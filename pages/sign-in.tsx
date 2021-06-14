@@ -3,7 +3,7 @@ import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { AppLayout } from "../components";
 import Link from "next/link";
 
-import { useAuth } from "../hooks";
+// import { useAuth } from "../hooks";
 import { useRouter } from "next/router";
 
 const layout = {
@@ -11,12 +11,12 @@ const layout = {
 };
 
 const SignIn: React.FC = () => {
-  const { signIn } = useAuth();
+  // const { signIn } = useAuth();
   const router = useRouter();
 
   const onFinish = async (values: { email: string; password: string }) => {
     const { email, password } = values;
-    await signIn(email, password);
+    // await signIn(email, password);
     router.push("/dashboard");
   };
 

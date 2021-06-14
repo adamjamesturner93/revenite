@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Form, Input, Button, Checkbox } from "antd";
-import { useAuth } from "../../hooks";
+// import { useAuth } from "../../hooks";
 
 const layout = {
   wrapperCol: { xs: { span: 24 }, md: { span: 12 } },
@@ -14,11 +14,11 @@ interface Props {
 }
 
 export const RegisterForm: React.FC<Props> = ({ callback }) => {
-  const { signUp, signUpConfirm, signIn } = useAuth();
+  // const { signUp, signUpConfirm, signIn } = useAuth();
   const [passwd, setPasswd] = useState<string>();
 
   const checkEmail = async (email: string, password: string) => {
-    await signUp(email, password);
+    // await signUp(email, password);
     console.log(email, password);
   };
 
@@ -41,8 +41,8 @@ export const RegisterForm: React.FC<Props> = ({ callback }) => {
 
     const { email, confirmCode } = event;
     console.log(email, passwd, confirmCode);
-    await signUpConfirm(email, passwd, confirmCode);
-    await signIn(email, passwd);
+    // await signUpConfirm(email, passwd, confirmCode);
+    // await signIn(email, passwd);
     callback();
   };
 
