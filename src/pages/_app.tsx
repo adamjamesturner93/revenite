@@ -1,14 +1,13 @@
-import "../../styles/globals.css";
-import type { AppProps } from "next/app";
-import Head from "next/head";
-import React, { useState } from "react";
-import { useBreakpoint, AuthProvider } from "../hooks";
-import { Layout } from "../layout";
-import { Helmet } from "react-helmet";
+import '../../styles/globals.css';
+import type { AppProps } from 'next/app';
+import Head from 'next/head';
+import React, { useState } from 'react';
+import { useBreakpoint, AuthProvider } from '../hooks';
+import { Layout } from '../layout';
 
-function MyApp({ Component, pageProps }: AppProps) {
+const App: React.FC<AppProps> = ({ Component, pageProps }) => {
   const [isSidebarClosed, setSidebarClosed] = useState(false);
-  const isStatic = useBreakpoint("sm");
+  const isStatic = useBreakpoint('sm');
 
   return (
     <React.Fragment>
@@ -41,5 +40,5 @@ function MyApp({ Component, pageProps }: AppProps) {
       </AuthProvider>
     </React.Fragment>
   );
-}
-export default MyApp;
+};
+export default App;

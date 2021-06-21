@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
-import { SignIn } from "../views";
-import { useAuth } from "../hooks";
-const initialState = { email: "", password: "", authCode: "" };
+import { SignIn } from '../views';
+import { useAuth } from '../hooks';
+const initialState = { email: '', password: '', authCode: '' };
 
-const SignInPage = () => {
+const SignInPage: React.FC = () => {
   const [formState, setFormState] = useState(initialState);
   const { email, password } = formState;
   const { signIn } = useAuth();

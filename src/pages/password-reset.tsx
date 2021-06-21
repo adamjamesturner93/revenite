@@ -1,12 +1,13 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
-import { ForgotPassword, ForgottenPasswordSubmit } from "../views";
-import { useAuth } from "../hooks";
-const initialState = { email: "", password: "", authCode: "" };
+import { ForgotPassword, ForgottenPasswordSubmit } from '../views';
+import { useAuth } from '../hooks';
+const initialState = { email: '', password: '', authCode: '' };
 
-const PasswordResetPage = () => {
-  const [uiState, setUiState] =
-    useState<"forgotPassword" | "forgotPasswordConfirm">("forgotPassword");
+const PasswordResetPage: React.FC = () => {
+  const [uiState, setUiState] = useState<'forgotPassword' | 'forgotPasswordConfirm'>(
+    'forgotPassword',
+  );
   const [formState, setFormState] = useState(initialState);
   const { email, password, authCode } = formState;
   const { forgottenPassword, forgottenPasswordConfirm } = useAuth();
@@ -21,7 +22,7 @@ const PasswordResetPage = () => {
   const handleForgottenPassword = async () => {
     try {
       await forgottenPassword(email);
-      setUiState("forgotPasswordConfirm");
+      setUiState('forgotPasswordConfirm');
     } catch (err) {
       console.error({ err });
     }
@@ -35,12 +36,7 @@ const PasswordResetPage = () => {
   };
 
   const forms: Record<string, React.ReactNode> = {
-    forgotPassword: (
-      <ForgotPassword
-        onChange={onChange}
-        forgotPassword={handleForgottenPassword}
-      />
-    ),
+    forgotPassword: <ForgotPassword onChange={onChange} forgotPassword={handleForgottenPassword} />,
     forgotPasswordConfirm: (
       <ForgottenPasswordSubmit
         onChange={onChange}
@@ -53,9 +49,7 @@ const PasswordResetPage = () => {
     <div className="gb-gray-50 flex flex-grow ">
       <div className="flex flex-col flex-grow items-center">
         <div className="max-w-full sm:w-540 mt-14">
-          <div className="bg-white py-14 px-16 shadow-form rounded">
-            {forms[uiState]}
-          </div>
+          <div className="bg-white py-14 px-16 shadow-form rounded">{forms[uiState]}</div>
         </div>
       </div>
     </div>

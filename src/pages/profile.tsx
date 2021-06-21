@@ -1,7 +1,7 @@
-import React from "react";
-import { useAuth } from "../hooks";
+import React from 'react';
+import { useAuth } from '../hooks';
 
-const Profile = () => {
+const Profile: React.FC = () => {
   const { user } = useAuth();
 
   return (

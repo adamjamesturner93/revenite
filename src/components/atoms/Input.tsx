@@ -1,10 +1,7 @@
-import React from "react";
+import React from 'react';
 
 export const Input: React.FC<
-  React.DetailedHTMLProps<
-    React.InputHTMLAttributes<HTMLInputElement>,
-    HTMLInputElement
-  >
+  React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
 > = (props) => (
   <input
     {...props}

@@ -1,9 +1,6 @@
-import { useEffect, useRef } from "react";
+import React, { useEffect, useRef } from 'react';
 
-export const FocusTrap: React.FC<{ isActive: boolean }> = ({
-  isActive,
-  children,
-}) => {
+export const FocusTrap: React.FC<{ isActive: boolean }> = ({ isActive, children }) => {
   const topTabTrap = useRef<HTMLSpanElement>(null);
   const bottomTabTrap = useRef<HTMLSpanElement>(null);
   const container = useRef<HTMLDivElement>(null);
@@ -13,22 +10,20 @@ export const FocusTrap: React.FC<{ isActive: boolean }> = ({
       if (!container.current) return [];
 
       const FOCUSABLE_SELECTOR = [
-        "button",
-        "a[href]",
-        "input",
-        "select",
-        "textarea",
-        "[tabindex]",
-        "[contenteditable]",
+        'button',
+        'a[href]',
+        'input',
+        'select',
+        'textarea',
+        '[tabindex]',
+        '[contenteditable]',
       ]
         .map((selector) => `${selector}:not(:disabled):not([disabled])`)
-        .join(", ");
+        .join(', ');
 
       return Array.from(container.current.querySelectorAll(FOCUSABLE_SELECTOR))
         .filter((element) => element !== topTabTrap.current)
-        .filter(
-          (element) => element !== bottomTabTrap.current
-        ) as HTMLElement[];
+        .filter((element) => element !== bottomTabTrap.current) as HTMLElement[];
     };
 
     const trapFocus = (event: FocusEvent) => {
@@ -51,9 +46,9 @@ export const FocusTrap: React.FC<{ isActive: boolean }> = ({
       }
     };
 
-    document.addEventListener("focusin", trapFocus);
+    document.addEventListener('focusin', trapFocus);
 
-    return () => document.removeEventListener("focusin", trapFocus);
+    return () => document.removeEventListener('focusin', trapFocus);
   }, [isActive, topTabTrap, bottomTabTrap]);
 
   return (

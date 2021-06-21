@@ -5,8 +5,8 @@
  * I modified the script to not remove the enterTo and leaveTo classes upon completing the transition
  * Instead they're removed when the opposite transition begins
  */
-import { CSSTransition as ReactCSSTransition } from "react-transition-group";
-import * as React from "react";
+import { CSSTransition as ReactCSSTransition } from 'react-transition-group';
+import React from 'react';
 
 const TransitionContext = React.createContext({
   parent: { show: false, isInitialRender: true, appear: false },
@@ -33,21 +33,21 @@ interface TransitionProps {
 
 const CSSTransition: React.FC<TransitionProps> = ({
   show,
-  enter = "",
-  enterFrom = "",
-  enterTo = "",
-  leave = "",
-  leaveFrom = "",
-  leaveTo = "",
+  enter = '',
+  enterFrom = '',
+  enterTo = '',
+  leave = '',
+  leaveFrom = '',
+  leaveTo = '',
   appear,
   children,
 }) => {
-  const enterClasses = enter.split(" ").filter((s) => s.length);
-  const enterFromClasses = enterFrom.split(" ").filter((s) => s.length);
-  const enterToClasses = enterTo.split(" ").filter((s) => s.length);
-  const leaveClasses = leave.split(" ").filter((s) => s.length);
-  const leaveFromClasses = leaveFrom.split(" ").filter((s) => s.length);
-  const leaveToClasses = leaveTo.split(" ").filter((s) => s.length);
+  const enterClasses = enter.split(' ').filter((s) => s.length);
+  const enterFromClasses = enterFrom.split(' ').filter((s) => s.length);
+  const enterToClasses = enterTo.split(' ').filter((s) => s.length);
+  const leaveClasses = leave.split(' ').filter((s) => s.length);
+  const leaveFromClasses = leaveFrom.split(' ').filter((s) => s.length);
+  const leaveToClasses = leaveTo.split(' ').filter((s) => s.length);
 
   function addClasses(node: HTMLElement, classes: string[]) {
     classes.length && node.classList.add(...classes);
@@ -63,7 +63,7 @@ const CSSTransition: React.FC<TransitionProps> = ({
       unmountOnExit
       in={show}
       addEndListener={(node, done) => {
-        node.addEventListener("transitionend", done, false);
+        node.addEventListener('transitionend', done, false);
       }}
       onEnter={(node: HTMLElement) => {
         removeClasses(node, [...leaveToClasses]);
@@ -93,11 +93,7 @@ const CSSTransition: React.FC<TransitionProps> = ({
   );
 };
 
-export const Transition: React.FC<TransitionProps> = ({
-  show,
-  appear = true,
-  ...rest
-}) => {
+export const Transition: React.FC<TransitionProps> = ({ show, appear = true, ...rest }) => {
   const { parent } = React.useContext(TransitionContext);
   const isInitialRender = useIsInitialRender();
   const isChild = show === undefined;
