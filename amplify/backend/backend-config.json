@@ -1,0 +1,10 @@
+{
+  "auth": {
+    "revenite44d45666": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false
+    }
+  }
+}
