@@ -11,10 +11,12 @@
   "dependencies": {
     "autoprefixer": "^10.2.6",
     "aws-amplify": "^4.1.1",
+    "chartist": "^0.11.4",
     "next": "11.0.0",
     "next-pwa": "^5.2.21",
     "postcss": "^8.3.5",
     "react": "17.0.2",
+    "react-chartist": "^0.14.4",
     "react-dom": "17.0.2",
     "react-helmet": "^6.1.0",
     "react-icons": "^4.2.0",

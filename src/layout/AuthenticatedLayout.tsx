@@ -1,8 +1,9 @@
-import Link from "next/link";
-import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
-import { Transition, FocusTrap, MenuItem } from "../components";
-import { useAuth } from "../hooks";
-import "../configureAmplify";
+import React from 'react';
+import Link from 'next/link';
+import { AiOutlineMenu, AiOutlineClose } from 'react-icons/ai';
+import { Transition, FocusTrap, MenuItem } from '../components';
+import { useAuth } from '../hooks';
+import '../configureAmplify';
 
 export const AuthenticatedLayout: React.FC<{
   title: string;
@@ -11,6 +12,7 @@ export const AuthenticatedLayout: React.FC<{
   setSidebarClosed: (state: boolean) => void;
 }> = ({ title, isStatic, isSidebarClosed, setSidebarClosed, children }) => {
   const { signOut } = useAuth();
+
   return (
     <div className="flex bg-gray-100">
       <Transition
@@ -24,12 +26,12 @@ export const AuthenticatedLayout: React.FC<{
       >
         <aside
           aria-hidden={isSidebarClosed}
-          className={`z-20 bg-white w-64 min-h-screen flex flex-col ${
-            isStatic ? "" : "fixed"
+          className={`z-20 bg-gray-800 text-white w-64 min-h-screen flex flex-col ${
+            isStatic ? '' : 'fixed'
           }`}
         >
           <FocusTrap isActive={!isStatic}>
-            <div className="bg-white border-r border-b px-4 h-20 flex items-center justify-between">
+            <div className=" border-r border-b border-purple-600 px-4 h-20 flex items-center justify-between">
               <Link href="/">
                 <a className="text-blue py-2 text-3xl">Revenite</a>
               </Link>
@@ -47,10 +49,20 @@ export const AuthenticatedLayout: React.FC<{
             </div>
             <nav className="border-r flex-grow flex flex-col justify-between px-4 pb-8">
               <ul>
-                <MenuItem href="/activities" label="Activities" />
+                <MenuItem href="/dashboard" label="Dashboard" />
+                <li className="p-3">
+                  <details>
+                    <summary>Activities</summary>
+                    <ul>
+                      <MenuItem href="/activities/summary" label="Summary" />
+                      <MenuItem href="/activities/list" label="List" />
+                      <MenuItem href="/activities/add" label="Add manually" />
+                    </ul>
+                  </details>
+                </li>
                 <MenuItem href="/health-checks" label="Health Checks" />
               </ul>
-              <ul>
+              <ul className="border-t border-purple-600 ">
                 <MenuItem href="/settings" label="Settings" />
                 <MenuItem href="/profile" label="Profile" />
                 <li className="p-3" onClick={signOut}>
@@ -77,7 +89,7 @@ export const AuthenticatedLayout: React.FC<{
       </Transition>
 
       <main className="flex-grow flex flex-col min-h-screen">
-        <header className="bg-white border-b h-20 flex items-center">
+        <header className="bg-gray-800 text-white border-b h-20 flex items-center p-2">
           {!isStatic && (
             <button
               aria-label="Open Menu"
@@ -88,9 +100,6 @@ export const AuthenticatedLayout: React.FC<{
               <AiOutlineMenu />
             </button>
           )}
-          <div className="flex flex-grow items-center px-3">
-            <h1>{title}</h1>
-          </div>
         </header>
         {children}
       </main>

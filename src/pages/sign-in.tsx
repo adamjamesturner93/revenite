@@ -2,23 +2,26 @@ import React, { useState } from 'react';
 
 import { SignIn } from '../views';
 import { useAuth } from '../hooks';
+import { useRouter } from 'next/router';
 const initialState = { email: '', password: '', authCode: '' };
 
 const SignInPage: React.FC = () => {
   const [formState, setFormState] = useState(initialState);
   const { email, password } = formState;
   const { signIn } = useAuth();
+  const router = useRouter();
 
-  const onChange: React.FormEventHandler<HTMLInputElement> = (e) => {
+  const onChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
     setFormState((state) => ({
       ...state,
-      [e.currentTarget.name]: e.currentTarget.value,
+      [event.target.name]: event.target.value,
     }));
   };
 
   const handleSignIn = async () => {
     try {
       await signIn(email, password);
+      router.push('/profile');
     } catch (err) {
       console.error({ err });
     }

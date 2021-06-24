@@ -20,6 +20,7 @@ module.exports = {
   ],
   rules: {
     'react/prop-types': 0,
+    '@typescript-eslint/explicit-module-boundary-types': 0,
     // This is where you can disable/customize some of the rules specified by the plugins
   },
 };

@@ -1,8 +1,9 @@
-import { Input } from "../../components/atoms";
+import React from 'react';
+import { Input } from '../../components/atoms';
 
 export const SignUpConfirm: React.FC<{
   onChange: React.ChangeEventHandler<HTMLInputElement>;
-  confirmSignUp: () => {};
+  confirmSignUp: () => void;
 }> = ({ onChange, confirmSignUp }) => (
   <section>
     <p className="text-3xl font-black">Confirm your account</p>
@@ -11,10 +12,7 @@ export const SignUpConfirm: React.FC<{
       <Input onChange={onChange} name="authCode" />
     </section>
 
-    <button
-      className="text-white w-full mt-6 bg-purple-600 p-3 rounded"
-      onClick={confirmSignUp}
-    >
+    <button className="text-white w-full mt-6 bg-purple-600 p-3 rounded" onClick={confirmSignUp}>
       Sign Up
     </button>
   </section>

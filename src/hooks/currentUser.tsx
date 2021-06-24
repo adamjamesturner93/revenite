@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { Auth } from "aws-amplify";
+import React, { useEffect, useState } from 'react';
+import { Auth } from 'aws-amplify';
 type User = {
   username: string;
   attributes: {
@@ -14,34 +14,25 @@ type SignOut = () => Promise<void>;
 type SignIn = (email: string, password: string) => Promise<void>;
 type SignUp = (email: string, password: string) => Promise<void>;
 type SignUpResend = (email: string) => Promise<void>;
-type SignUpConfirm = (
-  email: string,
-  password: string,
-  code: string
-) => Promise<any>;
+type SignUpConfirm = (email: string, password: string, code: string) => Promise<any>;
 type ForgottenPassword = (email: string) => Promise<void>;
-type ForgottenPasswordConfirm = (
-  email: string,
-  code: string,
-  password: string
-) => void;
+type ForgottenPasswordConfirm = (email: string, code: string, password: string) => void;
 
-const AuthContext =
-  React.createContext<
-    | {
-        user: User | undefined;
-        setUser: SetUser;
-        storeCurrentSession: GetCurrentSession;
-        signOut: SignOut;
-        signIn: SignIn;
-        signUp: SignUp;
-        signUpResend: SignUpResend;
-        signUpConfirm: SignUpConfirm;
-        forgottenPassword: ForgottenPassword;
-        forgottenPasswordConfirm: ForgottenPasswordConfirm;
-      }
-    | undefined
-  >(undefined);
+const AuthContext = React.createContext<
+  | {
+      user: User | undefined;
+      setUser: SetUser;
+      storeCurrentSession: GetCurrentSession;
+      signOut: SignOut;
+      signIn: SignIn;
+      signUp: SignUp;
+      signUpResend: SignUpResend;
+      signUpConfirm: SignUpConfirm;
+      forgottenPassword: ForgottenPassword;
+      forgottenPasswordConfirm: ForgottenPasswordConfirm;
+    }
+  | undefined
+>(undefined);
 
 const AuthProvider: React.FC = ({ children }) => {
   const [user, setUser] = useState<User | undefined>(undefined);
@@ -61,7 +52,6 @@ const AuthProvider: React.FC = ({ children }) => {
     try {
       await Auth.signOut();
       setUser(undefined);
-      debugger;
     } catch (error) {
       console.error(error);
     }
@@ -98,11 +88,7 @@ const AuthProvider: React.FC = ({ children }) => {
     }
   };
 
-  const signUpConfirm = async (
-    email: string,
-    password: string,
-    code: string
-  ) => {
+  const signUpConfirm = async (email: string, password: string, code: string) => {
     try {
       await Auth.confirmSignUp(email, code);
       return await Auth.signIn(email, password);
@@ -121,11 +107,7 @@ const AuthProvider: React.FC = ({ children }) => {
     }
   };
 
-  const forgottenPasswordConfirm = async (
-    email: string,
-    code: string,
-    password: string
-  ) => {
+  const forgottenPasswordConfirm = async (email: string, code: string, password: string) => {
     try {
       await Auth.forgotPasswordSubmit(email, code, password);
       setUser(undefined);
@@ -158,7 +140,7 @@ const AuthProvider: React.FC = ({ children }) => {
 const useAuth = () => {
   const context = React.useContext(AuthContext);
   if (context === undefined) {
-    throw new Error("useAuth must be used within a AuthProvider");
+    throw new Error('useAuth must be used within a AuthProvider');
   }
   return context;
 };

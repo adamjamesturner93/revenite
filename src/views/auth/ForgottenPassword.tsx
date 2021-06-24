@@ -1,8 +1,9 @@
-import { Input } from "../../components/atoms";
+import React from 'react';
+import { Input } from '../../components/atoms';
 
 export const ForgotPassword: React.FC<{
   onChange: React.ChangeEventHandler<HTMLInputElement>;
-  forgotPassword: () => {};
+  forgotPassword: () => void;
 }> = ({ onChange, forgotPassword }) => (
   <section>
     <p className="text-3xl font-black">Forgot your password?</p>
@@ -10,10 +11,7 @@ export const ForgotPassword: React.FC<{
       <label className="text-sm">Email</label>
       <Input onChange={onChange} name="email" />
     </section>
-    <button
-      className="text-white w-full mt-6 bg-purple-600 p-3 rounded"
-      onClick={forgotPassword}
-    >
+    <button className="text-white w-full mt-6 bg-purple-600 p-3 rounded" onClick={forgotPassword}>
       Reset Password
     </button>
 
