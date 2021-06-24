@@ -1,8 +1,9 @@
-import { Input } from "../../components/atoms";
+import React from 'react';
+import { Input } from '../../components/atoms';
 
 export const ForgottenPasswordSubmit: React.FC<{
   onChange: React.ChangeEventHandler<HTMLInputElement>;
-  forgottenPasswordSubmit: () => {};
+  forgottenPasswordSubmit: () => void;
 }> = ({ onChange, forgottenPasswordSubmit }) => (
   <section>
     <p className="text-3xl font-black">Confirm new password</p>

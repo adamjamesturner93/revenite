@@ -1,8 +1,9 @@
-import { Auth } from "aws-amplify";
-import { CognitoHostedUIIdentityProvider } from "@aws-amplify/auth";
-import { FaGoogle } from "react-icons/fa";
+import React from 'react';
+import { Auth } from 'aws-amplify';
+import { CognitoHostedUIIdentityProvider } from '@aws-amplify/auth';
+import { FaGoogle } from 'react-icons/fa';
 
-export const SocialSignIn = () => (
+export const SocialSignIn: React.FC = () => (
   <section className="flex flex-col">
     <button
       className="mt-10 focus:outline-none"
