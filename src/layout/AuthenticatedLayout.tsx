@@ -56,7 +56,7 @@ export const AuthenticatedLayout: React.FC<{
                     <ul>
                       <MenuItem href="/activities/summary" label="Summary" />
                       <MenuItem href="/activities/list" label="List" />
-                      <MenuItem href="/activities/add" label="Add manually" />
+                      <MenuItem href="/activities/add" label="Add Activity" />
                     </ul>
                   </details>
                 </li>
