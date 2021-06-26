@@ -17,6 +17,7 @@ type ActivityFormData = {
 };
 
 const ViewActivity: React.FC<{ activity: ActivityFormData }> = ({ activity }) => {
+  if (!activity) return <p>Error - not found</p>;
   return (
     <div className="gb-gray-50 flex flex-grow ">
       <div className="flex flex-col flex-grow items-center">
