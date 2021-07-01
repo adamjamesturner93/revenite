@@ -19,6 +19,7 @@ export const Layout: React.FC<{
     APP_ROUTES.SIGN_IN.url,
     APP_ROUTES.PASSWORD_RESET.url,
     APP_ROUTES.REGISTER.url,
+    APP_ROUTES.TERMS.url,
   ];
 
   let pathIsProtected = unprotectedRoutes.indexOf(router.pathname) === -1;

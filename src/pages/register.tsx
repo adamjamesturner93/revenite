@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { SignUp, SignUpConfirm } from '../views';
 import { useAuth } from '../hooks';
 
-const initialState = { email: '', password: '', authCode: '' };
+const initialState = { email: '', password: '', confirm: '', authCode: '' };
 
 const RegisterPage: React.FC = () => {
   const [uiState, setUiState] = useState<'signUp' | 'signUpConfirm'>('signUp');
@@ -19,6 +19,13 @@ const RegisterPage: React.FC = () => {
 
   const handleSignUp = async () => {
     try {
+      await fetch('/api/invite-codes', {
+        body: JSON.stringify({ code: 'test' }),
+        method: 'post',
+        headers: {
+          'content-type': 'application/json',
+        },
+      });
       await signUp(email, password);
       setUiState('signUpConfirm');
     } catch (err) {
@@ -41,7 +48,7 @@ const RegisterPage: React.FC = () => {
   return (
     <div className="gb-gray-50 flex flex-grow ">
       <div className="flex flex-col flex-grow items-center">
-        <div className="max-w-full sm:w-540 mt-14">
+        <div className="max-w-full sm:w-540 sm:mt-14">
           <div className="bg-white py-14 px-16 shadow-form rounded">{forms[uiState]}</div>
         </div>
       </div>

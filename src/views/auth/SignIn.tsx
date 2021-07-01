@@ -8,7 +8,7 @@ export const SignIn: React.FC<{
   signIn: () => void;
 }> = ({ onChange, signIn }) => (
   <section>
-    <p className="text-3xl font-black">Sign in to your account</p>
+    <h1 className="text-3xl font-black">Sign in to your account</h1>
     <section className="mt-10">
       <label className="text-sm">Email</label>
       <Input onChange={onChange} name="email" />
