@@ -6,7 +6,7 @@ export const ForgottenPasswordSubmit: React.FC<{
   forgottenPasswordSubmit: () => void;
 }> = ({ onChange, forgottenPasswordSubmit }) => (
   <section>
-    <p className="text-3xl font-black">Confirm new password</p>
+    <h1 className="text-3xl font-black">Confirm new password</h1>
     <section className="mt-10">
       <label className="text-sm">Confirmation Code</label>
       <Input onChange={onChange} name="authCode" />

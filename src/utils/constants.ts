@@ -19,6 +19,10 @@ export const APP_ROUTES = {
     url: '/register',
     title: 'Register',
   },
+  TERMS: {
+    url: '/terms',
+    title: 'Terms',
+  },
   PROFILE: {
     url: '/profile',
     title: 'Profile',
@@ -32,3 +36,7 @@ export const APP_ROUTES = {
     title: 'Health Checks',
   },
 };
+
+// const percievedExertion = {
+//   1: {}
+// }

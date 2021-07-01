@@ -1,13 +1,13 @@
 import React from 'react';
 import { SiStrava, SiFitbit, SiGarmin, SiGooglefit } from 'react-icons/si';
+
 const Settings: React.FC = () => {
   return (
     <div className="gb-gray-50 flex flex-grow ">
       <div className="flex flex-col flex-grow items-center">
-        <div className="max-w-full sm:w-540 mt-14">
+        <div className="max-w-full sm:w-540 sm:mt-14">
           <div className="bg-white py-14 px-16 shadow-form rounded flex flex-col">
-            <h2 className="text-xl">Settings</h2>
-
+            <h1 className="text-3xl font-black">Settings</h1>
             <button
               className="mt-10 focus:outline-none"
               onClick={() => console.log('NOT IMPLEMENTED')}

@@ -6,7 +6,7 @@ import { useBreakpoint, AuthProvider } from '../hooks';
 import { Layout } from '../layout';
 
 const App: React.FC<AppProps> = ({ Component, pageProps, router }) => {
-  const [isSidebarClosed, setSidebarClosed] = useState(false);
+  const [isSidebarClosed, setSidebarClosed] = useState(true);
   const isStatic = useBreakpoint('sm');
 
   return (
