@@ -33,7 +33,9 @@ export const AuthenticatedLayout: React.FC<{
           <FocusTrap isActive={!isStatic}>
             <div className=" border-r border-b border-purple-600 px-4 h-20 flex items-center justify-between">
               <Link href="/">
-                <a className="text-blue py-2 text-3xl">Revenite</a>
+                <a>
+                  <img className="banner" src="/banner.png" alt="Revenite" />
+                </a>
               </Link>
 
               {!isStatic && (

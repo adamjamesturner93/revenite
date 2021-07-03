@@ -1,31 +1,49 @@
 import React from 'react';
 import Link from 'next/link';
 import { useAuth } from '../hooks';
+import {
+  Icon,
+  Banner,
+  Goals,
+  GetInvolved,
+  Launch,
+  Choice,
+  ImperialLogo,
+  ScarFreeLogo,
+} from '../components/';
+import { Link as ScrollLink } from 'react-scroll';
 
 const Home: React.FC = () => {
   const { user, signOut } = useAuth();
 
   return (
     <React.Fragment>
-      <div className="w-full container mx-auto p-6">
-        <div className="w-full flex items-center justify-between">
-          <a
-            className="flex items-center text-purple-600 no-underline hover:no-underline font-bold text-2xl lg:text-4xl"
-            href="#"
-          >
-            <svg
-              className="h-8 fill-current text-purple-900 pr-2"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 20 20"
-            >
-              <path d="M10 20a10 10 0 1 1 0-20 10 10 0 0 1 0 20zm-5.6-4.29a9.95 9.95 0 0 1 11.2 0 8 8 0 1 0-11.2 0zm6.12-7.64l3.02-3.02 1.41 1.41-3.02 3.02a2 2 0 1 1-1.41-1.41z" />
-            </svg>{' '}
-            Revenite
+      <header className="w-full bg-gray-700 flex flex-col h-screen">
+        <nav className="container mx-auto w-full flex items-center justify-between py-6">
+          <a>
+            <Icon />
           </a>
+          <ul className="flex">
+            <li className="inline-block text-gray-100 no-underline hover:underline text-center h-10 p-2 md:h-auto md:p-4">
+              <ScrollLink to="get-involved" smooth={true} duration={500}>
+                Get Involved
+              </ScrollLink>
+            </li>
+            <li className="inline-block text-gray-100 no-underline hover:underline text-center h-10 p-2 md:h-auto md:p-4">
+              <ScrollLink to="team" smooth={true} duration={500}>
+                Meet the Team
+              </ScrollLink>
+            </li>
+            <li className="inline-block text-gray-100 no-underline hover:underline text-center h-10 p-2 md:h-auto md:p-4">
+              <ScrollLink to="partnerships" smooth={true} duration={500}>
+                Research Partnerships
+              </ScrollLink>
+            </li>
+          </ul>
 
-          <div className="flex w-1/2 justify-end content-center">
+          <div className="flex justify-end content-center">
             <a
-              className="inline-block text-blue-300 no-underline hover:text-indigo-800 hover:text-underline text-center h-10 p-2 md:h-auto md:p-4"
+              className="inline-block text-blue-300 no-underline hover:text-indigo-800 hover:underline text-center h-10 p-2 md:h-auto md:p-4"
               data-tippy-content="@twitter_handle"
               href="https://twitter.com/reveniterehab"
               target="_blank"
@@ -43,60 +61,180 @@ const Home: React.FC = () => {
               <Link href="/">
                 <a
                   onClick={signOut}
-                  className="inline-block text-purple-600 no-underline hover:text-indigo-800 hover:text-underline text-center h-10 p-2 md:h-auto md:p-4"
+                  className="inline-block text-purple-600 no-underline hover:text-indigo-800 hover:underline text-center h-10 p-2 md:h-auto md:p-4"
                 >
                   Sign out
                 </a>
               </Link>
             ) : (
               <Link href="/sign-in">
-                <a className="inline-block text-purple-600 no-underline hover:text-indigo-800 hover:text-underline text-center h-10 p-2 md:h-auto md:p-4">
+                <a className="inline-block text-purple-600 no-underline hover:text-indigo-800 hover:underline text-center h-10 p-2 md:h-auto md:p-4">
                   Sign in
                 </a>
               </Link>
             )} */}
           </div>
-        </div>
-      </div>
+        </nav>
 
-      <div className="container pt-24 md:pt-48 px-6 mx-auto flex flex-grow flex-wrap flex-col md:flex-row items-center">
-        <div className="flex flex-col w-full xl:w-2/5 justify-center lg:items-start overflow-y-hidden">
-          <h1 className="my-4 text-3xl md:text-5xl text-purple-800 font-bold leading-tight text-center md:text-left slide-in-bottom-h1">
-            Revenite
-          </h1>
-          <p className="leading-normal text-base md:text-2xl mb-8 text-center md:text-left slide-in-bottom-subtitle">
-            Your rehab companion app!
-          </p>
+        <section className="container w-full mx-auto flex justify-around flex-grow align-middle">
+          <article className="flex flex-col justify-center">
+            <Banner />
+            <h2 className="2xl text-gray-100 py-4">Helping you reach your fitness goals</h2>
+          </article>
+          <article className="flex flex-col justify-center">
+            <Goals />
+          </article>
+        </section>
+      </header>
 
-          <p className="text-blue-400 font-bold pb-8 lg:pb-6 text-center md:text-left fade-in">
-            App coming soon!
-          </p>
-          <p>
-            If you'd like to hear more or are interesting in helping us test the app you can message
-            us on{' '}
-            <a
-              className="inline-block text-purple-600 no-underline hover:text-indigo-800 hover:text-underline text-center "
-              href="https://twitter.com/reveniterehab"
-              target="_blank"
-              rel="noreferrer"
-            >
-              Twitter
-            </a>{' '}
-            or email{' '}
-            <a
-              className="inline-block text-purple-600 no-underline hover:text-indigo-800 hover:text-underline text-center "
-              href="mailto:s.turner17@imperial.ac.uk"
-            >
-              Shruti
-            </a>
-            .
-          </p>
-        </div>
-      </div>
-      <footer className="w-full container mx-auto p-6 pt-16 pb-6 text-sm text-center md:text-left fade-in">
-        <a className="text-gray-500 no-underline hover:no-underline" href="#">
-          &copy; Revenite 2021
-        </a>
+      <section
+        id="get-involved"
+        className="move-up-15vh w-full bg-gray-100 section-1 flex flex-col h-screen angle"
+      >
+        <section className="container w-full mx-auto flex justify-around flex-grow align-middle">
+          <article className="flex flex-col justify-center">
+            <GetInvolved />
+          </article>
+          <article className="flex flex-col justify-center">
+            <h2 className="text-3xl text-gray-700 p-6 font-bold">Get Involved</h2>
+            <p className="text-gray-700 p-6">
+              If you’re interested in becoming a test user, please contact Shruti (
+              <a
+                className="inline-block text-purple-600 no-underline hover:text-indigo-800  hover:underline text-center"
+                data-tippy-content="@twitter_handle"
+                href="https://twitter.com/reveniterehab"
+                target="_blank"
+                rel="noreferrer"
+              >
+                s.turner17@imperial.ac.uk
+              </a>
+              ) or message us on{' '}
+              <a
+                className="inline-block text-purple-600 no-underline hover:text-indigo-800 hover:underline text-center"
+                data-tippy-content="@twitter_handle"
+                href="https://twitter.com/reveniterehab"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Twitter
+              </a>
+              !
+            </p>
+          </article>
+        </section>
+      </section>
+
+      <section className="move-up-15vh w-full bg-purple-600 section-2 flex flex-col h-screen angle">
+        <section className="container w-full mx-auto flex justify-around flex-grow align-middle">
+          <article className="flex flex-col justify-center">
+            <h2 className="text-3xl text-gray-100 p-6 font-bold">Launching Soon!</h2>
+            <p className="text-gray-100 p-6">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Incidunt, corporis illum
+              praesentium illo sequi, optio adipisci ratione iste deserunt odio, amet voluptatem
+              natus. Deleniti quam et nisi natus vero totam.
+            </p>
+            <p className="text-gray-100 p-6">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Incidunt, corporis illum
+              praesentium illo sequi, optio adipisci ratione iste deserunt odio, amet voluptatem
+              natus. Deleniti quam et nisi natus vero totam.
+            </p>
+            <p className="text-gray-100 p-6">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Incidunt, corporis illum
+              praesentium illo sequi, optio adipisci ratione iste deserunt odio, amet voluptatem
+              natus. Deleniti quam et nisi natus vero totam.
+            </p>
+          </article>
+          <article className="flex flex-col justify-center">
+            <Launch />
+          </article>
+        </section>
+      </section>
+
+      <section
+        id="team"
+        className="move-up-15vh w-full bg-gray-100 section-3 flex flex-col h-screen angle"
+      >
+        <section className="container w-full mx-auto flex justify-around flex-grow align-middle">
+          <article className="flex flex-col justify-center">
+            <h2 className="text-3xl text-gray-700 p-6 font-bold">Meet the Team!</h2>
+          </article>
+        </section>
+      </section>
+
+      <section className="move-up-15vh w-full bg-purple-600 section-4 flex flex-col h-screen">
+        <section className="container w-full mx-auto flex justify-around flex-grow align-middle">
+          <article className="flex flex-col justify-center">
+            <h2 className="text-3xl text-gray-100 p-6 font-bold">Helping you Prioritise!</h2>
+            <p className="text-gray-100 p-6">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Incidunt, corporis illum
+              praesentium illo sequi, optio adipisci ratione iste deserunt odio, amet voluptatem
+              natus. Deleniti quam et nisi natus vero totam.
+            </p>
+            <p className="text-gray-100 p-6">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Incidunt, corporis illum
+              praesentium illo sequi, optio adipisci ratione iste deserunt odio, amet voluptatem
+              natus. Deleniti quam et nisi natus vero totam.
+            </p>
+            <p className="text-gray-100 p-6">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Incidunt, corporis illum
+              praesentium illo sequi, optio adipisci ratione iste deserunt odio, amet voluptatem
+              natus. Deleniti quam et nisi natus vero totam.
+            </p>
+          </article>
+          <article className="flex flex-col justify-center">
+            <Choice />
+          </article>
+        </section>
+      </section>
+
+      <section
+        id="partnerships"
+        className="move-up-15vh w-full bg-gray-100 section-5 flex flex-col h-screen angle"
+      >
+        <section className="container w-full mx-auto flex flex-col justify-center flex-grow align-middle">
+          <article className="flex flex-row-reverse px-12">
+            <h2 className="text-3xl text-gray-700 p-6 font-bold">Research Partnerships</h2>
+          </article>
+          <article className="flex flex-col md:flex-row p-6">
+            <article className="flex flex-col p-6 justify-center">
+              <a
+                href="https://scarfree.org.uk/"
+                target="_blank"
+                referrerPolicy="no-referrer"
+                rel="noreferrer"
+              >
+                <ImperialLogo style={{ height: 'auto', width: '35vw' }} />
+              </a>
+              <p className="text-gray-700 py-4 text-center">
+                This research is hosted and supported by Imperial College London - the Center for
+                Injury Studies..
+              </p>
+            </article>
+            <article className="flex flex-col p-6 justify-center">
+              <a
+                href="https://scarfree.org.uk/"
+                target="_blank"
+                referrerPolicy="no-referrer"
+                rel="noreferrer"
+              >
+                <ScarFreeLogo style={{ height: 'auto', width: '35vw' }} />
+              </a>
+              <p className="text-gray-700 py-4 text-center">
+                This research is funded by The Scar Free Foundation. The Scar Free Foundation is the
+                only medical research charity focused on scarring with the mission to achieve scar
+                free healing within a generation.
+              </p>
+            </article>
+          </article>
+        </section>
+      </section>
+
+      <footer className="move-up-15vh w-full flex flex-col align-middle justify-center mx-auto p-6 pt-16 pb-6 text-sm text-center md:text-left fade-in bg-gray-700">
+        <section className="container w-full mx-auto flex flex-col align-middle justify-center flex-grow">
+          <a className="text-gray-100 no-underline hover:no-underline" href="#">
+            &copy; Revenite 2021
+          </a>
+        </section>
       </footer>
     </React.Fragment>
   );
