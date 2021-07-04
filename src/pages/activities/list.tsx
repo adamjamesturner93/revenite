@@ -1,15 +1,14 @@
 import { GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
 import React from 'react';
+import { PageWrapper } from '../../components';
 import { ACTIVITY_LIST } from '../../utils/temp_activity';
 
 const Activities: React.FC<{ activities: any[] }> = ({ activities }) => {
   const router = useRouter();
 
   return (
-    <div className="gb-gray-50 flex flex-grow p-2 flex-col">
-      <h1 className="text-2xl">Activities List</h1>
-
+    <PageWrapper title="Activities">
       {activities.map(({ id, title, duration, date, strength, flexibility, cardio }) => (
         <article
           className="border border-purple-600 flex justify-between py-1 px-2 my-2"
@@ -35,7 +34,7 @@ const Activities: React.FC<{ activities: any[] }> = ({ activities }) => {
           </section>
         </article>
       ))}
-    </div>
+    </PageWrapper>
   );
 };
 

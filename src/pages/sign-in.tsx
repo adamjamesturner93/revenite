@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
+import { Input } from '../components/atoms';
+import Link from 'next/link';
 
-import { SignIn } from '../views';
 import { useAuth } from '../hooks';
 import { useRouter } from 'next/router';
+import { PageWrapper } from '../components';
+import { SocialSignIn } from '../views';
 const initialState = { email: '', password: '', authCode: '' };
 
 const SignInPage: React.FC = () => {
@@ -28,15 +31,33 @@ const SignInPage: React.FC = () => {
   };
 
   return (
-    <div className="gb-gray-50 flex flex-grow ">
-      <div className="flex flex-col flex-grow items-center">
-        <div className="max-w-full sm:w-540 sm:mt-14">
-          <div className="bg-white py-14 px-16 shadow-form rounded">
-            <SignIn onChange={onChange} signIn={handleSignIn} />
-          </div>
-        </div>
-      </div>
-    </div>
+    <PageWrapper title="Sign in to your account">
+      <section className="mt-10">
+        <label className="text-sm">Email</label>
+        <Input onChange={onChange} name="email" />
+      </section>
+      <section className="mt-4">
+        <label className="text-sm">Password</label>
+
+        <Link href="/password-reset">
+          <a className="text-sm ml-8 sm:ml-48 cursor-pointer text-purple-600">
+            Forgot your password?
+          </a>
+        </Link>
+
+        <Input onChange={onChange} name="password" type="password" />
+      </section>
+      <button className="text-white w-full mt-6 bg-purple-600 p-3 rounded" onClick={handleSignIn}>
+        Sign In
+      </button>
+      <SocialSignIn />
+      <p className="mt-12 text-sm font-light">
+        Don&apos;t have an account?{' '}
+        <Link href="/register">
+          <a className="cursor-pointer text-purple-600">Register here</a>
+        </Link>
+      </p>
+    </PageWrapper>
   );
 };
 

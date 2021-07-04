@@ -104,3 +104,7 @@ footer {
     height: 50vh;
   }
 }
+
+.bg-strava {
+  background-color: #fc4c02;
+}

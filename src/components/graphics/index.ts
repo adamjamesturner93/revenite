@@ -6,3 +6,4 @@ export * from './Icon';
 export * from './Imperial';
 export * from './Launch';
 export * from './ScarFree';
+export * from './Strava';

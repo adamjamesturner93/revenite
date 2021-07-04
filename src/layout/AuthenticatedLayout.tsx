@@ -1,6 +1,18 @@
 import React from 'react';
 import Link from 'next/link';
-import { AiOutlineMenu, AiOutlineClose } from 'react-icons/ai';
+import {
+  AiOutlineMenu,
+  AiOutlineClose,
+  AiOutlineLogout,
+  AiOutlineSetting,
+  AiOutlineUser,
+  AiOutlineDashboard,
+  AiOutlinePlusCircle,
+  AiOutlineTrophy,
+  AiOutlineHeart,
+  AiOutlineUnorderedList,
+  AiOutlinePieChart,
+} from 'react-icons/ai';
 import { Transition, FocusTrap, MenuItem, Banner } from '../components';
 import { useAuth } from '../hooks';
 import '../configureAmplify';
@@ -10,7 +22,7 @@ export const AuthenticatedLayout: React.FC<{
   isStatic: boolean;
   isSidebarClosed: boolean;
   setSidebarClosed: (state: boolean) => void;
-}> = ({ title, isStatic, isSidebarClosed, setSidebarClosed, children }) => {
+}> = ({ isStatic, isSidebarClosed, setSidebarClosed, children }) => {
   const { signOut } = useAuth();
 
   return (
@@ -26,7 +38,7 @@ export const AuthenticatedLayout: React.FC<{
       >
         <aside
           aria-hidden={isSidebarClosed}
-          className={`z-20 bg-gray-800 text-white w-64 min-h-screen flex flex-col ${
+          className={`z-20 bg-gray-800 text-white w-64 max-h-screen flex flex-col sticky top-0 ${
             isStatic ? '' : 'fixed'
           }`}
         >
@@ -51,34 +63,78 @@ export const AuthenticatedLayout: React.FC<{
             </div>
             <nav className="border-r flex-grow flex flex-col justify-between px-4 pb-8">
               <ul>
-                <MenuItem href="/dashboard" label="Dashboard" />
+                <MenuItem
+                  href="/dashboard"
+                  label="Dashboard"
+                  icon={<AiOutlineDashboard className="mr-4" />}
+                />
                 <li className="p-3">
                   <details>
-                    <summary>Activities</summary>
-                    <ul>
-                      <MenuItem href="/activities/summary" label="Summary" />
-                      <MenuItem href="/activities/list" label="List" />
-                      <MenuItem href="/activities/add" label="Add Activity" />
+                    <summary className="flex items-center pb-3">
+                      <AiOutlineTrophy className="mr-4" />
+                      Activities
+                    </summary>
+                    <ul className="pl-4">
+                      <MenuItem
+                        href="/activities/summary"
+                        label="Summary"
+                        icon={<AiOutlinePieChart className="mr-4" />}
+                      />
+                      <MenuItem
+                        href="/activities/list"
+                        label="List"
+                        icon={<AiOutlineUnorderedList className="mr-4" />}
+                      />
+                      <MenuItem
+                        href="/activities/add"
+                        label="Add Activity"
+                        icon={<AiOutlinePlusCircle className="mr-4" />}
+                      />
                     </ul>
                   </details>
                 </li>
                 <li className="p-3">
                   <details>
-                    <summary>Health Checks</summary>
-                    <ul>
-                      <MenuItem href="/health-checks/summary" label="Summary" />
-                      <MenuItem href="/health-checks/list" label="List" />
-                      <MenuItem href="/health-checks/add" label="Add Health Check" />
+                    <summary className="flex items-center pb-3">
+                      <AiOutlineHeart className="mr-4" />
+                      Health Checks
+                    </summary>
+                    <ul className="pl-4">
+                      <MenuItem
+                        href="/health-checks/summary"
+                        label="Summary"
+                        icon={<AiOutlinePieChart className="mr-4" />}
+                      />
+                      <MenuItem
+                        href="/health-checks/list"
+                        label="List"
+                        icon={<AiOutlineUnorderedList className="mr-4" />}
+                      />
+                      <MenuItem
+                        href="/health-checks/add"
+                        label="Add Health Check"
+                        icon={<AiOutlinePlusCircle className="mr-4" />}
+                      />
                     </ul>
                   </details>
                 </li>
               </ul>
               <ul className="border-t border-purple-600 ">
-                <MenuItem href="/settings" label="Settings" />
-                <MenuItem href="/profile" label="Profile" />
+                <MenuItem
+                  href="/settings"
+                  label="Settings"
+                  icon={<AiOutlineSetting className="mr-4" />}
+                />
+                <MenuItem
+                  href="/profile"
+                  label="Profile"
+                  icon={<AiOutlineUser className="mr-4" />}
+                />
                 <li className="p-3" onClick={signOut}>
                   <Link href="/">
-                    <a>Sign out</a>
+                    <a className="flex items-center">
+                      <AiOutlineLogout className="mr-4" /> Sign out
+                    </a>
                   </Link>
                 </li>
               </ul>

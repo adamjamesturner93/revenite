@@ -8,7 +8,7 @@ const Activities: React.FC<{ activities: any[] }> = ({ activities }) => {
 
   return (
     <div className="gb-gray-50 flex flex-grow p-2 flex-col">
-      <h1 className="text-2xl">Health Checks List</h1>
+      <h1 className="text-3xl">Health Checks List</h1>
 
       {activities.map(({ id, title, duration, date, strength, flexibility, cardio }) => (
         <article
