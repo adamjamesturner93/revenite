@@ -1,12 +1,10 @@
 import React from 'react';
 
-export const ScarFreeLogo: React.FC<{ style: React.CSSProperties }> = ({ style }) => (
+export const ScarFreeLogo = () => (
   <svg
-    style={style}
+    className="w-full"
     version="1.0"
     xmlns="http://www.w3.org/2000/svg"
-    width="5870.000000pt"
-    height="2790.000000pt"
     viewBox="0 0 5870.000000 2790.000000"
     preserveAspectRatio="xMidYMid meet"
   >

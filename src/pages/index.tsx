@@ -17,7 +17,7 @@ const Home: React.FC = () => {
   return (
     <React.Fragment>
       <header className="w-full bg-gray-700 flex flex-col h-screen">
-        <nav className="container mx-auto w-full flex items-center justify-between py-6">
+        <nav className="container mx-auto w-full flex items-center justify-between p-6">
           <a>
             <Icon />
           </a>
@@ -74,12 +74,14 @@ const Home: React.FC = () => {
           </div>
         </nav>
 
-        <section className="container w-full mx-auto flex justify-around flex-grow align-middle">
-          <article className="flex flex-col justify-center">
+        <section className="container w-full mx-auto flex flex-col lg:flex-row justify-center lg:justify-around flex-grow items-center">
+          <article className="flex flex-col items-center justify-center w-1/2 lg:w-1/3">
             <Banner />
-            <h2 className="2xl text-gray-100 py-4">Helping you reach your fitness goals</h2>
+            <h2 className="text-2xl text-center text-gray-100 py-4">
+              Helping you reach your fitness goals
+            </h2>
           </article>
-          <article className="flex flex-col justify-center">
+          <article className="hidden md:flex flex-col justify-center items-center w-2/3 lg:w-1/2">
             <Goals />
           </article>
         </section>

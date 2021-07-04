@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { AiOutlineMenu, AiOutlineClose } from 'react-icons/ai';
-import { Transition, FocusTrap, MenuItem } from '../components';
+import { Transition, FocusTrap, MenuItem, Banner } from '../components';
 import { useAuth } from '../hooks';
 import '../configureAmplify';
 
@@ -31,10 +31,10 @@ export const AuthenticatedLayout: React.FC<{
           }`}
         >
           <FocusTrap isActive={!isStatic}>
-            <div className=" border-r border-b border-purple-600 px-4 h-20 flex items-center justify-between">
+            <div className=" border-b border-purple-600 px-4 h-24 flex items-center justify-between">
               <Link href="/">
                 <a>
-                  <img className="banner" src="/banner.png" alt="Revenite" />
+                  <Banner />
                 </a>
               </Link>
 
@@ -62,7 +62,16 @@ export const AuthenticatedLayout: React.FC<{
                     </ul>
                   </details>
                 </li>
-                <MenuItem href="/health-checks" label="Health Checks" />
+                <li className="p-3">
+                  <details>
+                    <summary>Health Checks</summary>
+                    <ul>
+                      <MenuItem href="/health-checks/summary" label="Summary" />
+                      <MenuItem href="/health-checks/list" label="List" />
+                      <MenuItem href="/health-checks/add" label="Add Health Check" />
+                    </ul>
+                  </details>
+                </li>
               </ul>
               <ul className="border-t border-purple-600 ">
                 <MenuItem href="/settings" label="Settings" />
@@ -91,7 +100,7 @@ export const AuthenticatedLayout: React.FC<{
       </Transition>
 
       <main className="flex-grow flex flex-col min-h-screen">
-        <header className="bg-gray-800 text-white border-b h-20 flex items-center p-2">
+        <header className="bg-gray-800 text-white border-b h-24 flex items-center p-2">
           {!isStatic && (
             <button
               aria-label="Open Menu"

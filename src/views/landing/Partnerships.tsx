@@ -1,38 +1,38 @@
 import React from 'react';
-import { ImperialLogo, ScarFreeLogo } from '../../components';
+import { ImperialLogo, ScarFreeLogo, TextWrapper } from '../../components';
 
 export const Partnerships = () => (
   <section
     id="partnerships"
-    className="move-up-15vh w-full bg-gray-100 section-5 flex flex-col h-screen angle"
+    className="move-up-15vh w-full bg-gray-100 section-5 flex flex-col min-h-screen py-40 md:py-30 lg:py-0"
   >
     <section className="container w-full mx-auto flex flex-col justify-center flex-grow align-middle">
-      <article className="flex flex-row-reverse px-12">
+      <TextWrapper>
         <h2 className="text-3xl text-gray-700 p-6 font-bold">Research Partnerships</h2>
-      </article>
-      <article className="flex flex-col md:flex-row p-6">
-        <article className="flex flex-col p-6 justify-center">
+      </TextWrapper>
+      <article className="flex flex-col lg:flex-row p-6 items-center">
+        <article className="flex flex-col w-full md:w-2/3 lg:w-1/2 p-6 justify-center ">
           <a
             href="https://scarfree.org.uk/"
             target="_blank"
             referrerPolicy="no-referrer"
             rel="noreferrer"
           >
-            <ImperialLogo style={{ height: 'auto', width: '35vw' }} />
+            <ImperialLogo />
           </a>
           <p className="text-gray-700 py-4 text-center">
             This research is hosted and supported by Imperial College London - the Center for Injury
             Studies..
           </p>
         </article>
-        <article className="flex flex-col p-6 justify-center">
+        <article className="flex flex-col w-full md:w-2/3 lg:w-1/2 p-6 justify-center">
           <a
             href="https://scarfree.org.uk/"
             target="_blank"
             referrerPolicy="no-referrer"
             rel="noreferrer"
           >
-            <ScarFreeLogo style={{ height: 'auto', width: '35vw' }} />
+            <ScarFreeLogo />
           </a>
           <p className="text-gray-700 py-4 text-center">
             This research is funded by The Scar Free Foundation. The Scar Free Foundation is the

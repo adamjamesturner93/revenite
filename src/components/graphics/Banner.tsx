@@ -1,7 +1,7 @@
 import React from 'react';
 
 export const Banner = () => (
-  <svg width="276" height="84" viewBox="0 0 276 84" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <svg className="w-full" viewBox="0 0 276 84" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path
       d="M10 82C68.6667 71.1588 203.6 50.2415 274 53.3026"
       stroke="#5B21B6"
