@@ -13,7 +13,7 @@ export const Partnerships = () => (
       <article className="flex flex-col lg:flex-row p-6 items-center">
         <article className="flex flex-col w-full md:w-2/3 lg:w-1/2 p-6 justify-center ">
           <a
-            href="https://scarfree.org.uk/"
+            href="https://www.imperial.ac.uk/"
             target="_blank"
             referrerPolicy="no-referrer"
             rel="noreferrer"
