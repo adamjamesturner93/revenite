@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const GetInvolved = () => (
+export const Contact = () => (
   <svg
     width="462"
     height="316"

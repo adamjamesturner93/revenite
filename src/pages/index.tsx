@@ -1,17 +1,15 @@
 import React from 'react';
 import Link from 'next/link';
 import { useAuth } from '../hooks';
-import {
-  Icon,
-  Banner,
-  Goals,
-  GetInvolved,
-  Launch,
-  Choice,
-  ImperialLogo,
-  ScarFreeLogo,
-} from '../components/';
+import { Icon, Banner, Goals } from '../components/';
 import { Link as ScrollLink } from 'react-scroll';
+import {
+  HelpingYouPrioritise,
+  Partnerships,
+  LaunchingSoon,
+  MeetTheTeam,
+  GetInvolved,
+} from '../views/landing';
 
 const Home: React.FC = () => {
   const { user, signOut } = useAuth();
@@ -87,152 +85,27 @@ const Home: React.FC = () => {
         </section>
       </header>
 
-      <section
-        id="get-involved"
-        className="move-up-15vh w-full bg-gray-100 section-1 flex flex-col h-screen angle"
-      >
-        <section className="container w-full mx-auto flex justify-around flex-grow align-middle">
-          <article className="flex flex-col justify-center">
-            <GetInvolved />
-          </article>
-          <article className="flex flex-col justify-center">
-            <h2 className="text-3xl text-gray-700 p-6 font-bold">Get Involved</h2>
-            <p className="text-gray-700 p-6">
-              If you’re interested in becoming a test user, please contact Shruti (
-              <a
-                className="inline-block text-purple-600 no-underline hover:text-indigo-800  hover:underline text-center"
-                data-tippy-content="@twitter_handle"
-                href="https://twitter.com/reveniterehab"
-                target="_blank"
-                rel="noreferrer"
-              >
-                s.turner17@imperial.ac.uk
-              </a>
-              ) or message us on{' '}
-              <a
-                className="inline-block text-purple-600 no-underline hover:text-indigo-800 hover:underline text-center"
-                data-tippy-content="@twitter_handle"
-                href="https://twitter.com/reveniterehab"
-                target="_blank"
-                rel="noreferrer"
-              >
-                Twitter
-              </a>
-              !
-            </p>
-          </article>
-        </section>
-      </section>
-
-      <section className="move-up-15vh w-full bg-purple-600 section-2 flex flex-col h-screen angle">
-        <section className="container w-full mx-auto flex justify-around flex-grow align-middle">
-          <article className="flex flex-col justify-center">
-            <h2 className="text-3xl text-gray-100 p-6 font-bold">Launching Soon!</h2>
-            <p className="text-gray-100 p-6">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Incidunt, corporis illum
-              praesentium illo sequi, optio adipisci ratione iste deserunt odio, amet voluptatem
-              natus. Deleniti quam et nisi natus vero totam.
-            </p>
-            <p className="text-gray-100 p-6">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Incidunt, corporis illum
-              praesentium illo sequi, optio adipisci ratione iste deserunt odio, amet voluptatem
-              natus. Deleniti quam et nisi natus vero totam.
-            </p>
-            <p className="text-gray-100 p-6">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Incidunt, corporis illum
-              praesentium illo sequi, optio adipisci ratione iste deserunt odio, amet voluptatem
-              natus. Deleniti quam et nisi natus vero totam.
-            </p>
-          </article>
-          <article className="flex flex-col justify-center">
-            <Launch />
-          </article>
-        </section>
-      </section>
-
-      <section
-        id="team"
-        className="move-up-15vh w-full bg-gray-100 section-3 flex flex-col h-screen angle"
-      >
-        <section className="container w-full mx-auto flex justify-around flex-grow align-middle">
-          <article className="flex flex-col justify-center">
-            <h2 className="text-3xl text-gray-700 p-6 font-bold">Meet the Team!</h2>
-          </article>
-        </section>
-      </section>
-
-      <section className="move-up-15vh w-full bg-purple-600 section-4 flex flex-col h-screen">
-        <section className="container w-full mx-auto flex justify-around flex-grow align-middle">
-          <article className="flex flex-col justify-center">
-            <h2 className="text-3xl text-gray-100 p-6 font-bold">Helping you Prioritise!</h2>
-            <p className="text-gray-100 p-6">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Incidunt, corporis illum
-              praesentium illo sequi, optio adipisci ratione iste deserunt odio, amet voluptatem
-              natus. Deleniti quam et nisi natus vero totam.
-            </p>
-            <p className="text-gray-100 p-6">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Incidunt, corporis illum
-              praesentium illo sequi, optio adipisci ratione iste deserunt odio, amet voluptatem
-              natus. Deleniti quam et nisi natus vero totam.
-            </p>
-            <p className="text-gray-100 p-6">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Incidunt, corporis illum
-              praesentium illo sequi, optio adipisci ratione iste deserunt odio, amet voluptatem
-              natus. Deleniti quam et nisi natus vero totam.
-            </p>
-          </article>
-          <article className="flex flex-col justify-center">
-            <Choice />
-          </article>
-        </section>
-      </section>
-
-      <section
-        id="partnerships"
-        className="move-up-15vh w-full bg-gray-100 section-5 flex flex-col h-screen angle"
-      >
-        <section className="container w-full mx-auto flex flex-col justify-center flex-grow align-middle">
-          <article className="flex flex-row-reverse px-12">
-            <h2 className="text-3xl text-gray-700 p-6 font-bold">Research Partnerships</h2>
-          </article>
-          <article className="flex flex-col md:flex-row p-6">
-            <article className="flex flex-col p-6 justify-center">
-              <a
-                href="https://scarfree.org.uk/"
-                target="_blank"
-                referrerPolicy="no-referrer"
-                rel="noreferrer"
-              >
-                <ImperialLogo style={{ height: 'auto', width: '35vw' }} />
-              </a>
-              <p className="text-gray-700 py-4 text-center">
-                This research is hosted and supported by Imperial College London - the Center for
-                Injury Studies..
-              </p>
-            </article>
-            <article className="flex flex-col p-6 justify-center">
-              <a
-                href="https://scarfree.org.uk/"
-                target="_blank"
-                referrerPolicy="no-referrer"
-                rel="noreferrer"
-              >
-                <ScarFreeLogo style={{ height: 'auto', width: '35vw' }} />
-              </a>
-              <p className="text-gray-700 py-4 text-center">
-                This research is funded by The Scar Free Foundation. The Scar Free Foundation is the
-                only medical research charity focused on scarring with the mission to achieve scar
-                free healing within a generation.
-              </p>
-            </article>
-          </article>
-        </section>
-      </section>
+      <GetInvolved />
+      <LaunchingSoon />
+      <MeetTheTeam />
+      <HelpingYouPrioritise />
+      <Partnerships />
 
       <footer className="move-up-15vh w-full flex flex-col align-middle justify-center mx-auto p-6 pt-16 pb-6 text-sm text-center md:text-left fade-in bg-gray-700">
-        <section className="container w-full mx-auto flex flex-col align-middle justify-center flex-grow">
-          <a className="text-gray-100 no-underline hover:no-underline" href="#">
-            &copy; Revenite 2021
+        <section className="container w-full mx-auto flex align-middle justify-center p-6">
+          <a className="text-xl text-gray-100 no-underline hover:no-underline px-6" href="#">
+            Privacy
+          </a>
+          <a className="text-xl text-gray-100 no-underline hover:no-underline px-6" href="#">
+            Security
+          </a>
+          <a className="text-xl text-gray-100 no-underline hover:no-underline px-6" href="#">
+            GDPR
+          </a>
+        </section>
+        <section className="container w-full mx-auto flex flex-col align-middle justify-center p-6">
+          <a className="text-xl text-gray-100 text-center no-underline hover:no-underline" href="#">
+            &copy; Revenite 2021 - AdamJamesTurner93
           </a>
         </section>
       </footer>
