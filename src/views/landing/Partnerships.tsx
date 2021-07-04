@@ -22,7 +22,7 @@ export const Partnerships = () => (
           </a>
           <p className="text-gray-700 py-4 text-center">
             This research is hosted and supported by Imperial College London - the Center for Injury
-            Studies..
+            Studies.
           </p>
         </article>
         <article className="flex flex-col w-full md:w-2/3 lg:w-1/2 p-6 justify-center">
