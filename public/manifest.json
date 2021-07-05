@@ -3,8 +3,8 @@
   "name": "Revenite: Rehablitation App",
   "description": "Rehabilitation companion app.",
   "display": "standalone",
-  "theme_color": "#2196f3",
-  "background_color": "#2196f3",
+  "theme_color": "#5B21B6",
+  "background_color": "#374151",
   "scope": "/",
   "start_url": "/",
   "icons": [

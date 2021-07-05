@@ -40,64 +40,50 @@ const AddActivity: React.FC = () => {
   return (
     <PageWrapper title="Add Activity">
       <form onSubmit={handleSubmit(onSubmit)}>
-        <section className="mt-3">
-          <label className="text-sm" htmlFor="title">
-            Activity Name
-          </label>
-          <Input
-            {...register('name', {
-              required: 'Please enter an activity name',
-              minLength: {
-                value: 4,
-                message: 'Please enter at least 4 characters',
-              },
-            })}
-            errorMessage={errors.name?.message}
-            valid={touchedFields.name && !errors.name}
-          />
-        </section>
-        <section className="mt-3">
-          <label className="text-sm" htmlFor="date">
-            Date
-          </label>
-          <Input
-            {...(register('date', { valueAsDate: true }), { required: true })}
-            onChange={(e) => setValue('date', new Date(e.target.value))}
-            errorMessage={errors.date?.message}
-            valid={touchedFields.date && !errors.date}
-            type="date"
-            name="date"
-          />
-        </section>
-        <section className="mt-3">
-          <label className="text-sm" htmlFor="duration">
-            Duration
-          </label>
-          <Input
-            {...register('duration')}
-            type="number"
-            errorMessage={errors.duration?.message}
-            valid={touchedFields.duration && !errors.duration}
-            name="duration"
-            min={0}
-          />
-        </section>
-        <section className="mt-3">
-          <label className="text-sm" htmlFor="distance">
-            Distance
-          </label>
-          <Input
-            {...register('distance')}
-            errorMessage={errors.distance?.message}
-            valid={touchedFields.distance && !errors.distance}
-            type="number"
-            name="distance"
-            min={0}
-          />
-        </section>
+        <Input
+          label="Activity Name"
+          {...register('name', {
+            required: 'Please enter an activity name',
+            minLength: {
+              value: 4,
+              message: 'Please enter at least 4 characters',
+            },
+          })}
+          errorMessage={errors.name?.message}
+          valid={touchedFields.name && !errors.name}
+        />
+
+        <Input
+          label="Date"
+          {...(register('date', { valueAsDate: true }), { required: true })}
+          onChange={(e) => setValue('date', new Date(e.target.value))}
+          errorMessage={errors.date?.message}
+          valid={touchedFields.date && !errors.date}
+          type="date"
+          name="date"
+        />
+        <Input
+          label="Duration"
+          {...register('duration')}
+          type="number"
+          errorMessage={errors.duration?.message}
+          valid={touchedFields.duration && !errors.duration}
+          name="duration"
+          min={0}
+        />
+
+        <Input
+          label="Distance"
+          {...register('distance')}
+          errorMessage={errors.distance?.message}
+          valid={touchedFields.distance && !errors.distance}
+          type="number"
+          name="distance"
+          min={0}
+        />
         <section className="mt-3">
           <label className="text-sm">Workout type</label>
-          <section className="mt-3 flex flex-col sm:flex-row sm:justify-around ">
+          <div className="mt-3 flex flex-col sm:flex-row sm:justify-around ">
             <label className="text-sm">
               <input {...register('cardio')} className="mr-2" type="checkbox" name="cardio" />
               Cardio
@@ -115,13 +101,11 @@ const AddActivity: React.FC = () => {
               <input {...register('strength')} className="mr-2" type="checkbox" name="strength" />
               Strength
             </label>
-          </section>
+          </div>
         </section>
         <section className="mt-3">
-          <label className="text-sm" htmlFor="exertion">
-            Perceived Exertion
-          </label>
           <Input
+            label="Perceived Exertion"
             {...register('perceivedExertion')}
             defaultValue={5}
             onChange={(e) => setValue('perceivedExertion', +e.target.value)}
@@ -134,10 +118,8 @@ const AddActivity: React.FC = () => {
           <p className="text-xs">{exertion} - Really hard!</p>
         </section>
         <section className="mt-3">
-          <label className="text-sm" htmlFor="body">
-            How is your body feeling?
-          </label>
           <Input
+            label="How is your body feeling?"
             {...register('feeling')}
             onChange={(e) => setValue('feeling', +e.target.value)}
             defaultValue={5}
@@ -150,7 +132,7 @@ const AddActivity: React.FC = () => {
           <p className="text-xs">{feeling} - Really hard!</p>
         </section>
         <button className="text-white w-full mt-6 bg-purple-600 p-3 rounded" type="submit">
-          Save
+          Save Activity
         </button>
       </form>
     </PageWrapper>

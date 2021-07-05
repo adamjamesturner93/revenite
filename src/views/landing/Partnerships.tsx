@@ -6,7 +6,7 @@ export const Partnerships = () => (
     id="partnerships"
     className="move-up-15vh w-full bg-gray-100 section-5 flex flex-col min-h-screen py-40 md:py-30 lg:py-0"
   >
-    <section className="container w-full mx-auto flex flex-col justify-center flex-grow align-middle">
+    <section className="container w-full mx-auto flex flex-col justify-center flex-grow align-middle lg:items-end">
       <TextWrapper>
         <h2 className="text-3xl text-gray-700 p-6 font-bold">Research Partnerships</h2>
       </TextWrapper>
@@ -21,8 +21,8 @@ export const Partnerships = () => (
             <ImperialLogo />
           </a>
           <p className="text-gray-700 py-4 text-center">
-            This research is hosted and supported by Imperial College London - the Center for Injury
-            Studies.
+            Revenite is being developed by researchers at Imperial College London, in conjunction
+            with the Centre for Blast Injury Studies Amputee Advisory Board.
           </p>
         </article>
         <article className="flex flex-col w-full md:w-2/3 lg:w-1/2 p-6 justify-center">

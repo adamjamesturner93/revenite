@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { SignUp, SignUpConfirm } from '../views';
 import { useAuth } from '../hooks';
+import { PageWrapper } from '../components';
 
 const initialState = { email: '', password: '', confirm: '', authCode: '' };
 
@@ -45,15 +46,7 @@ const RegisterPage: React.FC = () => {
     signUpConfirm: <SignUpConfirm onChange={onChange} confirmSignUp={handleSignUpConfirm} />,
   };
 
-  return (
-    <div className="gb-gray-50 flex flex-grow ">
-      <div className="flex flex-col flex-grow items-center">
-        <div className="max-w-full sm:w-540 sm:mt-14">
-          <div className="bg-white py-14 px-16 shadow-form rounded">{forms[uiState]}</div>
-        </div>
-      </div>
-    </div>
-  );
+  return <PageWrapper>{forms[uiState]}</PageWrapper>;
 };
 
 export default RegisterPage;

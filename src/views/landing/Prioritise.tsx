@@ -7,19 +7,14 @@ export const HelpingYouPrioritise = () => (
       <TextWrapper>
         <h2 className="text-3xl text-gray-100 p-6 font-bold">Helping you Prioritise!</h2>
         <p className="text-gray-100 p-6">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Incidunt, corporis illum
-          praesentium illo sequi, optio adipisci ratione iste deserunt odio, amet voluptatem natus.
-          Deleniti quam et nisi natus vero totam.
+          Revenite isn’t just a fitness tracking up, but is here to help you understand what works
+          for your body. Do you need to do more cardio? Or maybe you’re working far too hard?
+          Revenite is here for you.
         </p>
         <p className="text-gray-100 p-6">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Incidunt, corporis illum
-          praesentium illo sequi, optio adipisci ratione iste deserunt odio, amet voluptatem natus.
-          Deleniti quam et nisi natus vero totam.
-        </p>
-        <p className="text-gray-100 p-6">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Incidunt, corporis illum
-          praesentium illo sequi, optio adipisci ratione iste deserunt odio, amet voluptatem natus.
-          Deleniti quam et nisi natus vero totam.
+          Whether you choose to synchronise other apps or wearables, or manually input your
+          activity, Revenite will help you to see trends in your exercise with easy to read data
+          displays, so you know what’s best for your exercise.
         </p>
       </TextWrapper>
       <GraphicWrapper>

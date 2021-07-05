@@ -18,13 +18,16 @@ const App: React.FC<AppProps> = ({ Component, pageProps, router }) => {
           name="viewport"
           content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"
         />
-        <meta name="description" content="Description" />
-        <meta name="keywords" content="Keywords" />
+        <meta
+          name="description"
+          content="Revenite is an application for people with amputation(s) to encourage long term physical health and scar management"
+        />
+        <meta name="keywords" content="amputation, rehabilitation, health, rehab, amputee" />
         <title>Revenite</title>
 
         <link rel="manifest" href="/manifest.json" />
 
-        <meta name="theme-color" content="#317EFB" />
+        <meta name="theme-color" content="#5B21B6" />
         <meta name="description" content="Revenite" />
         <link rel="icon" href="/favicon.ico" />
       </Head>

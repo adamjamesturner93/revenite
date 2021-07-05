@@ -22,24 +22,10 @@ const ViewActivity: React.FC<{ activity: ActivityFormData }> = ({ activity }) =>
   return (
     <PageWrapper title={`Activity - ${activity.name}`}>
       <form>
-        <section className="mt-3">
-          <label className="text-sm" htmlFor="date">
-            Date
-          </label>
-          <Input disabled value={format(new Date(activity.date), 'PPP')} />
-        </section>
-        <section className="mt-3">
-          <label className="text-sm" htmlFor="duration">
-            Duration
-          </label>
-          <Input disabled type="number" value={activity.duration} />
-        </section>
-        <section className="mt-3">
-          <label className="text-sm" htmlFor="distance">
-            Distance
-          </label>
-          <Input disabled type="number" value={activity.distance} />
-        </section>
+        <Input label="Date" disabled value={format(new Date(activity.date), 'PPP')} />
+        <Input title="Duration" disabled type="number" value={activity.duration} />
+        <Input title="Distance" disabled type="number" value={activity.distance} />
+
         <section className="mt-3">
           <label className="text-sm">Workout type</label>
           <section className="mt-3 flex flex-col sm:flex-row sm:justify-around ">
@@ -76,17 +62,25 @@ const ViewActivity: React.FC<{ activity: ActivityFormData }> = ({ activity }) =>
           </section>
         </section>
         <section className="mt-3">
-          <label className="text-sm" htmlFor="exertion">
-            Perceived Exertion
-          </label>
-          <Input value={activity.perceivedExertion} min={1} max={10} type="range" disabled />
+          <Input
+            label="Perceived Exertion"
+            value={activity.perceivedExertion}
+            min={1}
+            max={10}
+            type="range"
+            disabled
+          />
           <p className="text-xs">{activity.perceivedExertion} - Really hard!</p>
         </section>
         <section className="mt-3">
-          <label className="text-sm" htmlFor="body">
-            How is your body feeling?
-          </label>
-          <Input value={activity.feeling} min={1} max={10} type="range" disabled />
+          <Input
+            label="How is your body feeling?"
+            value={activity.feeling}
+            min={1}
+            max={10}
+            type="range"
+            disabled
+          />
           <p className="text-xs">{activity.feeling} - Really hard!</p>
         </section>
       </form>

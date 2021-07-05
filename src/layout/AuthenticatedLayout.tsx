@@ -70,11 +70,11 @@ export const AuthenticatedLayout: React.FC<{
                 />
                 <li className="p-3">
                   <details>
-                    <summary className="flex items-center pb-3">
+                    <summary className="flex items-center">
                       <AiOutlineTrophy className="mr-4" />
                       Activities
                     </summary>
-                    <ul className="pl-4">
+                    <ul className="pl-4 pt-3">
                       <MenuItem
                         href="/activities/summary"
                         label="Summary"
@@ -95,11 +95,11 @@ export const AuthenticatedLayout: React.FC<{
                 </li>
                 <li className="p-3">
                   <details>
-                    <summary className="flex items-center pb-3">
+                    <summary className="flex items-center">
                       <AiOutlineHeart className="mr-4" />
                       Health Checks
                     </summary>
-                    <ul className="pl-4">
+                    <ul className="pl-4 pt-3">
                       <MenuItem
                         href="/health-checks/summary"
                         label="Summary"

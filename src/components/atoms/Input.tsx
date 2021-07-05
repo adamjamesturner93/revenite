@@ -1,24 +1,21 @@
 import React from 'react';
-import classnames from 'classnames';
+import { inputClasses } from '../../utils';
 
 export const Input: React.FC<
-  { errorMessage?: string; valid?: boolean } & React.DetailedHTMLProps<
+  { errorMessage?: string; valid?: boolean; label?: string } & React.DetailedHTMLProps<
     React.InputHTMLAttributes<HTMLInputElement>,
     HTMLInputElement
   >
-> = ({ errorMessage, valid, ...props }) => {
-  const inputClasses = classnames(
-    'outline-none border rounded p-2 mt-3 w-full focus:shadow-inputFocus focus:border-white border-gray-300',
-    {
-      'border-red-500': !!errorMessage,
-      'border-green-500': valid,
-    },
-  );
+> = ({ errorMessage, valid, label, ...props }) => {
+  const classes = inputClasses(errorMessage, valid);
 
   return (
-    <React.Fragment>
-      <input {...props} className={inputClasses} />
+    <div className="mt-3">
+      <label className="text-sm">
+        {label}
+        <input {...props} className={classes} />
+      </label>
       {errorMessage && <span className="text-sm px-2 text-red-500">{errorMessage}</span>}
-    </React.Fragment>
+    </div>
   );
 };

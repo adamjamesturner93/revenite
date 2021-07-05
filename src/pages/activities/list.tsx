@@ -10,18 +10,18 @@ const Activities: React.FC<{ activities: any[] }> = ({ activities }) => {
   return (
     <PageWrapper title="Activities">
       {activities.map(({ id, title, duration, date, strength, flexibility, cardio }) => (
-        <article
+        <section
           className="border border-purple-600 flex justify-between py-1 px-2 my-2"
           role="link"
           onClick={() => router.push(`/activities/${id}`)}
           key={id}
         >
-          <section>
+          <article>
             <h3 className="text-gray-700">{title}</h3>
             <p className="text-gray-500">{duration} minutes</p>
             <p className="text-gray-500">{new Date(date).toDateString()}</p>
-          </section>
-          <section className="my-auto">
+          </article>
+          <aside className="my-auto">
             {flexibility && (
               <span className="mx-1 text-white bg-indigo-400 border-radius-5 py-1 px-3">Flex</span>
             )}
@@ -31,8 +31,8 @@ const Activities: React.FC<{ activities: any[] }> = ({ activities }) => {
             {cardio && (
               <span className="mx-1 text-white bg-green-400 border-radius-5 py-1 px-3">Cardio</span>
             )}
-          </section>
-        </article>
+          </aside>
+        </section>
       ))}
     </PageWrapper>
   );

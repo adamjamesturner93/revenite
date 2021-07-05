@@ -13,17 +13,15 @@ export const GetInvolved = () => (
       <TextWrapper>
         <h2 className="text-3xl text-gray-700 p-6 font-bold">Get Involved</h2>
         <p className="text-xl text-gray-700 p-6">
-          If you’re interested in becoming a test user, please contact Shruti <br /> (
+          If you’re interested in becoming a test user, please contact{' '}
           <a
             className="inline-block text-purple-600 no-underline hover:text-indigo-800  hover:underline text-center"
-            data-tippy-content="@twitter_handle"
-            href="https://twitter.com/reveniterehab"
-            target="_blank"
+            href="mailto:s.turner17@imperial.ac.uk"
             rel="noreferrer"
           >
-            s.turner17@imperial.ac.uk
-          </a>
-          ) or message us on{' '}
+            Shruti
+          </a>{' '}
+          or message us on{' '}
           <a
             className="inline-block text-purple-600 no-underline hover:text-indigo-800 hover:underline text-center"
             data-tippy-content="@twitter_handle"
@@ -33,7 +31,6 @@ export const GetInvolved = () => (
           >
             Twitter
           </a>
-          !
         </p>
       </TextWrapper>
     </SectionWrapper>
