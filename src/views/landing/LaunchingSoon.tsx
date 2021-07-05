@@ -19,7 +19,7 @@ export const LaunchingSoon = () => (
           pilot study. For sneak previews, up to date information or if you’d like to be involved
           please contact{' '}
           <a
-            className="inline-block text-gray-900 no-underline hover:text-gray-700 hover:underline text-center"
+            className="inline-block text-gray-100 underline hover:text-gray-300 text-center"
             href="mailto:s.turner17@imperial.ac.uk"
             rel="noreferrer"
           >
@@ -27,7 +27,7 @@ export const LaunchingSoon = () => (
           </a>{' '}
           or follow us on{' '}
           <a
-            className="inline-block text-gray-900 no-underline hover:text-gray-700 hover:underline text-center"
+            className="inline-block text-gray-100 underline hover:text-gray-300 text-center"
             data-tippy-content="@twitter_handle"
             href="https://twitter.com/reveniterehab"
             target="_blank"

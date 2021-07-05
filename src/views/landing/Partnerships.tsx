@@ -17,6 +17,7 @@ export const Partnerships = () => (
             target="_blank"
             referrerPolicy="no-referrer"
             rel="noreferrer"
+            aria-label="Imperial College London"
           >
             <ImperialLogo />
           </a>
@@ -31,6 +32,7 @@ export const Partnerships = () => (
             target="_blank"
             referrerPolicy="no-referrer"
             rel="noreferrer"
+            aria-label="The Scar Free Foundation"
           >
             <ScarFreeLogo />
           </a>

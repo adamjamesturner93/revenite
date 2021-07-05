@@ -1,6 +1,6 @@
 import React from 'react';
-import Link from 'next/link';
-import { useAuth } from '../hooks';
+// import Link from 'next/link';
+// import { useAuth } from '../hooks';
 import { Icon, Banner, Goals } from '../components/';
 import { Link as ScrollLink } from 'react-scroll';
 import {
@@ -12,13 +12,13 @@ import {
 } from '../views/landing';
 
 const Home: React.FC = () => {
-  const { user, signOut } = useAuth();
+  // const { user, signOut } = useAuth();
 
   return (
     <React.Fragment>
       <header className="w-full bg-gray-700 flex flex-col h-screen">
         <nav className="container mx-auto w-full flex items-center justify-between p-6">
-          <a>
+          <a href="/" aria-label="Revenite">
             <Icon />
           </a>
           <ul className="flex">
@@ -41,6 +41,7 @@ const Home: React.FC = () => {
 
           <div className="flex justify-end content-center">
             <a
+              aria-label="Follow us on Twitter"
               className="inline-block text-blue-300 no-underline hover:text-indigo-800 hover:underline text-center h-10 p-2 md:h-auto md:p-4"
               data-tippy-content="@twitter_handle"
               href="https://twitter.com/reveniterehab"

@@ -28,17 +28,17 @@ const PersonCard: React.FC<TeamMemberProps> = ({
     <p className="text-gray-700 py-2">{description}</p>
     <aside className="flex w-1/2 justify-around">
       {researchGate && (
-        <a href={researchGate}>
+        <a href={researchGate} aria-label={`Find ${name} on ResearchGate`}>
           <FaResearchgate style={{ fill: '#40BA9B' }} className="w-8 h-8" />
         </a>
       )}
       {twitter && (
-        <a href={twitter}>
+        <a href={twitter} aria-label={`Find ${name} on Twitter`}>
           <FaTwitter style={{ fill: '#1DA1F2' }} className="w-8 h-8" />
         </a>
       )}
       {linkedIn && (
-        <a href={linkedIn}>
+        <a href={linkedIn} aria-label={`Find ${name} on LinkedIn`}>
           <FaLinkedin style={{ fill: '#0a66C2' }} className="w-8 h-8" />
         </a>
       )}
