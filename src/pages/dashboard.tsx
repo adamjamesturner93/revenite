@@ -11,6 +11,15 @@ const Dashboard: React.FC = () => {
         <h2 className="text-xl text-gray-700">Making the most of Revenite...</h2>
         <article role="listbox">
           <p role="listitem" className="flex py-2">
+            <FaLightbulb className="mr-3 self-center text-yellow-400" /> Provide some personal
+            details{' '}
+            <FaArrowRight
+              role="link"
+              onClick={() => router.push('/profile')}
+              className="ml-auto self-center text-blue-400 hover:text-blue-600"
+            />
+          </p>
+          <p role="listitem" className="flex py-2">
             <FaLightbulb className="mr-3 self-center text-yellow-400" /> Provide details of any
             Amputations you have{' '}
             <FaArrowRight

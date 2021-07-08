@@ -1,21 +1,24 @@
 import React from 'react';
+import { UseFormRegister } from 'react-hook-form';
 import { inputClasses } from '../../utils';
 
 export const Select: React.FC<
   {
+    register: UseFormRegister<any>;
+    name: string;
     errorMessage?: string;
     valid?: boolean;
     label: string;
     options: { label: string; value: string }[];
   } & React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLSelectElement>, HTMLSelectElement>
-> = ({ errorMessage, valid, label, options, ...props }) => {
+> = ({ register, name, errorMessage, valid, label, options, ...rest }) => {
   const classes = inputClasses(errorMessage, valid);
 
   return (
     <div className="mt-3">
       <label className="text-sm">
         {label}
-        <select {...props} className={classes} defaultValue="">
+        <select {...register(name)} {...rest} className={classes} defaultValue="">
           <option value="" disabled>
             Select your option
           </option>
