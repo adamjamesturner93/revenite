@@ -13,5 +13,22 @@
       "type": "cicd",
       "lastPushTimeStamp": "2021-06-24T08:46:50.917Z"
     }
+  },
+  "api": {
+    "revenite": {
+      "service": "AppSync",
+      "providerPlugin": "awscloudformation",
+      "output": {
+        "authConfig": {
+          "defaultAuthentication": {
+            "authenticationType": "AMAZON_COGNITO_USER_POOLS",
+            "userPoolConfig": {
+              "userPoolId": "authrevenite44d45666"
+            }
+          },
+          "additionalAuthenticationProviders": []
+        }
+      }
+    }
   }
 }

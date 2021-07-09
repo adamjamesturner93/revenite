@@ -1,31 +1,49 @@
 import React from 'react';
-import Link from 'next/link';
-import { useAuth } from '../hooks';
+// import Link from 'next/link';
+// import { useAuth } from '../hooks';
+import { Icon, Banner, Goals } from '../components/';
+import { Link as ScrollLink } from 'react-scroll';
+import {
+  HelpingYouPrioritise,
+  Partnerships,
+  LaunchingSoon,
+  MeetTheTeam,
+  GetInvolved,
+} from '../views/landing';
 
 const Home: React.FC = () => {
-  const { user, signOut } = useAuth();
+  // const { user, signOut } = useAuth();
 
+  // TODO CREATE A TERMS, PRIVACY AND SECURITY PAGE WITH RAIN CLOUD AND UNDER CONSTRUCTION.
   return (
     <React.Fragment>
-      <div className="w-full container mx-auto p-6">
-        <div className="w-full flex items-center justify-between">
-          <a
-            className="flex items-center text-purple-600 no-underline hover:no-underline font-bold text-2xl lg:text-4xl"
-            href="#"
-          >
-            <svg
-              className="h-8 fill-current text-purple-900 pr-2"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 20 20"
-            >
-              <path d="M10 20a10 10 0 1 1 0-20 10 10 0 0 1 0 20zm-5.6-4.29a9.95 9.95 0 0 1 11.2 0 8 8 0 1 0-11.2 0zm6.12-7.64l3.02-3.02 1.41 1.41-3.02 3.02a2 2 0 1 1-1.41-1.41z" />
-            </svg>{' '}
-            Revenite
+      <header className="w-full bg-gray-700 flex flex-col h-screen">
+        <nav className="container mx-auto w-full flex items-center justify-between p-6">
+          <a href="/" aria-label="Revenite">
+            <Icon />
           </a>
+          <ul className="flex">
+            <li className="inline-block text-gray-100 no-underline hover:underline text-center h-10 p-2 md:h-auto md:p-4">
+              <ScrollLink to="get-involved" smooth={true} duration={500}>
+                Get Involved
+              </ScrollLink>
+            </li>
+            <li className="inline-block text-gray-100 no-underline hover:underline text-center h-10 p-2 md:h-auto md:p-4">
+              <ScrollLink to="team" smooth={true} duration={500}>
+                Meet the Team
+              </ScrollLink>
+            </li>
+            <li className="inline-block text-gray-100 no-underline hover:underline text-center h-10 p-2 md:h-auto md:p-4">
+              <ScrollLink to="partnerships" smooth={true} duration={500}>
+                Research Partnerships
+              </ScrollLink>
+            </li>
+          </ul>
 
-          <div className="flex w-1/2 justify-end content-center">
+          <div className="flex justify-end content-center">
             <a
-              className="inline-block text-blue-300 no-underline hover:text-indigo-800 hover:text-underline text-center h-10 p-2 md:h-auto md:p-4"
+              aria-label="Follow us on Twitter"
+              className="inline-block text-blue-300 no-underline hover:text-indigo-800 hover:underline text-center h-10 p-2 md:h-auto md:p-4"
               data-tippy-content="@twitter_handle"
               href="https://twitter.com/reveniterehab"
               target="_blank"
@@ -43,60 +61,57 @@ const Home: React.FC = () => {
               <Link href="/">
                 <a
                   onClick={signOut}
-                  className="inline-block text-purple-600 no-underline hover:text-indigo-800 hover:text-underline text-center h-10 p-2 md:h-auto md:p-4"
+                  className="inline-block text-purple-600 no-underline hover:text-indigo-800 hover:underline text-center h-10 p-2 md:h-auto md:p-4"
                 >
                   Sign out
                 </a>
               </Link>
             ) : (
               <Link href="/sign-in">
-                <a className="inline-block text-purple-600 no-underline hover:text-indigo-800 hover:text-underline text-center h-10 p-2 md:h-auto md:p-4">
+                <a className="inline-block text-purple-600 no-underline hover:text-indigo-800 hover:underline text-center h-10 p-2 md:h-auto md:p-4">
                   Sign in
                 </a>
               </Link>
             )} */}
           </div>
-        </div>
-      </div>
+        </nav>
 
-      <div className="container pt-24 md:pt-48 px-6 mx-auto flex flex-grow flex-wrap flex-col md:flex-row items-center">
-        <div className="flex flex-col w-full xl:w-2/5 justify-center lg:items-start overflow-y-hidden">
-          <h1 className="my-4 text-3xl md:text-5xl text-purple-800 font-bold leading-tight text-center md:text-left slide-in-bottom-h1">
-            Revenite
-          </h1>
-          <p className="leading-normal text-base md:text-2xl mb-8 text-center md:text-left slide-in-bottom-subtitle">
-            Your rehab companion app!
-          </p>
+        <section className="container w-full mx-auto flex flex-col lg:flex-row justify-center lg:justify-around flex-grow items-center">
+          <article className="flex flex-col items-center justify-center w-1/2 lg:w-1/3">
+            <Banner />
+            <h2 className="text-2xl text-center text-gray-100 py-4">
+              Helping you reach your fitness goals.
+            </h2>
+          </article>
+          <article className="hidden md:flex flex-col justify-center items-center w-2/3 lg:w-1/2">
+            <Goals />
+          </article>
+        </section>
+      </header>
 
-          <p className="text-blue-400 font-bold pb-8 lg:pb-6 text-center md:text-left fade-in">
-            App coming soon!
-          </p>
-          <p>
-            If you'd like to hear more or are interesting in helping us test the app you can message
-            us on{' '}
-            <a
-              className="inline-block text-purple-600 no-underline hover:text-indigo-800 hover:text-underline text-center "
-              href="https://twitter.com/reveniterehab"
-              target="_blank"
-              rel="noreferrer"
-            >
-              Twitter
-            </a>{' '}
-            or email{' '}
-            <a
-              className="inline-block text-purple-600 no-underline hover:text-indigo-800 hover:text-underline text-center "
-              href="mailto:s.turner17@imperial.ac.uk"
-            >
-              Shruti
-            </a>
-            .
-          </p>
-        </div>
-      </div>
-      <footer className="w-full container mx-auto p-6 pt-16 pb-6 text-sm text-center md:text-left fade-in">
-        <a className="text-gray-500 no-underline hover:no-underline" href="#">
-          &copy; Revenite 2021
-        </a>
+      <GetInvolved />
+      <LaunchingSoon />
+      <MeetTheTeam />
+      <HelpingYouPrioritise />
+      <Partnerships />
+
+      <footer className="move-up-15vh w-full flex flex-col align-middle justify-center mx-auto p-6 pt-16 pb-6 text-sm text-center md:text-left fade-in bg-gray-700">
+        {/*<section className="container w-full mx-auto flex align-middle justify-center p-6">
+          <a className="text-xl text-gray-100 no-underline hover:no-underline px-6" href="#">
+            Privacy
+          </a>
+          <a className="text-xl text-gray-100 no-underline hover:no-underline px-6" href="#">
+            Security
+          </a>
+          <a className="text-xl text-gray-100 no-underline hover:no-underline px-6" href="#">
+            GDPR
+          </a>
+        </section> */}
+        <section className="container w-full mx-auto flex flex-col align-middle justify-center p-6">
+          <a className="text-xl text-gray-100 text-center no-underline hover:no-underline" href="#">
+            &copy; Revenite 2021 - AdamJamesTurner93
+          </a>
+        </section>
       </footer>
     </React.Fragment>
   );

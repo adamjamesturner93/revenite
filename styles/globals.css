@@ -23,3 +23,88 @@ details[open] summary ~ * {
     margin-left: 0px;
   }
 }
+
+.banner {
+  height: 5em;
+}
+
+.move-up-15vh {
+  margin-top: -15vh;
+}
+
+.section-1 {
+  clip-path: polygon(0 7.5%, 100% 0, 100% 92.5%, 0 100%);
+}
+.section-2 {
+  clip-path: polygon(0 0%, 100% 5%, 100% 92.5%, 0 100%);
+}
+.section-3 {
+  clip-path: polygon(0 7.5%, 100% 0%, 100% 92.5%, 0 100%);
+}
+.section-4 {
+  clip-path: polygon(0 0%, 100% 5%, 100% 92.5%, 0 100%);
+}
+.section-5 {
+  clip-path: polygon(0 7.5%, 100% 0%, 100% 92.5%, 0 100%);
+}
+.move-up-15vh {
+  margin-top: -7.5vh;
+}
+footer {
+  clip-path: polygon(0 0%, 100% 15%, 100% 100%, 0 100%);
+  height: 50vh;
+}
+
+@media screen and (min-width: 768px) {
+  .section-1 {
+    clip-path: polygon(0 10%, 100% 0, 100% 90%, 0 100%);
+  }
+  .section-2 {
+    clip-path: polygon(0 0%, 100% 10%, 100% 90%, 0 100%);
+  }
+  .section-3 {
+    clip-path: polygon(0 10%, 100% 0%, 100% 90%, 0 100%);
+  }
+  .section-4 {
+    clip-path: polygon(0 0%, 100% 10%, 100% 90%, 0 100%);
+  }
+  .section-5 {
+    clip-path: polygon(0 10%, 100% 0%, 100% 90%, 0 100%);
+  }
+  .move-up-15vh {
+    margin-top: -10vh;
+  }
+
+  footer {
+    clip-path: polygon(0 0%, 100% 20%, 100% 100%, 0 100%);
+    height: 50vh;
+  }
+}
+@media screen and (min-width: 1024px) {
+  .section-1 {
+    clip-path: polygon(0 15%, 100% 0, 100% 85%, 0 100%);
+  }
+  .section-2 {
+    clip-path: polygon(0 0%, 100% 15%, 100% 85%, 0 100%);
+  }
+  .section-3 {
+    clip-path: polygon(0 15%, 100% 0%, 100% 85%, 0 100%);
+  }
+  .section-4 {
+    clip-path: polygon(0 0%, 100% 15%, 100% 85%, 0 100%);
+  }
+  .section-5 {
+    clip-path: polygon(0 15%, 100% 0%, 100% 85%, 0 100%);
+  }
+  .move-up-15vh {
+    margin-top: -15vh;
+  }
+  footer {
+    clip-path: polygon(0 0%, 100% 20%, 100% 100%, 0 100%);
+    height: 50vh;
+  }
+}
+
+.bg-strava {
+  background-color: #fc4c02;
+}

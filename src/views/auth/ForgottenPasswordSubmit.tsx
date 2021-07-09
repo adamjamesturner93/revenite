@@ -5,8 +5,8 @@ export const ForgottenPasswordSubmit: React.FC<{
   onChange: React.ChangeEventHandler<HTMLInputElement>;
   forgottenPasswordSubmit: () => void;
 }> = ({ onChange, forgottenPasswordSubmit }) => (
-  <section>
-    <h1 className="text-3xl font-black">Confirm new password</h1>
+  <React.Fragment>
+    <h1 className="text-3xl text-center">Confirm new password</h1>
     <section className="mt-10">
       <label className="text-sm">Confirmation Code</label>
       <Input onChange={onChange} name="authCode" />
@@ -22,5 +22,5 @@ export const ForgottenPasswordSubmit: React.FC<{
     >
       Submit new password
     </button>
-  </section>
+  </React.Fragment>
 );

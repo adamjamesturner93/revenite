@@ -12,8 +12,8 @@ export const SignUp: React.FC<{
   };
 
   return (
-    <section>
-      <h1 className="text-3xl font-black">Register for an account</h1>
+    <React.Fragment>
+      <h1 className="text-3xl text-center">Register for an account</h1>
       <section className="mt-10">
         <label className="text-sm">Email</label>
         <Input onChange={onChange} name="email" />
@@ -48,6 +48,6 @@ export const SignUp: React.FC<{
           <a className="cursor-pointer text-purple-600">Sign in</a>
         </Link>
       </p>
-    </section>
+    </React.Fragment>
   );
 };

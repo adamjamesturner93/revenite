@@ -22,7 +22,7 @@ export const Layout: React.FC<{
     APP_ROUTES.TERMS.url,
   ];
 
-  let pathIsProtected = unprotectedRoutes.indexOf(router.pathname) === -1;
+  const pathIsProtected = unprotectedRoutes.indexOf(router.pathname) === -1;
 
   if (isBrowser() && !user && pathIsProtected) {
     router.push(APP_ROUTES.SIGN_IN.url);
@@ -30,17 +30,18 @@ export const Layout: React.FC<{
 
   if (!user) return <UnauthenticatedLayout>{children}</UnauthenticatedLayout>;
 
-  const authFlowRoutes = [
-    APP_ROUTES.SIGN_IN.url,
-    APP_ROUTES.PASSWORD_RESET.url,
-    APP_ROUTES.REGISTER.url,
-  ];
-  pathIsProtected = authFlowRoutes.indexOf(router.pathname) > -1;
+  // const authFlowRoutes = [
+  //   APP_ROUTES.HOME.url,
+  //   APP_ROUTES.SIGN_IN.url,
+  //   APP_ROUTES.PASSWORD_RESET.url,
+  //   APP_ROUTES.REGISTER.url,
+  // ];
+  // pathIsProtected = authFlowRoutes.indexOf(router.pathname) > -1;
 
-  if (isBrowser() && pathIsProtected) {
-    console.log('Path is protected', authFlowRoutes.indexOf(router.pathname), router.pathname);
-    router.push(APP_ROUTES.DASHBOARD.url);
-  }
+  // if (isBrowser() && pathIsProtected) {
+  //   console.log('Path is protected', authFlowRoutes.indexOf(router.pathname), router.pathname);
+  //   router.push(APP_ROUTES.DASHBOARD.url);
+  // }
 
   return (
     <AuthenticatedLayout

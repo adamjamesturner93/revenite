@@ -1,10 +1,10 @@
 import React from 'react';
+import { PageWrapper } from '../../components';
 
 const Activities: React.FC = () => {
   return (
-    <div className="gb-gray-50 flex flex-grow p-2 flex-col">
-      <h1 className="text-2xl">Activities Summary</h1>
-      <section className="grid grid-cols-3 gap-10">
+    <PageWrapper title="Activities Summary">
+      <section className="grid lg:grid-cols-3 grid-cols-1 gap-10">
         <article className="bg-white p-10 shadow-form flex-col">
           <h3 className="text-xl font-bold text-gray-700">This week:</h3>
           <p className="text-gray-500">Cardio: 5 (40%)</p>
@@ -24,7 +24,7 @@ const Activities: React.FC = () => {
           <p className="text-gray-500">Strength: 25 (22%)</p>
         </article>
       </section>
-    </div>
+    </PageWrapper>
   );
 };
 

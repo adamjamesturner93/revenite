@@ -1,24 +1,37 @@
 import React from 'react';
-import classnames from 'classnames';
+import { UseFormRegister } from 'react-hook-form';
+import { inputClasses } from '../../utils';
 
 export const Input: React.FC<
-  { errorMessage?: string; valid?: boolean } & React.DetailedHTMLProps<
-    React.InputHTMLAttributes<HTMLInputElement>,
-    HTMLInputElement
-  >
-> = ({ errorMessage, valid, ...props }) => {
-  const inputClasses = classnames(
-    'outline-none border rounded p-2 mt-3 w-full focus:shadow-inputFocus focus:border-white border-gray-300',
-    {
-      'border-red-500': !!errorMessage,
-      'border-green-500': valid,
-    },
-  );
+  {
+    register?: UseFormRegister<any>;
+    name?: string;
+    errorMessage?: string;
+    valid?: boolean;
+    label?: string;
+    initialValue?: string;
+  } & React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
+> = ({ register, name, errorMessage, valid, label, ...rest }) => {
+  const classes = inputClasses(errorMessage, valid);
+
+  if (!register || !name) {
+    return (
+      <div className="mt-3">
+        <label className="text-sm">
+          {label}
+          <input disabled {...rest} className={classes} />
+        </label>
+      </div>
+    );
+  }
 
   return (
-    <React.Fragment>
-      <input {...props} className={inputClasses} />
+    <div className="mt-3">
+      <label className="text-sm">
+        {label}
+        <input {...register(name)} {...rest} className={classes} />
+      </label>
       {errorMessage && <span className="text-sm px-2 text-red-500">{errorMessage}</span>}
-    </React.Fragment>
+    </div>
   );
 };

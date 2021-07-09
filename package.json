@@ -9,10 +9,12 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@aws-amplify/api": "^4.0.4",
     "autoprefixer": "^9",
     "aws-amplify": "^4.1.1",
     "chartist": "^0.11.4",
     "classnames": "^2.3.1",
+    "date-fns": "^2.22.1",
     "next": "9.5.5",
     "next-pwa": "^5.2.21",
     "postcss": "^7",
@@ -23,15 +25,19 @@
     "react-hook-form": "^7.9.0",
     "react-icons": "^4.2.0",
     "react-responsive": "^8.2.0",
+    "react-scroll": "^1.8.2",
     "react-transition-group": "^4.4.2",
-    "tailwindcss": "npm:@tailwindcss/postcss7-compat"
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "@types/react": "17.0.11",
     "@types/react-helmet": "^6.1.1",
     "@types/react-responsive": "^8.0.2",
+    "@types/react-scroll": "^1.8.2",
     "@types/react-transition-group": "^4.4.1",
     "@types/tailwindcss": "^2.0.6",
+    "@types/uuid": "^8.3.1",
     "@typescript-eslint/eslint-plugin": "^4.28.0",
     "@typescript-eslint/parser": "^4.28.0",
     "eslint": "^7.29.0",

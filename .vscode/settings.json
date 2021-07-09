@@ -9,6 +9,12 @@
     "amplify/backend/awscloudformation": true
   },
   "cSpell.words": [
-    "Revenite"
-  ]
+    "Linkedin",
+    "Prioritise",
+    "Researchgate",
+    "Revenite",
+    "Shruti",
+    "synchronise"
+  ],
+  "compile-hero.disable-compile-files-on-did-save-code": false
 }

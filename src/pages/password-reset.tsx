@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 import { ForgotPassword, ForgottenPasswordSubmit } from '../views';
 import { useAuth } from '../hooks';
+import { PageWrapper } from '../components';
 const initialState = { email: '', password: '', authCode: '' };
 
 const PasswordResetPage: React.FC = () => {
@@ -45,15 +46,7 @@ const PasswordResetPage: React.FC = () => {
     ),
   };
 
-  return (
-    <div className="gb-gray-50 flex flex-grow ">
-      <div className="flex flex-col flex-grow items-center">
-        <div className="max-w-full sm:w-540 sm:mt-14">
-          <div className="bg-white py-14 px-16 shadow-form rounded">{forms[uiState]}</div>
-        </div>
-      </div>
-    </div>
-  );
+  return <PageWrapper>{forms[uiState]}</PageWrapper>;
 };
 
 export default PasswordResetPage;

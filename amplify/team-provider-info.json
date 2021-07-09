@@ -1,26 +1,26 @@
 {
-    "dev": {
-        "awscloudformation": {
-            "AuthRoleName": "amplify-revenite-dev-144035-authRole",
-            "UnauthRoleArn": "arn:aws:iam::543499822714:role/amplify-revenite-dev-144035-unauthRole",
-            "AuthRoleArn": "arn:aws:iam::543499822714:role/amplify-revenite-dev-144035-authRole",
-            "Region": "eu-west-1",
-            "DeploymentBucketName": "amplify-revenite-dev-144035-deployment",
-            "UnauthRoleName": "amplify-revenite-dev-144035-unauthRole",
-            "StackName": "amplify-revenite-dev-144035",
-            "StackId": "arn:aws:cloudformation:eu-west-1:543499822714:stack/amplify-revenite-dev-144035/eebb4710-d103-11eb-90d5-068e2e279083",
-            "AmplifyAppId": "d3me1pv9gnc5w8"
-        },
-        "categories": {
-            "auth": {
-                "revenite44d45666": {}
-            },
-            "hosting": {
-                "amplifyhosting": {
-                    "appId": "d3me1pv9gnc5w8",
-                    "type": "cicd"
-                }
-            }
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-revenite-dev-144035-authRole",
+      "UnauthRoleArn": "arn:aws:iam::543499822714:role/amplify-revenite-dev-144035-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::543499822714:role/amplify-revenite-dev-144035-authRole",
+      "Region": "eu-west-1",
+      "DeploymentBucketName": "amplify-revenite-dev-144035-deployment",
+      "UnauthRoleName": "amplify-revenite-dev-144035-unauthRole",
+      "StackName": "amplify-revenite-dev-144035",
+      "StackId": "arn:aws:cloudformation:eu-west-1:543499822714:stack/amplify-revenite-dev-144035/eebb4710-d103-11eb-90d5-068e2e279083",
+      "AmplifyAppId": "d3me1pv9gnc5w8"
+    },
+    "categories": {
+      "auth": {
+        "revenite44d45666": {}
+      },
+      "hosting": {
+        "amplifyhosting": {
+          "appId": "d3me1pv9gnc5w8",
+          "type": "cicd"
         }
+      }
     }
+  }
 }
