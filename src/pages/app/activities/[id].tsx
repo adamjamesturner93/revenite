@@ -1,11 +1,11 @@
 import React from 'react';
 import { GetServerSideProps } from 'next';
-import { Input, PageWrapper } from '../../components';
+import { Input, PageWrapper } from '../../../components';
 import { format } from 'date-fns';
 import { withSSRContext } from 'aws-amplify';
-import { getActivity, getGraphQL } from '../../graphql';
-import { GetActivityQuery } from '../../API';
-import { mapGetActivityQuery } from '../../models/Activity';
+import { getActivity, getGraphQL } from '../../../graphql';
+import { GetActivityQuery } from '../../../API';
+import { mapGetActivityQuery } from '../../../models/Activity';
 
 type ActivityFormData = {
   id: string;

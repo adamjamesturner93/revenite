@@ -64,7 +64,7 @@ export const AuthenticatedLayout: React.FC<{
             <nav className="border-r flex-grow flex flex-col justify-between px-4 pb-8">
               <ul>
                 <MenuItem
-                  href="/dashboard"
+                  href="/app/dashboard"
                   label="Dashboard"
                   icon={<AiOutlineDashboard className="mr-4" />}
                 />
@@ -76,17 +76,17 @@ export const AuthenticatedLayout: React.FC<{
                     </summary>
                     <ul className="pl-4 pt-3">
                       <MenuItem
-                        href="/activities/summary"
+                        href="/app/activities/summary"
                         label="Summary"
                         icon={<AiOutlinePieChart className="mr-4" />}
                       />
                       <MenuItem
-                        href="/activities/list"
+                        href="/app/activities/list"
                         label="List"
                         icon={<AiOutlineUnorderedList className="mr-4" />}
                       />
                       <MenuItem
-                        href="/activities/add"
+                        href="/app/activities/add"
                         label="Add Activity"
                         icon={<AiOutlinePlusCircle className="mr-4" />}
                       />
@@ -101,17 +101,17 @@ export const AuthenticatedLayout: React.FC<{
                     </summary>
                     <ul className="pl-4 pt-3">
                       <MenuItem
-                        href="/health-checks/summary"
+                        href="/app/health-checks/summary"
                         label="Summary"
                         icon={<AiOutlinePieChart className="mr-4" />}
                       />
                       <MenuItem
-                        href="/health-checks/list"
+                        href="/app/health-checks/list"
                         label="List"
                         icon={<AiOutlineUnorderedList className="mr-4" />}
                       />
                       <MenuItem
-                        href="/health-checks/add"
+                        href="/app/health-checks/add"
                         label="Add Health Check"
                         icon={<AiOutlinePlusCircle className="mr-4" />}
                       />
@@ -121,12 +121,12 @@ export const AuthenticatedLayout: React.FC<{
               </ul>
               <ul className="border-t border-purple-600 ">
                 <MenuItem
-                  href="/settings"
+                  href="/app/settings"
                   label="Settings"
                   icon={<AiOutlineSetting className="mr-4" />}
                 />
                 <MenuItem
-                  href="/profile"
+                  href="/app/profile"
                   label="Profile"
                   icon={<AiOutlineUser className="mr-4" />}
                 />

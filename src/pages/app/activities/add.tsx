@@ -1,8 +1,8 @@
 import React from 'react';
-import { Input, PageWrapper } from '../../components';
+import { Input, PageWrapper } from '../../../components';
 import { useForm } from 'react-hook-form';
-import { callGraphQL, createActivity } from '../../graphql';
-import { CreateActivityMutation } from '../../API';
+import { callGraphQL, createActivity } from '../../../graphql';
+import { CreateActivityMutation } from '../../../API';
 import { v4 } from 'uuid';
 
 type ActivityFormData = {

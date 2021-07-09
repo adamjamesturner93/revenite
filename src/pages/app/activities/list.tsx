@@ -2,10 +2,10 @@ import { withSSRContext } from 'aws-amplify';
 import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 import React from 'react';
-import { ListActivitysQuery } from '../../API';
-import { PageWrapper } from '../../components';
-import { callGraphQL, listActivitys } from '../../graphql';
-import { Activity, mapListActivitiesQuery, mapActivitiesByMonth } from '../../models/Activity';
+import { ListActivitysQuery } from '../../../API';
+import { PageWrapper } from '../../../components';
+import { callGraphQL, listActivitys } from '../../../graphql';
+import { Activity, mapListActivitiesQuery, mapActivitiesByMonth } from '../../../models/Activity';
 
 const Activities: React.FC<{ activities: Activity[] }> = ({ activities }) => {
   const router = useRouter();

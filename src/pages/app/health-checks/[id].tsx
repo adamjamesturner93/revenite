@@ -1,7 +1,7 @@
 import React from 'react';
 import { GetStaticPaths, GetStaticProps } from 'next';
-import { ACTIVITY_LIST } from '../../utils/temp_activity';
-import { Input, PageWrapper } from '../../components';
+import { ACTIVITY_LIST } from '../../../utils/temp_activity';
+import { Input, PageWrapper } from '../../../components';
 
 type ActivityFormData = {
   id: string;
