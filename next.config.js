@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const withPWA = require('next-pwa');
 const path = require('path');
-const runtimeCaching = require('next-pwa/cache');
 
 /**
  * @type {import('next/dist/next-server/server/config').NextConfig}
@@ -9,8 +8,8 @@ const runtimeCaching = require('next-pwa/cache');
 const nextConfig = withPWA({
   pwa: {
     dest: 'public',
-    mode: 'production',
-    runtimeCaching,
+    publicExcludes: ['!**/*.png'],
+    scope: '/app',
   },
   sassOptions: {
     includePaths: [path.join(__dirname, 'styles')],

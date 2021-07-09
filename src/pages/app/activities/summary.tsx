@@ -1,5 +1,5 @@
 import React from 'react';
-import { PageWrapper } from '../../components';
+import { PageWrapper } from '../../../components';
 
 const Activities: React.FC = () => {
   return (

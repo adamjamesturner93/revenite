@@ -1,5 +1,5 @@
 import React from 'react';
-import { PageWrapper, Strava } from '../components';
+import { PageWrapper, Strava } from '../../components';
 
 const Settings: React.FC = () => {
   return (

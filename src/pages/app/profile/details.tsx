@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Input, PageWrapper, Select } from '../../components';
-import { EthnicGroups, Ethnicity, GenderIdentities, MilitaryService, Sex } from '../../utils';
-import { callGraphQL, createUser, listUsers, updateUser } from '../../graphql';
+import { Input, PageWrapper, Select } from '../../../components';
+import { EthnicGroups, Ethnicity, GenderIdentities, MilitaryService, Sex } from '../../../utils';
+import { callGraphQL, createUser, listUsers, updateUser } from '../../../graphql';
 import { v4 } from 'uuid';
 import { GetServerSideProps } from 'next';
 import { withSSRContext } from 'aws-amplify';
-import { CreateUserMutation, ListUsersQuery, UpdateUserMutation } from '../../API';
-import { mapCreateUser, mapListUsersQuery, mapUpdateUser, User } from '../../models';
+import { CreateUserMutation, ListUsersQuery, UpdateUserMutation } from '../../../API';
+import { mapCreateUser, mapListUsersQuery, mapUpdateUser, User } from '../../../models';
 
 const PersonalDetails: React.FC<{ serverUser: User }> = ({ serverUser }) => {
   const [user, setUser] = useState<User>(serverUser);

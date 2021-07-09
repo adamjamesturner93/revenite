@@ -1,5 +1,5 @@
 import React from 'react';
-import { Input, PageWrapper } from '../../components';
+import { Input, PageWrapper } from '../../../components';
 import { useForm } from 'react-hook-form';
 
 type ActivityFormData = {

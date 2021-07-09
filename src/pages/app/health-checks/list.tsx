@@ -1,7 +1,7 @@
 import { GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
 import React from 'react';
-import { ACTIVITY_LIST } from '../../utils/temp_activity';
+import { ACTIVITY_LIST } from '../../../utils/temp_activity';
 
 const Activities: React.FC<{ activities: any[] }> = ({ activities }) => {
   const router = useRouter();

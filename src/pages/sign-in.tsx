@@ -27,7 +27,7 @@ const SignInPage: React.FC = () => {
   const onSubmit = async (event: SignIn) => {
     try {
       await signIn(event.email, event.password);
-      router.push('/profile');
+      router.push('/app/profile');
     } catch (err) {
       console.error({ err });
     }
