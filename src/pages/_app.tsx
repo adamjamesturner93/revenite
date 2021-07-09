@@ -28,13 +28,13 @@ const App: React.FC<AppProps> = ({ Component, pageProps, router }) => {
 
         <meta property="og:title" content="Revenite" />
         <meta property="og:site_name" content="Revenite" />
-        <meta property="og:url" content="https://8dac47af75f9.ngrok.io" />
+        <meta property="og:url" content="https://www.revenite.org" />
         <meta
           property="og:description"
           content="Revenite is an application for people with amputation(s) to encourage long term physical health and scar management"
         />
         <meta property="og:type" content="website" />
-        <meta property="og:image" content="https://8dac47af75f9.ngrok.io/TwitterCard.png" />
+        <meta property="og:image" content="https://www.revenite.org/TwitterCard.png" />
 
         <link rel="manifest" href="/manifest.json" />
 
