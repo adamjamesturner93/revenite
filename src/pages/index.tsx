@@ -80,7 +80,7 @@ const Home: React.FC = () => {
           <article className="flex flex-col items-center justify-center w-1/2 lg:w-1/3">
             <Banner />
             <h2 className="text-2xl text-center text-gray-100 py-4">
-              Helping you reach your fitness goals
+              Helping you reach your fitness goals.
             </h2>
           </article>
           <article className="hidden md:flex flex-col justify-center items-center w-2/3 lg:w-1/2">

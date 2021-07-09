@@ -31,6 +31,7 @@ export const GetInvolved = () => (
           >
             Twitter
           </a>
+          .
         </p>
       </TextWrapper>
     </SectionWrapper>
