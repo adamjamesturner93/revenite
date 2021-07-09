@@ -7,12 +7,11 @@ export const LaunchingSoon = () => (
       <TextWrapper>
         <h2 className="text-3xl text-gray-100 p-6 font-bold">Launching Soon!</h2>
         <p className="text-gray-100 p-6">
-          Your central place for your fitness tracking, scar management and physical health
-          monitoring.
+          Your central place for fitness tracking, scar management and physical health monitoring.
         </p>
         <p className="text-gray-100 p-6">
-          We’re putting the finishing touches on the first version of the app and just going through
-          the last few bits of approvals before we will be ready to launch our app.
+          We’re putting the finishing touches on the first version of the app and going through the
+          last few bits of approvals before we will be ready to launch.
         </p>
         <p className="text-gray-100 p-6">
           We’ll continually be adding functionality and updating the app, based on feedback from our

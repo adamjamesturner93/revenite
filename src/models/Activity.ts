@@ -1,5 +1,7 @@
 import { CreateActivityMutation, GetActivityQuery, ListActivitysQuery } from '../API';
 import { GraphQLResult } from '@aws-amplify/api-graphql';
+import {} from 'date-fns';
+import { MONTHS } from '../utils';
 
 export type Activity = {
   id?: string;
@@ -15,6 +17,13 @@ export type Activity = {
   createdAt?: string;
   updatedAt?: string;
   owner?: string | null;
+};
+
+type ActivityMonth = Activity & { month: string };
+
+type ListActivitiesByMonth = {
+  month: string;
+  activities: Activity[];
 };
 
 export function mapListActivitiesQuery(
@@ -110,4 +119,37 @@ export function mapCreateActivity(
     updatedAt: activity?.updatedAt,
     owner: activity?.owner,
   };
+}
+
+export function mapActivitiesByMonth(activities: Activity[]): ListActivitiesByMonth[] {
+  const monthActivities: ActivityMonth[] = activities.map((activity) => ({
+    ...activity,
+    month: MONTHS[new Date(activity.date).getMonth()],
+  }));
+
+  const months = monthActivities.reduce<ListActivitiesByMonth[]>(
+    (acc: ListActivitiesByMonth[], cur: ActivityMonth) => {
+      const { month, ...activity } = cur;
+
+      const relevantMonth = acc?.findIndex((m) => m.month === month);
+
+      if (relevantMonth === -1) {
+        acc.push({
+          month,
+          activities: [activity],
+        });
+      } else {
+        acc[relevantMonth] = {
+          ...acc[relevantMonth],
+          activities: [...acc[relevantMonth].activities, activity],
+        };
+      }
+      return acc;
+    },
+    [],
+  );
+
+  months.forEach((month) => month.activities.sort((a, b) => (a.date > b.date ? -1 : 1)));
+
+  return months;
 }

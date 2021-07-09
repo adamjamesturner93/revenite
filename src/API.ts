@@ -80,7 +80,7 @@ export type ModelSizeInput = {
 
 export type User = {
   __typename: "User",
-  id?: string,
+  id: string,
   name?: string | null,
   display_name?: string | null,
   dateOfBirth?: string | null,
@@ -94,8 +94,8 @@ export type User = {
   hasMilitaryService?: string | null,
   militaryService?: string | null,
   militaryServiceOther?: string | null,
-  createdAt?: string,
-  updatedAt?: string,
+  createdAt: string,
+  updatedAt: string,
   owner?: string | null,
 };
 
@@ -117,7 +117,7 @@ export type UpdateUserInput = {
 };
 
 export type DeleteUserInput = {
-  id?: string | null,
+  id: string,
 };
 
 export type CreateActivityInput = {
@@ -157,18 +157,18 @@ export type ModelBooleanInput = {
 
 export type Activity = {
   __typename: "Activity",
-  id?: string,
+  id: string,
   name?: string | null,
-  date?: string,
-  duration?: string,
-  distance?: string,
+  date: string,
+  duration: string,
+  distance: string,
   cardio?: boolean | null,
   flexibility?: boolean | null,
   strength?: boolean | null,
-  perceivedExertion?: string,
-  feeling?: string,
-  createdAt?: string,
-  updatedAt?: string,
+  perceivedExertion: string,
+  feeling: string,
+  createdAt: string,
+  updatedAt: string,
   owner?: string | null,
 };
 
@@ -186,7 +186,7 @@ export type UpdateActivityInput = {
 };
 
 export type DeleteActivityInput = {
-  id?: string | null,
+  id: string,
 };
 
 export type ModelUserFilterInput = {
@@ -254,7 +254,7 @@ export type ModelActivityConnection = {
 };
 
 export type CreateUserMutationVariables = {
-  input?: CreateUserInput,
+  input: CreateUserInput,
   condition?: ModelUserConditionInput | null,
 };
 
@@ -282,7 +282,7 @@ export type CreateUserMutation = {
 };
 
 export type UpdateUserMutationVariables = {
-  input?: UpdateUserInput,
+  input: UpdateUserInput,
   condition?: ModelUserConditionInput | null,
 };
 
@@ -310,7 +310,7 @@ export type UpdateUserMutation = {
 };
 
 export type DeleteUserMutationVariables = {
-  input?: DeleteUserInput,
+  input: DeleteUserInput,
   condition?: ModelUserConditionInput | null,
 };
 
@@ -338,7 +338,7 @@ export type DeleteUserMutation = {
 };
 
 export type CreateActivityMutationVariables = {
-  input?: CreateActivityInput,
+  input: CreateActivityInput,
   condition?: ModelActivityConditionInput | null,
 };
 
@@ -362,7 +362,7 @@ export type CreateActivityMutation = {
 };
 
 export type UpdateActivityMutationVariables = {
-  input?: UpdateActivityInput,
+  input: UpdateActivityInput,
   condition?: ModelActivityConditionInput | null,
 };
 
@@ -386,7 +386,7 @@ export type UpdateActivityMutation = {
 };
 
 export type DeleteActivityMutationVariables = {
-  input?: DeleteActivityInput,
+  input: DeleteActivityInput,
   condition?: ModelActivityConditionInput | null,
 };
 
@@ -410,7 +410,7 @@ export type DeleteActivityMutation = {
 };
 
 export type GetUserQueryVariables = {
-  id?: string,
+  id: string,
 };
 
 export type GetUserQuery = {
@@ -470,7 +470,7 @@ export type ListUsersQuery = {
 };
 
 export type GetActivityQueryVariables = {
-  id?: string,
+  id: string,
 };
 
 export type GetActivityQuery = {
@@ -522,7 +522,7 @@ export type ListActivitysQuery = {
 };
 
 export type OnCreateUserSubscriptionVariables = {
-  owner?: string,
+  owner: string,
 };
 
 export type OnCreateUserSubscription = {
@@ -549,7 +549,7 @@ export type OnCreateUserSubscription = {
 };
 
 export type OnUpdateUserSubscriptionVariables = {
-  owner?: string,
+  owner: string,
 };
 
 export type OnUpdateUserSubscription = {
@@ -576,7 +576,7 @@ export type OnUpdateUserSubscription = {
 };
 
 export type OnDeleteUserSubscriptionVariables = {
-  owner?: string,
+  owner: string,
 };
 
 export type OnDeleteUserSubscription = {
@@ -603,7 +603,7 @@ export type OnDeleteUserSubscription = {
 };
 
 export type OnCreateActivitySubscriptionVariables = {
-  owner?: string,
+  owner: string,
 };
 
 export type OnCreateActivitySubscription = {
@@ -626,7 +626,7 @@ export type OnCreateActivitySubscription = {
 };
 
 export type OnUpdateActivitySubscriptionVariables = {
-  owner?: string,
+  owner: string,
 };
 
 export type OnUpdateActivitySubscription = {
@@ -649,7 +649,7 @@ export type OnUpdateActivitySubscription = {
 };
 
 export type OnDeleteActivitySubscriptionVariables = {
-  owner?: string,
+  owner: string,
 };
 
 export type OnDeleteActivitySubscription = {

@@ -96,7 +96,7 @@ const Home: React.FC = () => {
       <Partnerships />
 
       <footer className="move-up-15vh w-full flex flex-col align-middle justify-center mx-auto p-6 pt-16 pb-6 text-sm text-center md:text-left fade-in bg-gray-700">
-        <section className="container w-full mx-auto flex align-middle justify-center p-6">
+        {/*<section className="container w-full mx-auto flex align-middle justify-center p-6">
           <a className="text-xl text-gray-100 no-underline hover:no-underline px-6" href="#">
             Privacy
           </a>
@@ -106,7 +106,7 @@ const Home: React.FC = () => {
           <a className="text-xl text-gray-100 no-underline hover:no-underline px-6" href="#">
             GDPR
           </a>
-        </section>
+        </section> */}
         <section className="container w-full mx-auto flex flex-col align-middle justify-center p-6">
           <a className="text-xl text-gray-100 text-center no-underline hover:no-underline" href="#">
             &copy; Revenite 2021 - AdamJamesTurner93

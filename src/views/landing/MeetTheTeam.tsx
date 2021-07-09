@@ -1,6 +1,8 @@
 import React from 'react';
 import { SectionWrapper, TextWrapper } from '../../components';
 import { FaResearchgate, FaTwitter, FaLinkedin } from 'react-icons/fa';
+import { SiWebmoney } from 'react-icons/si';
+import classnames from 'classnames';
 
 type TeamMemberProps = {
   name: string;
@@ -10,6 +12,8 @@ type TeamMemberProps = {
   linkedIn?: string;
   twitter?: string;
   researchGate?: string;
+  website?: string;
+  offset?: boolean;
 };
 
 const PersonCard: React.FC<TeamMemberProps> = ({
@@ -20,8 +24,14 @@ const PersonCard: React.FC<TeamMemberProps> = ({
   linkedIn,
   twitter,
   researchGate,
+  website,
+  offset = false,
 }) => (
-  <article className="flex flex-col w-full p-6 items-center">
+  <article
+    className={classnames('flex flex-col w-full p-6 items-center col-span-2', {
+      'lg:col-start-2': offset,
+    })}
+  >
     <img src={img} alt={name} className="rounded-full w-2/3 md:w-1/2" />
     <h3 className="text-xl font-bold pt-2">{name}</h3>
     <h4 className="font-bold">{role}</h4>
@@ -42,6 +52,11 @@ const PersonCard: React.FC<TeamMemberProps> = ({
           <FaLinkedin style={{ fill: '#0a66C2' }} className="w-8 h-8" />
         </a>
       )}
+      {website && (
+        <a href={website} aria-label={`${name}'s Website`}>
+          <SiWebmoney style={{ fill: '#0a66C2' }} className="w-8 h-8" />
+        </a>
+      )}
     </aside>
   </article>
 );
@@ -51,11 +66,11 @@ export const MeetTheTeam = () => (
     className="move-up-15vh w-full bg-gray-100 section-3 flex flex-col min-h-screen py-40"
   >
     <SectionWrapper>
-      <div className="flex flex-col justify-center text-center lg:items-end">
+      <div className="flex flex-col justify-center text-center items-center">
         <TextWrapper>
           <h2 className="text-3xl text-gray-700 p-6 font-bold">Meet the Team</h2>
         </TextWrapper>
-        <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+        <section className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6">
           <PersonCard
             img="/Shruti.png"
             name="Shruti Turner"
@@ -66,10 +81,11 @@ export const MeetTheTeam = () => (
             researchGate="https://www.researchgate.net/profile/Shruti-Turner"
           />
           <PersonCard
-            img="https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png"
+            img="/Alison.png"
             name="Prof. Alison McGregor"
             role="Principal Investigator"
-            description=""
+            description="Alison is a Professor of Musculoskeletal Biodynamics at Imperial College London. Her research focuses on the musculoskeletal system with respect to mechanisms of injury; effects of injury on function and rehabilitation. She has a specific interest in the spine and spinal biomechanics, elite performance, long term amputee health and the development and translation of new management approaches and innovations into the clinical environment. She is an associate director for the Centre for Blast Injury Studies where she leads the rehabilitation theme."
+            website="https://www.imperial.ac.uk/people/a.mcgregor"
           />
           <PersonCard
             img="/Adam.jpeg"
@@ -79,16 +95,20 @@ export const MeetTheTeam = () => (
             linkedIn="https://www.linkedin.com/in/adamjturner93/"
           />
           <PersonCard
-            img="https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png"
+            img="/David.png"
             name="Dr. David Henson"
-            role="User Representatives"
-            description=""
+            role="User Representative"
+            description="Dave was a Captain in the British Army, losing his legs to an IED blast in February 2011.  Dave has competed at the Invictus Games, World Championships, and the Paralympic Games; winning medals in all competitions, and has a PhD in Amputee Biomechanics from Imperial College London."
+            twitter="https://twitter.com/leglessbdh"
+            offset
           />
           <PersonCard
-            img="https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png"
+            img="/Jon.png"
             name="Jon White"
-            role="User Representatives"
+            role="User Representative"
             description=""
+            twitter="https://twitter.com/jonwhite50"
+            website="www.thewhitehousefuture.co.uk"
           />
         </section>
       </div>

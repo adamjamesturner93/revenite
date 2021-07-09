@@ -13,7 +13,7 @@ export const GetInvolved = () => (
       <TextWrapper>
         <h2 className="text-3xl text-gray-700 p-6 font-bold">Get Involved</h2>
         <p className="text-xl text-gray-700 p-6">
-          If you’re interested in becoming a test user, please contact{' '}
+          If you’re interested in being involved in the creation of Revenite, please contact{' '}
           <a
             className="inline-block text-purple-600 no-underline hover:text-indigo-800  hover:underline text-center"
             href="mailto:s.turner17@imperial.ac.uk"

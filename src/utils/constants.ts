@@ -119,3 +119,18 @@ export const MilitaryService = [
   { value: 'royal_navy_reserves', label: 'Royal Navy Reserves' },
   { value: 'other', label: 'Any other Military Service' },
 ];
+
+export const MONTHS = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December',
+];
