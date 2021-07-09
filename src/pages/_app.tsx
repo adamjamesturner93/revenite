@@ -15,31 +15,26 @@ const App: React.FC<AppProps> = ({ Component, pageProps, router }) => {
         <meta charSet="utf-8" />
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Revenite</title>
         <meta
           name="description"
           content="Revenite is an application for people with amputation(s) to encourage long term physical health and scar management"
         />
         <meta name="keywords" content="amputation, rehabilitation, health, rehab, amputee" />
-        <title>Revenite</title>
 
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:site" content="@reveniterehab" />
-        <meta name="twitter:title" content="Revenite" />
-        <meta
-          name="twitter:description"
-          content="Revenite is an application for people with amputation(s) to encourage long term physical health and scar management"
-        />
-        <meta name="twitter:image" content="https://revenite.org/banner.png" />
+        <meta name="twitter:creator" content="@AdamJTurner93" />
 
         <meta property="og:title" content="Revenite" />
         <meta property="og:site_name" content="Revenite" />
-        <meta property="og:url" content="https://revenite.org" />
+        <meta property="og:url" content="https://8dac47af75f9.ngrok.io" />
         <meta
           property="og:description"
           content="Revenite is an application for people with amputation(s) to encourage long term physical health and scar management"
         />
         <meta property="og:type" content="website" />
-        <meta property="og:image" content="https://revenite.org/banner.png" />
+        <meta property="og:image" content="https://8dac47af75f9.ngrok.io/TwitterCard.png" />
 
         <link rel="manifest" href="/manifest.json" />
 
