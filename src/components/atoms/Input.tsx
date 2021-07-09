@@ -14,7 +14,7 @@ export const Input: React.FC<
 > = ({ register, name, errorMessage, valid, label, ...rest }) => {
   const classes = inputClasses(errorMessage, valid);
 
-  if (!register) {
+  if (!register || !name) {
     return (
       <div className="mt-3">
         <label className="text-sm">

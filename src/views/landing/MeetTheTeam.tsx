@@ -74,7 +74,7 @@ export const MeetTheTeam = () => (
           <PersonCard
             img="/Shruti.png"
             name="Shruti Turner"
-            role="Researcher"
+            role="Co-Investigator (Researcher)"
             description="Shruti recently completed her PhD at Imperial College London, using a user-centred design approach to create software for clinicians to fit and monitor prosthetic sockets. She contributes to the app development and testing and is passionate about working with people, technology and data, to improve quality of life."
             linkedIn="https://www.linkedin.com/in/shrutiturner/"
             twitter="https://twitter.com/ShrutiTurner"
@@ -90,14 +90,14 @@ export const MeetTheTeam = () => (
           <PersonCard
             img="/Adam.jpeg"
             name="Adam Turner"
-            role="Software Developer"
+            role="Co-Investigator (Software Developer)"
             description="Adam is a Senior Software Engineer at Qualio, specialising in creating secure software in highly regulated environments. He has worked and consulted in Medical Technology companies as well as global Financial Institutions."
             linkedIn="https://www.linkedin.com/in/adamjturner93/"
           />
           <PersonCard
             img="/David.png"
             name="Dr. David Henson"
-            role="User Representative"
+            role="Co-Investigator (User Representative)"
             description="Dave was a Captain in the British Army, losing his legs to an IED blast in February 2011.  Dave has competed at the Invictus Games, World Championships, and the Paralympic Games; winning medals in all competitions, and has a PhD in Amputee Biomechanics from Imperial College London."
             twitter="https://twitter.com/leglessbdh"
             offset
@@ -105,7 +105,7 @@ export const MeetTheTeam = () => (
           <PersonCard
             img="/Jon.png"
             name="Jon White"
-            role="User Representative"
+            role="Co-Investigator (User Representative)"
             description=""
             twitter="https://twitter.com/jonwhite50"
             website="www.thewhitehousefuture.co.uk"
