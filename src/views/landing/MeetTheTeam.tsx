@@ -78,7 +78,7 @@ export const MeetTheTeam = () => (
         <section className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6">
           <PersonCard
             img="/Shruti.png"
-            name="Shruti Turner"
+            name="Dr. Shruti Turner"
             role="Co-Investigator (Researcher)"
             description="Shruti recently completed her PhD at Imperial College London, using a user-centred design approach to create software for clinicians to fit and monitor prosthetic sockets. She contributes to the app development and testing and is passionate about working with people, technology and data, to improve quality of life."
             linkedIn="https://www.linkedin.com/in/shrutiturner/"
