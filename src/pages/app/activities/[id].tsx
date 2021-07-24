@@ -1,33 +1,52 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { GetServerSideProps } from 'next';
 import { Input, PageWrapper } from '../../../components';
 import { format } from 'date-fns';
-import { withSSRContext } from 'aws-amplify';
-import { getActivity, getGraphQL } from '../../../graphql';
-import { GetActivityQuery } from '../../../API';
-import { mapGetActivityQuery } from '../../../models/Activity';
+import { Activity } from '../../../../models';
+import { getActivity } from '../../../models/Activity';
+import { ActivitiesOptions, ExertionOptions } from '../../../utils';
 
-type ActivityFormData = {
-  id: string;
-  name: string;
-  date: Date;
-  duration: number;
-  distance: number;
-  cardio: boolean;
-  flexibility: boolean;
-  strength: boolean;
-  perceivedExertion: number;
-  feeling: number;
-};
+const ViewActivity: React.FC<{ id: string }> = ({ id }) => {
+  const [activity, setActivity] = useState<Activity>();
+  const [loading, setLoading] = useState(false);
 
-const ViewActivity: React.FC<{ activity: ActivityFormData }> = ({ activity }) => {
-  if (!activity) return <p>Error - not found</p>;
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await getActivity(id);
+      setActivity(data);
+      setLoading(false);
+    };
+    setLoading(true);
+    fetchData();
+  }, [id]);
+
+  if (loading) {
+    return (
+      <PageWrapper title="Activity">
+        <h2>Loading...</h2>
+      </PageWrapper>
+    );
+  }
+
+  if (!activity) {
+    return (
+      <PageWrapper title="Activity">
+        <p>Error - not found</p>{' '}
+      </PageWrapper>
+    );
+  }
+
+  const activityOption = ActivitiesOptions[activity.activity || ''];
+
   return (
     <PageWrapper title={activity.name}>
       <form>
         <Input label="Date" value={format(new Date(activity.date), 'PPP')} />
+        <Input title="Activity" value={activityOption.label} />
         <Input title="Duration" type="number" value={activity.duration} />
-        <Input title="Distance" type="number" value={activity.distance} />
+        {activityOption.distance && (
+          <Input title="Distance" type="number" value={activity.distance} />
+        )}
 
         <section className="mt-3">
           <label className="text-sm">Workout type</label>
@@ -72,8 +91,11 @@ const ViewActivity: React.FC<{ activity: ActivityFormData }> = ({ activity }) =>
             max={10}
             type="range"
           />
-          <p className="text-xs">{activity.perceivedExertion} - Really hard!</p>
+          <p className="text-xs">
+            {activity.perceivedExertion} - {ExertionOptions[+activity.perceivedExertion]}
+          </p>
         </section>
+
         <section className="mt-3">
           <Input
             label="How is your body feeling?"
@@ -82,22 +104,15 @@ const ViewActivity: React.FC<{ activity: ActivityFormData }> = ({ activity }) =>
             max={10}
             type="range"
           />
-          <p className="text-xs">{activity.feeling} - Really hard!</p>
+          <p className="text-xs">{activity.feeling}</p>
         </section>
       </form>
     </PageWrapper>
   );
 };
-
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { API } = withSSRContext(context);
   const id = context.params?.id;
-
-  const resp = await getGraphQL<GetActivityQuery>(getActivity, API, {
-    id,
-  });
-  const activity = mapGetActivityQuery(resp);
-  return { props: { activity } };
+  return { props: { id } };
 };
 
 export default ViewActivity;

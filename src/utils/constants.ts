@@ -134,3 +134,105 @@ export const MONTHS = [
   'November',
   'December',
 ];
+
+export const ActivitiesOptions: Record<
+  string,
+  { label: string; flex: boolean; cardio: boolean; strength: boolean; distance: boolean }
+> = {
+  bandwork: { label: 'Bandwork', cardio: false, flex: true, strength: true, distance: false },
+  canoeing: { label: 'Canoeing', cardio: true, flex: false, strength: false, distance: true },
+  crossfit: { label: 'Crossfit', cardio: true, flex: false, strength: true, distance: false },
+  cyclingIndoor: {
+    label: 'Cycling (Indoor)',
+    cardio: true,
+    flex: false,
+    strength: false,
+    distance: true,
+  },
+  cyclingOutdoor: {
+    label: 'Cycling (Outdoor)',
+    cardio: true,
+    flex: false,
+    strength: false,
+    distance: true,
+  },
+  elliptical: { label: 'Elliptical', cardio: true, flex: false, strength: false, distance: true },
+  handcycle: { label: 'Handcycle', cardio: true, flex: false, strength: false, distance: true },
+  hike: { label: 'Hike', cardio: true, flex: false, strength: false, distance: true },
+  kayaking: { label: 'Kayaking', cardio: true, flex: false, strength: false, distance: true },
+  pilates: { label: 'Pilates', cardio: false, flex: true, strength: true, distance: false },
+  rockClimbing: {
+    label: 'Rock Climbing',
+    cardio: true,
+    flex: false,
+    strength: true,
+    distance: false,
+  },
+  rowingIndoor: {
+    label: 'Rowing (Indoor)',
+    cardio: true,
+    flex: false,
+    strength: false,
+    distance: true,
+  },
+  rowingOutdoor: {
+    label: 'Rowing (Outdoor)',
+    cardio: true,
+    flex: false,
+    strength: false,
+    distance: true,
+  },
+  run: { label: 'Run', cardio: true, flex: false, strength: false, distance: true },
+  ski: { label: 'Ski Ergometer', cardio: true, flex: false, strength: false, distance: true },
+  stairStepper: {
+    label: 'StairStepper',
+    cardio: true,
+    flex: false,
+    strength: false,
+    distance: false,
+  },
+  swim: { label: 'Swim', cardio: true, flex: false, strength: false, distance: true },
+  treadmill: { label: 'Treadmill', cardio: true, flex: false, strength: false, distance: true },
+  walk: { label: 'Walk', cardio: true, flex: false, strength: false, distance: true },
+  weightTraining: {
+    label: 'WeightTraining',
+    cardio: false,
+    flex: false,
+    strength: true,
+    distance: false,
+  },
+  workout: { label: 'Workout', cardio: true, flex: true, strength: true, distance: false },
+  yoga: { label: 'Yoga', cardio: true, flex: true, strength: true, distance: false },
+};
+
+export const getActivityDropdownOptions = () =>
+  Object.keys(ActivitiesOptions).map((key) => ({
+    value: key,
+    label: ActivitiesOptions[key].label,
+  }));
+
+export const ExertionOptions: Record<number, string> = {
+  1: 'Extremely Light (e.g. light stretching)',
+  2: 'Very Light (e.g. walking slowly)',
+  3: 'Light (moving around, but breathing easy)',
+  4: 'Moderate (light workout but can talk)',
+  5: 'Considerable (heavier breathing, heart rate up)',
+  6: 'Challenging (breathing hard, not talking much)',
+  7: 'Hard (tough workout, hard to talk)',
+  8: 'Very Hard (Breathing very hard, whole body tired)',
+  9: 'Extremely Hard (almost maxed out, no talking)',
+  10: 'Max Effort (hardest I can possibly work)',
+};
+
+export const FeelingScales: Record<number, string> = {
+  1: '',
+  2: '',
+  3: '',
+  4: '',
+  5: '',
+  6: '',
+  7: '',
+  8: '',
+  9: '',
+  10: '',
+};

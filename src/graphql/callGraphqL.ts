@@ -29,6 +29,7 @@ export async function getGraphQL<T>(
   variables?: Record<string, unknown>,
 ): Promise<GraphQLResult<T>> {
   if (ssrAPI) {
+    console.log(variables);
     return (await ssrAPI.graphql(graphqlOperation(query, variables))) as GraphQLResult<T>;
   }
   return (await API.graphql(graphqlOperation(query, variables))) as GraphQLResult<T>;

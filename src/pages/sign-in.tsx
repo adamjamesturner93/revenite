@@ -39,6 +39,7 @@ const SignInPage: React.FC = () => {
         <section className="mt-10">
           <Input
             register={register}
+            options={{ required: 'Please enter a valid email address' }}
             name="email"
             label="Email"
             errorMessage={errors.email?.message}
@@ -55,7 +56,9 @@ const SignInPage: React.FC = () => {
           </Link>
           <Input
             register={register}
+            options={{ required: 'Please enter a valid password' }}
             name="password"
+            type="password"
             errorMessage={errors.password?.message}
             valid={touchedFields.password && !errors.password}
           />
