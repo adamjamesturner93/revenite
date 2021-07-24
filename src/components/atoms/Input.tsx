@@ -16,7 +16,7 @@ export const Input: React.FC<
   const disabled = rest.disabled || !register || !name;
   const classes = inputClasses(errorMessage, valid, disabled);
 
-  if (disabled) {
+  if (rest.disabled || !register || !name) {
     return (
       <div className="mt-3">
         <label className="text-sm">
@@ -27,11 +27,15 @@ export const Input: React.FC<
     );
   }
 
+  const props = register && name && { ...register(name, options) };
+
+  if (!props) throw new Error();
+
   return (
     <div className="mt-3">
       <label className="text-sm">
         {label}
-        <input {...register(name, options)} {...rest} className={classes} />
+        <input {...rest} className={classes} />
       </label>
       {errorMessage && <span className="text-sm px-2 text-red-500">{errorMessage}</span>}
     </div>
