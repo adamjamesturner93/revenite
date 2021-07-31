@@ -4,15 +4,15 @@ export const APP_ROUTES = {
     title: 'Home',
   },
   DASHBOARD: {
-    url: '/dashboard',
+    url: '/app/dashboard',
     title: 'Dashboard',
   },
   SIGN_IN: {
-    url: '/sign-in',
+    url: 'sign-in',
     title: 'Sign In',
   },
   PASSWORD_RESET: {
-    url: '/password-reset',
+    url: 'password-reset',
     title: 'Password Reset',
   },
   REGISTER: {
@@ -24,22 +24,18 @@ export const APP_ROUTES = {
     title: 'Terms',
   },
   PROFILE: {
-    url: '/profile',
+    url: '/app/profile',
     title: 'Profile',
   },
   ACTIVITIES: {
-    url: '/activities',
+    url: '/app/activities',
     title: 'Activities',
   },
   HEALTH_CHECKS: {
-    url: '/health-checks',
+    url: '/app/health-checks',
     title: 'Health Checks',
   },
 };
-
-// const percievedExertion = {
-//   1: {}
-// }
 
 // INFO: Following guidelines from here: https://equalities.blog.gov.uk/2017/07/28/lgbtsurvey-asking-about-your-sex-and-gender-identity/
 export const GenderIdentities = [
@@ -236,3 +232,31 @@ export const FeelingScales: Record<number, string> = {
   9: '',
   10: '',
 };
+
+const LowerLimbAmputationLevels: { label: string; value: string }[] = [
+  { label: 'Through foot', value: 'THROUGH_FOOT' },
+  { label: 'Trans-tibial', value: 'TRANSTIBIAL' },
+  { label: 'Through knee', value: 'THROUGH_KNEE' },
+  { label: 'Trans-femoral', value: 'TRANSFEMORAL' },
+];
+
+export const UpperLimbAmputationLevels: { label: string; value: string }[] = [
+  { label: 'Through hand', value: 'THROUGH_HAND' },
+  { label: 'Trans-radial', value: 'TRANSRADIAL' },
+  { label: 'Through elbow', value: 'THROUGH_ELBOW' },
+  { label: 'Trans-humeral', value: 'TRANSHUMERAL' },
+];
+
+export const AmputationLevels: Record<string, { value: string; label: string }[]> = {
+  LEFT_LEG: LowerLimbAmputationLevels,
+  RIGHT_LEG: LowerLimbAmputationLevels,
+  LEFT_ARM: UpperLimbAmputationLevels,
+  RIGHT_ARM: UpperLimbAmputationLevels,
+};
+
+export const AmputationLimb = [
+  { label: 'Left leg', value: 'LEFT_LEG' },
+  { label: 'Right leg', value: 'RIGHT_LEG' },
+  { label: 'Left arm', value: 'LEFT_ARM' },
+  { label: 'Right arm', value: 'RIGHT_ARM' },
+];

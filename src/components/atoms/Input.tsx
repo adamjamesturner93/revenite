@@ -35,7 +35,7 @@ export const Input: React.FC<
     <div className="mt-3">
       <label className="text-sm">
         {label}
-        <input {...rest} className={classes} />
+        <input {...props} {...rest} className={classes} />
       </label>
       {errorMessage && <span className="text-sm px-2 text-red-500">{errorMessage}</span>}
     </div>

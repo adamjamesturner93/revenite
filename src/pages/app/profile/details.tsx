@@ -2,57 +2,49 @@ import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Input, PageWrapper, Select } from '../../../components';
 import { EthnicGroups, Ethnicity, GenderIdentities, MilitaryService, Sex } from '../../../utils';
-import { callGraphQL, createUser, listUsers, updateUser } from '../../../graphql';
 import { v4 } from 'uuid';
-import { GetServerSideProps } from 'next';
-import { withSSRContext } from 'aws-amplify';
-import { CreateUserMutation, ListUsersQuery, UpdateUserMutation } from '../../../API';
-import { mapCreateUser, mapListUsersQuery, mapUpdateUser, User } from '../../../models';
+import { User } from '../../../../models';
+import { getUser, saveUser, updateUser } from '../../../services';
 
-const PersonalDetails: React.FC<{ serverUser: User }> = ({ serverUser }) => {
-  const [user, setUser] = useState<User>(serverUser);
+export const PersonalDetails: React.FC = () => {
+  const [currentUser, setCurrentUser] = useState<User>();
 
   const {
     handleSubmit,
     register,
     watch,
     unregister,
-
+    reset,
     formState: { touchedFields, errors },
   } = useForm<User>({
     mode: 'onTouched',
-    defaultValues: user,
+    defaultValues: currentUser,
   });
 
+  useEffect(() => {
+    getUser()
+      .then((data) => {
+        setCurrentUser(data);
+        reset(data);
+      })
+      .catch(console.error);
+  }, [reset]);
+
   const onSubmit = async (event: User) => {
-    if (user.id) {
-      // Update
+    let user: User = event;
+    if (currentUser?.id) {
       const input = {
         ...event,
       };
-
-      delete input.createdAt;
-      delete input.updatedAt;
-      delete input.owner;
-
-      const resp = await callGraphQL<UpdateUserMutation>(updateUser, undefined, { input });
-      setUser(mapUpdateUser(resp, user));
+      user = await updateUser(currentUser, input);
     } else {
-      // Create
       const input = {
         ...event,
         id: v4(),
       };
-
-      try {
-        const resp = await callGraphQL<CreateUserMutation>(createUser, undefined, { input });
-        setUser(mapCreateUser(resp));
-      } catch (error) {
-        console.error(error);
-      }
+      user = await saveUser(input);
     }
-
-    return;
+    setCurrentUser(user);
   };
 
   const ethnicGroup = watch('ethnicGroup');
@@ -228,22 +220,6 @@ const PersonalDetails: React.FC<{ serverUser: User }> = ({ serverUser }) => {
       </form>
     </PageWrapper>
   );
-};
-
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { API } = withSSRContext(context);
-  let serverUser;
-
-  try {
-    const userData = await callGraphQL<ListUsersQuery>(listUsers, API);
-    serverUser = mapListUsersQuery(userData);
-  } catch (error) {
-    console.error(error);
-  }
-
-  return {
-    props: { serverUser },
-  };
 };
 
 export default PersonalDetails;

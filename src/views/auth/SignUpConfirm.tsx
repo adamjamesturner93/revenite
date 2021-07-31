@@ -1,19 +1,47 @@
 import React from 'react';
+import { useForm } from 'react-hook-form';
 import { Input } from '../../components/atoms';
 
-export const SignUpConfirm: React.FC<{
-  onChange: React.ChangeEventHandler<HTMLInputElement>;
-  confirmSignUp: () => void;
-}> = ({ onChange, confirmSignUp }) => (
-  <React.Fragment>
-    <h1 className="text-3xl text-center">Confirm your account</h1>
-    <section className="mt-10">
-      <label className="text-sm">Confirmation Code</label>
-      <Input onChange={onChange} name="authCode" />
-    </section>
+type SignUpConfirmFormData = {
+  authCode: string;
+};
 
-    <button className="text-white w-full mt-6 bg-purple-600 p-3 rounded" onClick={confirmSignUp}>
-      Sign Up
-    </button>
-  </React.Fragment>
-);
+export const SignUpConfirm: React.FC<{
+  confirmSignUp: (authCode: string) => void;
+}> = ({ confirmSignUp }) => {
+  const {
+    handleSubmit,
+    register,
+    formState: { touchedFields, errors },
+  } = useForm<SignUpConfirmFormData>({
+    mode: 'onTouched',
+  });
+
+  const onSubmit = (event: SignUpConfirmFormData) => {
+    confirmSignUp(event.authCode);
+  };
+
+  console.log(errors);
+
+  return (
+    <React.Fragment>
+      <h1 className="text-3xl text-center">Confirm your account</h1>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <Input
+          label="Confirmation Code"
+          name="authCode"
+          register={register}
+          options={{
+            required: 'Please enter your authentication code',
+          }}
+          errorMessage={errors.authCode?.message}
+          valid={touchedFields.authCode && !errors.authCode}
+        />
+
+        <button className="text-white w-full mt-6 bg-purple-600 p-3 rounded" type="submit">
+          Sign Up
+        </button>
+      </form>
+    </React.Fragment>
+  );
+};

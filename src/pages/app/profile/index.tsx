@@ -6,7 +6,6 @@ const Profile: React.FC = () => {
     <PageWrapper title="Profile">
       <ButtonLink href="/app/profile/details">Update Personal Details</ButtonLink>
       <ButtonLink href="/app/profile/amputations">Update Amputation Details</ButtonLink>
-      <ButtonLink href="/app/profile/injuries">Update Injury Details</ButtonLink>
       <ButtonLink href="/app/profile/preferences">Communication Preferences</ButtonLink>
     </PageWrapper>
   );

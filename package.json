@@ -9,9 +9,11 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@aws-amplify/api": "^4.0.4",
+    "@aws-amplify/api": "^4.0.7",
+    "@aws-amplify/core": "^4.2.1",
+    "@aws-amplify/datastore": "^3.2.2",
     "autoprefixer": "^9",
-    "aws-amplify": "^4.1.1",
+    "aws-amplify": "^4.2.1",
     "chart.js": "^3.4.1",
     "chartist": "^0.11.4",
     "classnames": "^2.3.1",

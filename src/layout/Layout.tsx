@@ -30,19 +30,6 @@ export const Layout: React.FC<{
 
   if (!user) return <UnauthenticatedLayout>{children}</UnauthenticatedLayout>;
 
-  // const authFlowRoutes = [
-  //   APP_ROUTES.HOME.url,
-  //   APP_ROUTES.SIGN_IN.url,
-  //   APP_ROUTES.PASSWORD_RESET.url,
-  //   APP_ROUTES.REGISTER.url,
-  // ];
-  // pathIsProtected = authFlowRoutes.indexOf(router.pathname) > -1;
-
-  // if (isBrowser() && pathIsProtected) {
-  //   console.log('Path is protected', authFlowRoutes.indexOf(router.pathname), router.pathname);
-  //   router.push(APP_ROUTES.DASHBOARD.url);
-  // }
-
   return (
     <AuthenticatedLayout
       title={title}

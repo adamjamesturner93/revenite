@@ -3,7 +3,7 @@ import { Input, Select, PageWrapper } from '../../../components';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
 import { Activity } from '../../../../models';
-import { saveActivity } from '../../../models/Activity';
+import { saveActivity } from '../../../services';
 import { ActivitiesOptions, getActivityDropdownOptions, ExertionOptions } from '../../../utils';
 
 type ActivityFormData = {

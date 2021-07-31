@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { Activity } from '../../../../models';
 import { PageWrapper } from '../../../components';
-import { listActivities, mapActivitiesByMonth } from '../../../models/Activity';
+import { listActivities, mapActivitiesByMonth } from '../../../services';
 
 const Activities: React.FC = () => {
   const router = useRouter();
@@ -27,7 +27,7 @@ const Activities: React.FC = () => {
     );
   }
 
-  if (!activities) {
+  if (activities.length === 0) {
     return (
       <PageWrapper title="Activities">
         <h2>No activities have been recorded yet</h2>

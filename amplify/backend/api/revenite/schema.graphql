@@ -1,4 +1,64 @@
-type User @model @auth(rules: [{ allow: owner }]) {
+type SocketCheck @model @key(name: "byHealthCheck", fields: ["healthcheckID"]) @key(name: "byAmputation", fields: ["amputationID"]) @auth(rules: [{allow: owner}]) {
+  id: ID!
+  healthcheckID: ID
+  socketComfortScore: String!
+  blistered: Boolean
+  bleeding: Boolean
+  bruised: Boolean
+  hot: Boolean
+  painful: Boolean
+  red: Boolean
+  sore: Boolean
+  sweaty: Boolean
+  loose: Boolean
+  tight: Boolean
+  amputationID: ID
+}
+
+type HealthCheck @model @auth(rules: [{allow: owner}]) {
+  id: ID!
+  bodyScore: String!
+  aching: Boolean
+  painful: Boolean
+  sore: Boolean
+  tight: Boolean
+  tired: Boolean
+  other: Boolean
+  details: String
+  otherComments: String
+  SocketChecks: [SocketCheck] @connection(keyName: "byHealthCheck", fields: ["id"])
+  date: AWSDateTime!
+}
+
+enum AmputationLevelEnum {
+  THROUGH_FOOT
+  TRANSTIBIAL
+  THROUGH_KNEE
+  TRANSFEMORAL
+  THROUGH_HAND
+  TRANSRADIAL
+  THROUGH_ELBOW
+  TRANSHUMERAL
+}
+
+enum AmputationEnum {
+  LEFT_LET
+  RIGHT_LEG
+  LEFT_ARM
+  RIGHT_ARM
+}
+
+type Amputation @model @auth(rules: [{allow: owner}]) {
+  id: ID!
+  limb: AmputationEnum
+  level: AmputationLevelEnum
+  prosthesisWorn: Boolean
+  SocketChecks: [SocketCheck] @connection(keyName: "byAmputation", fields: ["id"])
+  scarring: Boolean
+  grafting: Boolean
+}
+
+type User @model @auth(rules: [{allow: owner}]) {
   id: ID!
   name: String
   display_name: String
@@ -15,10 +75,10 @@ type User @model @auth(rules: [{ allow: owner }]) {
   militaryServiceOther: String
 }
 
-type Activity @model @auth(rules: [{ allow: owner }]) {
+type Activity @model @auth(rules: [{allow: owner}]) {
   id: ID!
   name: String
-  date: String!
+  date: AWSDate!
   duration: String!
   distance: String!
   cardio: Boolean
@@ -26,37 +86,6 @@ type Activity @model @auth(rules: [{ allow: owner }]) {
   strength: Boolean
   perceivedExertion: String!
   feeling: String!
+  activity: String
 }
-
-# type Amputation
-#   @model
-#   @auth(rules: [{ allow: owner }])
-#   @key(name: "byUserID", fields: ["userId"], queryField: "amputationByUserId") {
-#   id: ID!
-#   userId: ID!
-#   user: User @connection(fields: ["userId"])
-#   limb: String!
-#   level: String!
-#   prosthesisWorn: Boolean!
-# }
-
-# type Injury
-#   @model
-#   @auth(rules: [{ allow: owner }])
-#   @key(name: "byUserID", fields: ["userId"], queryField: "injuryByUserId") {
-#   id: ID!
-#   userId: ID!
-#   user: User @connection(fields: ["userId"])
-#   location: String!
-#   severity: String!
-#   chronic: Boolean!
-# }
-
-# type HealthCheck
-#   @model
-#   @auth(rules: [{ allow: owner }])
-#   @key(name: "byUserID", fields: ["userId"], queryField: "healthCheckByUserId") {
-#   id: ID!
-#   userId: ID!
-#   user: User @connection(fields: ["userId"])
-# }
+ 

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { subDays, isAfter } from 'date-fns';
 import { PageWrapper, Tab, TabLink, ActivityTab } from '../../../components';
-import { listActivities } from '../../../models/Activity';
+import { listActivities } from '../../../services';
 import { Activity } from '../../../../models';
 
 const Activities: React.FC = () => {
@@ -44,7 +44,7 @@ const Activities: React.FC = () => {
         <div className="w-full">
           <ul className="flex mb-0 list-none flex-wrap pt-3 pb-4 flex-row" role="tablist">
             <TabLink openTab={openTab} index={1} onClick={() => setOpenTab(1)}>
-              This week
+              Last 7 days
             </TabLink>
             <TabLink openTab={openTab} index={2} onClick={() => setOpenTab(2)}>
               Last 4 weeks

@@ -14,15 +14,17 @@ const AmputationLevelEnum = {
 };
 
 const AmputationEnum = {
-  "LEFT_LEG": "LEFT_LEG",
+  "LEFT_LET": "LEFT_LET",
   "RIGHT_LEG": "RIGHT_LEG",
   "LEFT_ARM": "LEFT_ARM",
   "RIGHT_ARM": "RIGHT_ARM"
 };
 
-const { Amputation, User, Activity } = initSchema(schema);
+const { SocketCheck, HealthCheck, Amputation, User, Activity } = initSchema(schema);
 
 export {
+  SocketCheck,
+  HealthCheck,
   Amputation,
   User,
   Activity,

@@ -3,7 +3,7 @@ import { GetServerSideProps } from 'next';
 import { Input, PageWrapper } from '../../../components';
 import { format } from 'date-fns';
 import { Activity } from '../../../../models';
-import { getActivity } from '../../../models/Activity';
+import { getActivity } from '../../../services';
 import { ActivitiesOptions, ExertionOptions } from '../../../utils';
 
 const ViewActivity: React.FC<{ id: string }> = ({ id }) => {

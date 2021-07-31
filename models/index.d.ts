@@ -12,7 +12,7 @@ export enum AmputationLevelEnum {
 }
 
 export enum AmputationEnum {
-  LEFT_LEG = "LEFT_LEG",
+  LEFT_LET = "LEFT_LET",
   RIGHT_LEG = "RIGHT_LEG",
   LEFT_ARM = "LEFT_ARM",
   RIGHT_ARM = "RIGHT_ARM"
@@ -20,11 +20,50 @@ export enum AmputationEnum {
 
 
 
+export declare class SocketCheck {
+  readonly id: string;
+  readonly healthcheckID?: string;
+  readonly socketComfortScore: string;
+  readonly blistered?: boolean;
+  readonly bleeding?: boolean;
+  readonly bruised?: boolean;
+  readonly hot?: boolean;
+  readonly painful?: boolean;
+  readonly red?: boolean;
+  readonly sore?: boolean;
+  readonly sweaty?: boolean;
+  readonly loose?: boolean;
+  readonly tight?: boolean;
+  readonly amputationID?: string;
+  constructor(init: ModelInit<SocketCheck>);
+  static copyOf(source: SocketCheck, mutator: (draft: MutableModel<SocketCheck>) => MutableModel<SocketCheck> | void): SocketCheck;
+}
+
+export declare class HealthCheck {
+  readonly id: string;
+  readonly bodyScore: string;
+  readonly aching?: boolean;
+  readonly painful?: boolean;
+  readonly sore?: boolean;
+  readonly tight?: boolean;
+  readonly tired?: boolean;
+  readonly other?: boolean;
+  readonly details?: string;
+  readonly otherComments?: string;
+  readonly SocketChecks?: (SocketCheck | null)[];
+  readonly date: string;
+  constructor(init: ModelInit<HealthCheck>);
+  static copyOf(source: HealthCheck, mutator: (draft: MutableModel<HealthCheck>) => MutableModel<HealthCheck> | void): HealthCheck;
+}
+
 export declare class Amputation {
   readonly id: string;
   readonly limb?: AmputationEnum | keyof typeof AmputationEnum;
   readonly level?: AmputationLevelEnum | keyof typeof AmputationLevelEnum;
   readonly prosthesisWorn?: boolean;
+  readonly SocketChecks?: (SocketCheck | null)[];
+  readonly scarring?: boolean;
+  readonly grafting?: boolean;
   constructor(init: ModelInit<Amputation>);
   static copyOf(source: Amputation, mutator: (draft: MutableModel<Amputation>) => MutableModel<Amputation> | void): Amputation;
 }
@@ -53,7 +92,7 @@ export declare class Activity {
   readonly name?: string;
   readonly date: string;
   readonly duration: string;
-  readonly distance?: string;
+  readonly distance: string;
   readonly cardio?: boolean;
   readonly flexibility?: boolean;
   readonly strength?: boolean;

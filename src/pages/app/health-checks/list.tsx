@@ -1,48 +1,63 @@
-import { GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
-import React from 'react';
-import { ACTIVITY_LIST } from '../../../utils/temp_activity';
+import React, { useEffect, useState } from 'react';
+import { HealthCheck } from '../../../../models';
+import { PageWrapper } from '../../../components';
+import { listHealthChecks, mapHealthChecksByMonth } from '../../../services';
 
-const Activities: React.FC<{ activities: any[] }> = ({ activities }) => {
+const HealthChecks: React.FC = () => {
   const router = useRouter();
+  const [healthChecks, setHealthChecks] = useState<HealthCheck[]>([]);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await listHealthChecks();
+      setHealthChecks(data);
+      setLoading(false);
+    };
+    setLoading(true);
+    fetchData();
+  }, []);
+
+  if (loading) {
+    return (
+      <PageWrapper title="Health Checks">
+        <h2>Loading...</h2>
+      </PageWrapper>
+    );
+  }
+
+  console.log({ healthChecks });
+
+  if (healthChecks.length === 0) {
+    return (
+      <PageWrapper title="Health Checks">
+        <h2>No Health Checks have been recorded yet</h2>
+      </PageWrapper>
+    );
+  }
+
+  const healthChecksByMonth = mapHealthChecksByMonth(healthChecks);
 
   return (
-    <div className="gb-gray-50 flex flex-grow p-2 flex-col">
-      <h1 className="text-3xl">Health Checks List</h1>
-
-      {activities.map(({ id, title, duration, date, strength, flexibility, cardio }) => (
-        <article
-          className="border border-purple-600 flex justify-between py-1 px-2 my-2"
-          role="link"
-          onClick={() => router.push(`/activities/${id}`)}
-          key={id}
-        >
-          <section>
-            <h3 className="text-gray-700">{title}</h3>
-            <p className="text-gray-500">{duration} minutes</p>
-            <p className="text-gray-500">{new Date(date).toDateString()}</p>
-          </section>
-          <section className="my-auto">
-            {flexibility && (
-              <span className="mx-1 text-white bg-indigo-400 border-radius-5 py-1 px-3">Flex</span>
-            )}
-            {strength && (
-              <span className="mx-1 text-white bg-red-400 border-radius-5 py-1 px-3">Strength</span>
-            )}
-            {cardio && (
-              <span className="mx-1 text-white bg-green-400 border-radius-5 py-1 px-3">Cardio</span>
-            )}
-          </section>
-        </article>
+    <PageWrapper title="Health Checks">
+      {healthChecksByMonth.map(({ month, healthChecks }) => (
+        <section key={month} className="cursor-pointer">
+          <h3 className="text-xl font-bold">{month}</h3>
+          {healthChecks.map(({ id }) => (
+            <section
+              className="border border-purple-600 flex justify-between py-1 px-2 my-2"
+              role="link"
+              onClick={() => router.push(`/app/healthChecks/${id}`)}
+              key={id}
+            >
+              Test
+            </section>
+          ))}
+        </section>
       ))}
-    </div>
+    </PageWrapper>
   );
 };
 
-export const getStaticProps: GetStaticProps = async () => {
-  // Fetch necessary data for the blog post using params.id
-  const activities = ACTIVITY_LIST;
-  return { props: { activities } };
-};
-
-export default Activities;
+export default HealthChecks;
