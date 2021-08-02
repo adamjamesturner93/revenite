@@ -1,4 +1,3 @@
-export * from './ActivityTab';
 export * from './ButtonLink';
 export * from './FocusTrap';
 export * from './Input';

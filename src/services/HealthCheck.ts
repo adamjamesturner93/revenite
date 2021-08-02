@@ -1,5 +1,5 @@
 import { MONTHS } from '../utils';
-import { HealthCheck } from '../../models';
+import { HealthCheck, SocketCheck } from '../../models';
 import { DataStore } from '@aws-amplify/datastore';
 import { compareDesc } from 'date-fns';
 
@@ -12,10 +12,40 @@ type ListHealthChecksByMonth = {
 
 export const listHealthChecks = async () => await DataStore.query(HealthCheck);
 
-export const getHealthCheck = async (id: string) => await DataStore.query(HealthCheck, id);
+export const getHealthCheck = async (id: string): Promise<HealthCheck> => {
+  const healthCheck = await DataStore.query(HealthCheck, id);
+  if (!healthCheck) throw new Error('Not found');
 
-export const saveHealthCheck = async (healthCheck: HealthCheck) =>
-  await DataStore.save(healthCheck);
+  const socketChecks = (await DataStore.query(SocketCheck)).filter(
+    (check) => check.healthcheckID === healthCheck.id,
+  );
+
+  return {
+    ...healthCheck,
+    SocketChecks: socketChecks,
+  };
+};
+
+export const saveHealthCheck = async (healthCheck: HealthCheck): Promise<HealthCheck> => {
+  const savedHealthCheck = await DataStore.save(new HealthCheck(healthCheck));
+
+  const updates: Array<Promise<SocketCheck>> = [];
+  healthCheck.SocketChecks?.map(async (socketCheck) => {
+    if (socketCheck) {
+      updates.push(
+        DataStore.save(
+          new SocketCheck({
+            ...socketCheck,
+            healthcheckID: savedHealthCheck.id,
+          }),
+        ),
+      );
+    }
+  });
+  await Promise.all(updates);
+
+  return savedHealthCheck;
+};
 
 export function mapHealthChecksByMonth(healthChecks: HealthCheck[]): ListHealthChecksByMonth[] {
   const monthHealthChecks: HealthCheckMonth[] = healthChecks.map((healthCheck) => ({

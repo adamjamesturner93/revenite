@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { subDays, isAfter } from 'date-fns';
-import { PageWrapper, Tab, TabLink, ActivityTab } from '../../../components';
+import { PageWrapper, Tab, TabLink } from '../../../components';
 import { listActivities } from '../../../services';
 import { Activity } from '../../../../models';
+import { ActivityTab } from '../../../views';
 
 const Activities: React.FC = () => {
   const [openTab, setOpenTab] = React.useState(1);

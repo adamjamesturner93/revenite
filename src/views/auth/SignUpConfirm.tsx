@@ -21,8 +21,6 @@ export const SignUpConfirm: React.FC<{
     confirmSignUp(event.authCode);
   };
 
-  console.log(errors);
-
   return (
     <React.Fragment>
       <h1 className="text-3xl text-center">Confirm your account</h1>

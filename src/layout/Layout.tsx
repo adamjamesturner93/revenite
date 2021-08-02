@@ -12,7 +12,9 @@ export const Layout: React.FC<{
   isSidebarClosed: boolean;
   setSidebarClosed: (state: boolean) => void;
 }> = ({ router, title, isStatic, isSidebarClosed, setSidebarClosed, children }) => {
-  const { user } = useAuth();
+  const {
+    user: { loading, user },
+  } = useAuth();
 
   const unprotectedRoutes = [
     APP_ROUTES.HOME.url,
@@ -23,6 +25,8 @@ export const Layout: React.FC<{
   ];
 
   const pathIsProtected = unprotectedRoutes.indexOf(router.pathname) === -1;
+
+  if (loading) return <p>Loading...</p>;
 
   if (isBrowser() && !user && pathIsProtected) {
     router.push(APP_ROUTES.SIGN_IN.url);

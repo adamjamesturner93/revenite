@@ -1,31 +1,96 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { subDays, isAfter } from 'date-fns';
+import { PageWrapper, Tab, TabLink } from '../../../components';
+import { listHealthChecks } from '../../../services';
+import { HealthCheck } from '../../../../models';
+import { HealthCheckTab } from '../../../views';
 
-const HealthChecks: React.FC = () => {
+const Activities: React.FC = () => {
+  const [openTab, setOpenTab] = React.useState(1);
+  const [healthChecks, setHealthChecks] = useState<HealthCheck[]>([]);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await listHealthChecks();
+      setHealthChecks(data);
+      setLoading(false);
+    };
+    setLoading(true);
+    fetchData();
+  }, []);
+
+  if (loading) {
+    return (
+      <PageWrapper title="Health Checks">
+        <h2>Loading...</h2>
+      </PageWrapper>
+    );
+  }
+
+  if (!healthChecks) {
+    return (
+      <PageWrapper title="Health Checks">
+        <h2>No health checks have been recorded yet</h2>
+      </PageWrapper>
+    );
+  }
+
+  const sevenDaysBefore = subDays(new Date(), 7);
+  const twentyEightDaysBefore = subDays(new Date(), 28);
+
   return (
-    <div className="gb-gray-50 flex flex-grow p-2 flex-col">
-      <h1 className="text-3xl">Health Check Summary</h1>
-      <section className="grid md:grid-cols-3 grid-cols-1 gap-10">
-        <article className="bg-white p-10 shadow-form flex-col">
-          <h3 className="text-xl font-bold text-gray-700">This week:</h3>
-          <p className="text-gray-500">Cardio: 5 (40%)</p>
-          <p className="text-gray-500">Flex: 15 (4%)</p>
-          <p className="text-gray-500">Strength: 15 (56%)</p>
-        </article>
-        <article className="bg-white p-10 shadow-form flex-col">
-          <h3 className="text-xl font-bold text-gray-700">This month:</h3>
-          <p className="text-gray-500">Cardio: 15 (44%)</p>
-          <p className="text-gray-500">Flex: 15 (23%)</p>
-          <p className="text-gray-500">Strength: 15 (33%)</p>
-        </article>
-        <article className="bg-white p-10 shadow-form flex-col">
-          <h3 className="text-xl font-bold text-gray-700">All time:</h3>
-          <p className="text-gray-500">Cardio: 25 (32%)</p>
-          <p className="text-gray-500">Flex: 25 (46%)</p>
-          <p className="text-gray-500">Strength: 25 (22%)</p>
-        </article>
-      </section>
-    </div>
+    <PageWrapper title="Health Checks Summary">
+      <div className="flex flex-wrap">
+        <div className="w-full">
+          <ul className="flex mb-0 list-none flex-wrap pt-3 pb-4 flex-row" role="tablist">
+            <TabLink openTab={openTab} index={1} onClick={() => setOpenTab(1)}>
+              Last 7 days
+            </TabLink>
+            <TabLink openTab={openTab} index={2} onClick={() => setOpenTab(2)}>
+              Last 4 weeks
+            </TabLink>
+            <TabLink openTab={openTab} index={3} onClick={() => setOpenTab(3)}>
+              All time
+            </TabLink>
+          </ul>
+          <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">
+            <div className="px-4 py-5 flex-auto">
+              <div className="tab-content tab-space">
+                {/* {openTab === 1 && (
+                  <Tab>
+                    <HealthCheckTab
+                      label="This week:"
+                      timePeriod="week"
+                      activities={healthChecks.filter((a) =>
+                        isAfter(new Date(a.date), sevenDaysBefore),
+                      )}
+                    />
+                  </Tab>
+                )}
+                {openTab === 2 && (
+                  <Tab>
+                    <ActivityTab
+                      timePeriod="month"
+                      label="This month:"
+                      activities={healthChecks.filter((a) =>
+                        isAfter(new Date(a.date), twentyEightDaysBefore),
+                      )}
+                    />
+                  </Tab>
+                )}
+                {openTab === 3 && (
+                  <Tab>
+                    <ActivityTab timePeriod="forever" label="All time:" activities={healthChecks} />
+                  </Tab>
+                )} */}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </PageWrapper>
   );
 };
 
-export default HealthChecks;
+export default Activities;

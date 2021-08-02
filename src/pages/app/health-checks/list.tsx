@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { HealthCheck } from '../../../../models';
 import { PageWrapper } from '../../../components';
 import { listHealthChecks, mapHealthChecksByMonth } from '../../../services';
+import { format } from 'date-fns';
 
 const HealthChecks: React.FC = () => {
   const router = useRouter();
@@ -27,8 +28,6 @@ const HealthChecks: React.FC = () => {
     );
   }
 
-  console.log({ healthChecks });
-
   if (healthChecks.length === 0) {
     return (
       <PageWrapper title="Health Checks">
@@ -44,14 +43,14 @@ const HealthChecks: React.FC = () => {
       {healthChecksByMonth.map(({ month, healthChecks }) => (
         <section key={month} className="cursor-pointer">
           <h3 className="text-xl font-bold">{month}</h3>
-          {healthChecks.map(({ id }) => (
+          {healthChecks.map(({ id, date }) => (
             <section
               className="border border-purple-600 flex justify-between py-1 px-2 my-2"
               role="link"
-              onClick={() => router.push(`/app/healthChecks/${id}`)}
+              onClick={() => router.push(`/app/health-checks/${id}`)}
               key={id}
             >
-              Test
+              {format(new Date(date), 'HH:mm - PPPP')}
             </section>
           ))}
         </section>

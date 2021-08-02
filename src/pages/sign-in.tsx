@@ -66,7 +66,7 @@ const SignInPage: React.FC = () => {
         <button className="text-white w-full mt-6 bg-purple-600 p-3 rounded" type="submit">
           Sign In
         </button>
-        <SocialSignIn />
+        {/* <SocialSignIn /> */}
         <p className="mt-12 text-sm font-light">
           Don&apos;t have an account?{' '}
           <Link href="/register">

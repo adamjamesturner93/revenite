@@ -39,7 +39,6 @@ export const SignUp: React.FC<{
         },
       });
 
-      console.log({ res });
       if (res.status !== 200) throw new Error();
       signUp(email, password);
     } catch (error) {

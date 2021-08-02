@@ -1,7 +1,7 @@
 import React from 'react';
 import { Doughnut } from 'react-chartjs-2';
 import { minutesToHours } from 'date-fns';
-import { Activity } from '../../../models';
+import { Activity } from '../../models';
 
 type Data = {
   cardio: number;

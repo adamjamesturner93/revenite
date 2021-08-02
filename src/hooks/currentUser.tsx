@@ -20,7 +20,7 @@ type ForgottenPasswordConfirm = (email: string, code: string, password: string) 
 
 const AuthContext = React.createContext<
   | {
-      user: User | undefined;
+      user: { user: User | undefined; loading: boolean };
       setUser: SetUser;
       storeCurrentSession: GetCurrentSession;
       signOut: SignOut;
@@ -35,14 +35,29 @@ const AuthContext = React.createContext<
 >(undefined);
 
 const AuthProvider: React.FC = ({ children }) => {
-  const [user, setUser] = useState<User | undefined>(undefined);
+  const [user, setUser] = useState<{ user: User | undefined; loading: boolean }>({
+    user: undefined,
+    loading: true,
+  });
 
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        setUser(await Auth.currentAuthenticatedUser());
+        setUser((state) => ({
+          ...state,
+          loading: true,
+        }));
+        const u = await Auth.currentAuthenticatedUser();
+        setUser((state) => ({
+          ...state,
+          user: u,
+          loading: false,
+        }));
       } catch (error) {
-        setUser(undefined);
+        setUser({
+          loading: false,
+          user: undefined,
+        });
       }
     };
     fetchUser();
@@ -51,8 +66,9 @@ const AuthProvider: React.FC = ({ children }) => {
   const signOut = async () => {
     try {
       await Auth.signOut();
-      setUser(undefined);
-    } catch (error) {
+      setUser({ user: undefined, loading: false });
+    } catch (err) {
+      const error = err as Error;
       console.error(error);
     }
   };
@@ -60,7 +76,8 @@ const AuthProvider: React.FC = ({ children }) => {
   const signIn = async (email: string, password: string) => {
     try {
       setUser(await Auth.signIn({ username: email, password }));
-    } catch (error) {
+    } catch (err) {
+      const error = err as Error;
       console.error(error);
       throw new Error(error.message);
     }
@@ -73,7 +90,8 @@ const AuthProvider: React.FC = ({ children }) => {
         password,
         attributes: { email },
       });
-    } catch (error) {
+    } catch (err) {
+      const error = err as Error;
       console.error(error);
       throw new Error(error.message);
     }
@@ -82,7 +100,8 @@ const AuthProvider: React.FC = ({ children }) => {
   const signUpResend = async (email: string) => {
     try {
       Auth.resendSignUp(email);
-    } catch (error) {
+    } catch (err) {
+      const error = err as Error;
       console.error(error);
       throw new Error(error.message);
     }
@@ -92,7 +111,8 @@ const AuthProvider: React.FC = ({ children }) => {
     try {
       await Auth.confirmSignUp(email, code);
       return await Auth.signIn(email, password);
-    } catch (error) {
+    } catch (err) {
+      const error = err as Error;
       console.error(error);
       throw new Error(error.message);
     }
@@ -101,8 +121,12 @@ const AuthProvider: React.FC = ({ children }) => {
   const forgottenPassword = async (email: string) => {
     try {
       await Auth.forgotPassword(email);
-      setUser(undefined);
-    } catch (error) {
+      setUser({
+        user: undefined,
+        loading: true,
+      });
+    } catch (err) {
+      const error = err as Error;
       console.error(error);
     }
   };
@@ -110,15 +134,23 @@ const AuthProvider: React.FC = ({ children }) => {
   const forgottenPasswordConfirm = async (email: string, code: string, password: string) => {
     try {
       await Auth.forgotPasswordSubmit(email, code, password);
-      setUser(undefined);
-    } catch (error) {
+      setUser({
+        user: undefined,
+        loading: true,
+      });
+    } catch (err) {
+      const error = err as Error;
       console.error(error);
     }
   };
 
   const storeCurrentSession = async () => {
     try {
-      setUser(await Auth.currentAuthenticatedUser());
+      const user = await Auth.currentAuthenticatedUser();
+      setUser({
+        loading: false,
+        user,
+      });
     } catch (error) {}
   };
 
