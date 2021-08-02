@@ -620,7 +620,7 @@ export const schema = {
         "AmputationEnum": {
             "name": "AmputationEnum",
             "values": [
-                "LEFT_LET",
+                "LEFT_LEG",
                 "RIGHT_LEG",
                 "LEFT_ARM",
                 "RIGHT_ARM"

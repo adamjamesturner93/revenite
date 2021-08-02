@@ -14,7 +14,7 @@ const AmputationLevelEnum = {
 };
 
 const AmputationEnum = {
-  "LEFT_LET": "LEFT_LET",
+  "LEFT_LEG": "LEFT_LEG",
   "RIGHT_LEG": "RIGHT_LEG",
   "LEFT_ARM": "LEFT_ARM",
   "RIGHT_ARM": "RIGHT_ARM"

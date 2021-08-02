@@ -32,8 +32,6 @@ export const Layout: React.FC<{
     APP_ROUTES.TERMS.url,
   ];
 
-  console.log({ loading, isUser });
-
   const pathIsProtected = unprotectedRoutes.indexOf(router.pathname) === -1;
 
   if (loading) return <p>Loading...</p>;

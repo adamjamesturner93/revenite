@@ -85,14 +85,12 @@ const ViewHealthCheck: React.FC<{ id: string }> = ({ id }) => {
           )}
         </section>
 
-        {healthCheck?.SocketChecks?.length && healthCheck?.SocketChecks?.length > 0 && (
+        {healthCheck?.SocketChecks?.length && healthCheck?.SocketChecks?.length > 0 ? (
           <h2 className="text-xl">Residual Limb Checks</h2>
-        )}
-        {healthCheck?.SocketChecks?.length &&
-          healthCheck?.SocketChecks?.length > 0 &&
-          healthCheck?.SocketChecks.map((check, index) => {
-            return (
-              check && (
+        ) : null}
+        {healthCheck?.SocketChecks?.length && healthCheck?.SocketChecks?.length > 0
+          ? healthCheck?.SocketChecks.map((check, index) => {
+              return check ? (
                 <section className="my-3 pt-0 p-3" key={check.id}>
                   <Input
                     label={`How is your ${amputations[index]?.limb?.replace(
@@ -187,9 +185,9 @@ const ViewHealthCheck: React.FC<{ id: string }> = ({ id }) => {
                     </div>
                   )}
                 </section>
-              )
-            );
-          })}
+              ) : null;
+            })
+          : null}
       </form>
     </PageWrapper>
   );

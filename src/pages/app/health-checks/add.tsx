@@ -6,11 +6,13 @@ import { getAmputations } from '../../../services/Amputations';
 import { v4 } from 'uuid';
 import { saveHealthCheck } from '../../../services';
 import { useRouter } from 'next/router';
+import { useAuth } from '../../../hooks';
 
 const DEFAULT_SCORE = '7';
 
 const AddHealthCheck: React.FC = () => {
   const router = useRouter();
+  const { updateUserAttributes } = useAuth();
   const [healthCheckId] = useState(() => v4());
   const [amputations, setAmputations] = useState<Amputation[]>([]);
   const { control, handleSubmit, register, watch } = useForm<
@@ -48,6 +50,8 @@ const AddHealthCheck: React.FC = () => {
       date: new Date().toISOString(),
       SocketChecks: socketChecks,
     });
+
+    await updateUserAttributes({ attribute: 'lastHealthCheck', value: new Date() });
 
     router.push(`/app/health-checks/${saved.id}`);
   };

@@ -10,7 +10,7 @@ const Dashboard: React.FC = () => {
     getAmputationDetails,
     getFirstActivity,
     getFirstApp,
-    getFirstHealthCheck,
+    getLastHealthCheck,
     getPersonalDetails,
   } = useAuth();
   return (
@@ -53,7 +53,7 @@ const Dashboard: React.FC = () => {
           </p>
           <p role="listitem" className="flex py-2">
             <FaLightbulb
-              className={`mr-3 self-center ${getFirstHealthCheck() && 'text-yellow-400'}`}
+              className={`mr-3 self-center ${!!getLastHealthCheck() && 'text-yellow-400'}`}
             />{' '}
             Record your first health check{' '}
             <FaArrowRight

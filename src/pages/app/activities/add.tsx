@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 import { Activity } from '../../../../models';
 import { saveActivity } from '../../../services';
 import { ActivitiesOptions, getActivityDropdownOptions, ExertionOptions } from '../../../utils';
+import { useAuth } from '../../../hooks';
 
 type ActivityFormData = {
   name: string;
@@ -21,6 +22,7 @@ type ActivityFormData = {
 
 const AddActivity: React.FC = () => {
   const router = useRouter();
+  const { getFirstActivity, updateUserAttributes } = useAuth();
   const [isDistanceVisible, setIsDistanceVisible] = useState(true);
   const {
     handleSubmit,
@@ -62,6 +64,10 @@ const AddActivity: React.FC = () => {
       });
 
       const activity = await saveActivity(input);
+
+      if (!getFirstActivity()) {
+        await updateUserAttributes({ attribute: 'firstActivity', value: true });
+      }
       router.push(`/app/activities/${activity.id}`);
     } catch (error) {
       console.error(error);
