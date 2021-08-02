@@ -20,7 +20,7 @@ const RegisterPage: React.FC = () => {
         password: formPassword,
       });
 
-      await signUp(email, password);
+      await signUp(formEmail, formPassword);
       setUiState('signUpConfirm');
     } catch (err) {
       console.error({ err });

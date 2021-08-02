@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Router } from 'next/router';
 import { useAuth } from '../hooks';
 import { AuthenticatedLayout } from './AuthenticatedLayout';
@@ -12,9 +12,17 @@ export const Layout: React.FC<{
   isSidebarClosed: boolean;
   setSidebarClosed: (state: boolean) => void;
 }> = ({ router, title, isStatic, isSidebarClosed, setSidebarClosed, children }) => {
-  const {
-    user: { loading, user },
-  } = useAuth();
+  const { user } = useAuth();
+  const [loading, setLoading] = useState(true);
+  const [isUser, setIsUser] = useState(false);
+
+  useEffect(() => {
+    setLoading(user.loading);
+  }, [user.loading]);
+
+  useEffect(() => {
+    setIsUser(!!user.user);
+  }, [user.user]);
 
   const unprotectedRoutes = [
     APP_ROUTES.HOME.url,
@@ -24,15 +32,17 @@ export const Layout: React.FC<{
     APP_ROUTES.TERMS.url,
   ];
 
+  console.log({ loading, isUser });
+
   const pathIsProtected = unprotectedRoutes.indexOf(router.pathname) === -1;
 
   if (loading) return <p>Loading...</p>;
 
-  if (isBrowser() && !user && pathIsProtected) {
-    router.push(APP_ROUTES.SIGN_IN.url);
+  if (isBrowser() && !isUser && pathIsProtected) {
+    router.push('/sign-in');
   }
 
-  if (!user) return <UnauthenticatedLayout>{children}</UnauthenticatedLayout>;
+  if (!isUser) return <UnauthenticatedLayout>{children}</UnauthenticatedLayout>;
 
   return (
     <AuthenticatedLayout

@@ -8,11 +8,11 @@ export const APP_ROUTES = {
     title: 'Dashboard',
   },
   SIGN_IN: {
-    url: 'sign-in',
+    url: '/sign-in',
     title: 'Sign In',
   },
   PASSWORD_RESET: {
-    url: 'password-reset',
+    url: '/password-reset',
     title: 'Password Reset',
   },
   REGISTER: {

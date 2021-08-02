@@ -1,12 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { Auth } from 'aws-amplify';
+type AmplifyAttributes = {
+  'custom:email': string;
+  'custom:personalDetails': string;
+  'custom:amputationDetails': string;
+  'custom:firstActivity': string;
+  'custom:firstHealthCheck': string;
+  'custom:firstApp': string;
+  'custom:lastHealthCheck': string;
+};
 type User = {
   username: string;
   attributes: {
     email: string;
-    name: string;
-    preferred_username: string;
-  };
+  } & AmplifyAttributes;
 };
 type SetUser = (user: any) => void;
 type GetCurrentSession = () => Promise<void>;
@@ -22,6 +29,12 @@ const AuthContext = React.createContext<
   | {
       user: { user: User | undefined; loading: boolean };
       setUser: SetUser;
+      getPersonalDetails: () => boolean;
+      getAmputationDetails: () => boolean;
+      getFirstActivity: () => boolean;
+      getFirstHealthCheck: () => boolean;
+      getFirstApp: () => boolean;
+      getLastHealthCheck: () => Date | undefined;
       storeCurrentSession: GetCurrentSession;
       signOut: SignOut;
       signIn: SignIn;
@@ -30,6 +43,22 @@ const AuthContext = React.createContext<
       signUpConfirm: SignUpConfirm;
       forgottenPassword: ForgottenPassword;
       forgottenPasswordConfirm: ForgottenPasswordConfirm;
+      updateUserAttributes: (
+        payload:
+          | {
+              attribute:
+                | 'personalDetails'
+                | 'amputationDetails'
+                | 'firstActivity'
+                | 'firstHealthCheck'
+                | 'firstApp';
+              value: boolean;
+            }
+          | {
+              attribute: 'lastHealthCheck';
+              value: Date;
+            },
+      ) => Promise<void>;
     }
   | undefined
 >(undefined);
@@ -88,7 +117,15 @@ const AuthProvider: React.FC = ({ children }) => {
       await Auth.signUp({
         username: email,
         password,
-        attributes: { email },
+        attributes: {
+          email,
+          'custom:personalDetails': JSON.stringify(false),
+          'custom:amputationDetails': JSON.stringify(false),
+          'custom:firstActivity': JSON.stringify(false),
+          'custom:firstHealthCheck': JSON.stringify(false),
+          'custom:firstApp': JSON.stringify(false),
+          'custom:lastHealthCheck': JSON.stringify(undefined),
+        },
       });
     } catch (err) {
       const error = err as Error;
@@ -110,7 +147,7 @@ const AuthProvider: React.FC = ({ children }) => {
   const signUpConfirm = async (email: string, password: string, code: string) => {
     try {
       await Auth.confirmSignUp(email, code);
-      return await Auth.signIn(email, password);
+      return await signIn(email, password);
     } catch (err) {
       const error = err as Error;
       console.error(error);
@@ -154,9 +191,47 @@ const AuthProvider: React.FC = ({ children }) => {
     } catch (error) {}
   };
 
+  const getPersonalDetails = () =>
+    user.user ? (JSON.parse(user.user.attributes['custom:personalDetails']) as boolean) : false;
+  const getAmputationDetails = () =>
+    user.user ? (JSON.parse(user.user.attributes['custom:amputationDetails']) as boolean) : false;
+  const getFirstActivity = () =>
+    user.user ? (JSON.parse(user.user.attributes['custom:firstActivity']) as boolean) : false;
+  const getFirstHealthCheck = () =>
+    user.user ? (JSON.parse(user.user.attributes['custom:firstHealthCheck']) as boolean) : false;
+  const getFirstApp = () =>
+    user.user ? (JSON.parse(user.user.attributes['custom:firstApp']) as boolean) : false;
+  const getLastHealthCheck = () =>
+    user.user ? (JSON.parse(user.user.attributes['custom:lastHealthCheck']) as Date) : undefined;
+
+  const updateUserAttributes = async (
+    payload:
+      | {
+          attribute:
+            | 'personalDetails'
+            | 'amputationDetails'
+            | 'firstActivity'
+            | 'firstHealthCheck'
+            | 'firstApp';
+          value: boolean;
+        }
+      | { attribute: 'lastHealthCheck'; value: Date },
+  ) => {
+    await Auth.updateUserAttributes(user.user, {
+      ...user.user?.attributes,
+      [`custom:${payload.attribute}`]: JSON.stringify(payload.value),
+    });
+  };
+
   const value = {
     setUser,
     user,
+    getPersonalDetails,
+    getAmputationDetails,
+    getFirstActivity,
+    getFirstHealthCheck,
+    getFirstApp,
+    getLastHealthCheck,
     storeCurrentSession,
     signOut,
     signIn,
@@ -165,6 +240,7 @@ const AuthProvider: React.FC = ({ children }) => {
     signUpConfirm,
     forgottenPassword,
     forgottenPasswordConfirm,
+    updateUserAttributes,
   };
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };

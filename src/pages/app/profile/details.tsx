@@ -5,10 +5,11 @@ import { EthnicGroups, Ethnicity, GenderIdentities, MilitaryService, Sex } from 
 import { v4 } from 'uuid';
 import { User } from '../../../../models';
 import { getUser, saveUser, updateUser } from '../../../services';
+import { useAuth } from '../../../hooks';
 
 export const PersonalDetails: React.FC = () => {
   const [currentUser, setCurrentUser] = useState<User>();
-
+  const { getPersonalDetails, updateUserAttributes } = useAuth();
   const {
     handleSubmit,
     register,
@@ -43,6 +44,10 @@ export const PersonalDetails: React.FC = () => {
         id: v4(),
       };
       user = await saveUser(input);
+    }
+
+    if (!getPersonalDetails()) {
+      await updateUserAttributes({ attribute: 'personalDetails', value: true });
     }
     setCurrentUser(user);
   };

@@ -1,23 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { useFieldArray, useForm } from 'react-hook-form';
 import { v4 } from 'uuid';
-import { Amputation, AmputationLevelEnum } from '../../../../models';
-import { Input, PageWrapper, Select } from '../../../components';
+import { Amputation } from '../../../../models';
+import { PageWrapper, Select } from '../../../components';
+import { useAuth } from '../../../hooks';
 import { getAmputations, saveAmputation, updateAmputation } from '../../../services/Amputations';
 import { AmputationLevels, AmputationLimb } from '../../../utils';
 
 const AmputationDetails: React.FC = () => {
   const [currentAmputations, setCurrentAmputations] = useState<Amputation[]>([]);
-
-  const {
-    handleSubmit,
-    control,
-    register,
-    reset,
-    watch,
-    getValues,
-    formState: { touchedFields, errors },
-  } = useForm<{ amputations: Amputation[] }>({
+  const { getAmputationDetails, updateUserAttributes } = useAuth();
+  const { handleSubmit, control, register, reset, watch } = useForm<{ amputations: Amputation[] }>({
     mode: 'onTouched',
     defaultValues: { amputations: currentAmputations },
   });
@@ -49,6 +42,10 @@ const AmputationDetails: React.FC = () => {
         newAmputations.push(await updateAmputation(currentAmputations[index], input));
       }
     });
+
+    if (!getAmputationDetails()) {
+      await updateUserAttributes({ attribute: 'amputationDetails', value: true });
+    }
 
     setCurrentAmputations(newAmputations);
   };
