@@ -4,7 +4,11 @@ import { Input, PageWrapper, Select } from '../../../components';
 import { EthnicGroups, Ethnicity, GenderIdentities, MilitaryService, Sex } from '../../../utils';
 import { v4 } from 'uuid';
 import { User } from '../../../../models';
-import { getUser, saveUser, updateUser } from '../../../services/User';
+import {
+  getUser,
+  // saveUser,
+  // updateUser
+} from '../../../services';
 import { useAuth } from '../../../hooks';
 
 export const PersonalDetails: React.FC = () => {
@@ -32,18 +36,18 @@ export const PersonalDetails: React.FC = () => {
   }, [reset]);
 
   const onSubmit = async (event: User) => {
-    let user: User = event;
+    const user: User = event;
     if (currentUser?.id) {
-      const input = {
-        ...event,
-      };
-      user = await updateUser(currentUser, input);
+      //   const input = {
+      //     ...event,
+      //   };
+      //   user = await updateUser(currentUser, input);
     } else {
-      const input = {
-        ...event,
-        id: v4(),
-      };
-      user = await saveUser(input);
+      // const input = {
+      //   ...event,
+      //   id: v4(),
+      // };
+      // user = await saveUser(input);
     }
 
     if (!getPersonalDetails()) {
