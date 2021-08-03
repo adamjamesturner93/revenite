@@ -61,14 +61,14 @@ const Home: React.FC = () => {
               <Link href="/">
                 <a
                   onClick={signOut}
-                  className="inline-block text-purple-600 no-underline hover:text-indigo-800 hover:underline text-center h-10 p-2 md:h-auto md:p-4"
+                  className="inline-block text-gray-100 no-underline hover:underline text-center h-10 p-2 md:h-auto md:p-4"
                 >
                   Sign out
                 </a>
               </Link>
             ) : (
               <Link href="/sign-in">
-                <a className="inline-block text-purple-600 no-underline hover:text-indigo-800 hover:underline text-center h-10 p-2 md:h-auto md:p-4">
+                <a className="inline-block text-gray-100 no-underline hover:underline text-center h-10 p-2 md:h-auto md:p-4">
                   Sign in
                 </a>
               </Link>
