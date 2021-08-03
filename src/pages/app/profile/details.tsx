@@ -4,7 +4,7 @@ import { Input, PageWrapper, Select } from '../../../components';
 import { EthnicGroups, Ethnicity, GenderIdentities, MilitaryService, Sex } from '../../../utils';
 import { v4 } from 'uuid';
 import { User } from '../../../../models';
-import { getUser, saveUser, updateUser } from '../../../services';
+import { saveUser, updateUser } from '../../../services';
 import { useAuth } from '../../../hooks';
 
 export const PersonalDetails: React.FC = () => {
@@ -23,12 +23,12 @@ export const PersonalDetails: React.FC = () => {
   });
 
   useEffect(() => {
-    getUser()
-      .then((data) => {
-        setCurrentUser(data);
-        reset(data);
-      })
-      .catch(console.error);
+    // getUser()
+    //   .then((data) => {
+    //     setCurrentUser(data);
+    //     reset(data);
+    //   })
+    //   .catch(console.error);
   }, [reset]);
 
   const onSubmit = async (event: User) => {
