@@ -14,7 +14,6 @@ import {
 const Home: React.FC = () => {
   const { user, signOut } = useAuth();
 
-  // TODO CREATE A TERMS, PRIVACY AND SECURITY PAGE WITH RAIN CLOUD AND UNDER CONSTRUCTION.
   return (
     <React.Fragment>
       <header className="w-full bg-gray-700 flex flex-col h-screen">
