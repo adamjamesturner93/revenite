@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import { DataStore } from '@aws-amplify/datastore';
 import { useForm } from 'react-hook-form';
 import { Input, PageWrapper, Select } from '../../../components';
 import { EthnicGroups, Ethnicity, GenderIdentities, MilitaryService, Sex } from '../../../utils';
 import { v4 } from 'uuid';
 import { User } from '../../../../models';
+
 import { useAuth } from '../../../hooks';
+import { DataStore } from 'aws-amplify';
 
-const getUser = async () => (await DataStore.query(User))[0];
+export const getUser = async () => (await DataStore.query(User))[0];
 
-const saveUser = async (user: User) => await DataStore.save(new User(user));
+export const saveUser = async (user: User) => await DataStore.save(new User(user));
 
-const updateUser = async (initial: User, user: User) =>
+export const updateUser = async (initial: User, user: User) =>
   await DataStore.save(User.copyOf(initial, (updated) => Object.assign(updated, user)));
 
 export const PersonalDetails: React.FC = () => {
