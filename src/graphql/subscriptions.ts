@@ -2,8 +2,56 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const onCreateAmputation = /* GraphQL */ `
+  subscription OnCreateAmputation($owner: String) {
+    onCreateAmputation(owner: $owner) {
+      id
+      limb
+      level
+      prosthesisWorn
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onUpdateAmputation = /* GraphQL */ `
+  subscription OnUpdateAmputation($owner: String) {
+    onUpdateAmputation(owner: $owner) {
+      id
+      limb
+      level
+      prosthesisWorn
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onDeleteAmputation = /* GraphQL */ `
+  subscription OnDeleteAmputation($owner: String) {
+    onDeleteAmputation(owner: $owner) {
+      id
+      limb
+      level
+      prosthesisWorn
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
 export const onCreateUser = /* GraphQL */ `
-  subscription OnCreateUser($owner: String!) {
+  subscription OnCreateUser($owner: String) {
     onCreateUser(owner: $owner) {
       id
       name
@@ -19,6 +67,9 @@ export const onCreateUser = /* GraphQL */ `
       hasMilitaryService
       militaryService
       militaryServiceOther
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
       owner
@@ -26,7 +77,7 @@ export const onCreateUser = /* GraphQL */ `
   }
 `;
 export const onUpdateUser = /* GraphQL */ `
-  subscription OnUpdateUser($owner: String!) {
+  subscription OnUpdateUser($owner: String) {
     onUpdateUser(owner: $owner) {
       id
       name
@@ -42,6 +93,9 @@ export const onUpdateUser = /* GraphQL */ `
       hasMilitaryService
       militaryService
       militaryServiceOther
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
       owner
@@ -49,7 +103,7 @@ export const onUpdateUser = /* GraphQL */ `
   }
 `;
 export const onDeleteUser = /* GraphQL */ `
-  subscription OnDeleteUser($owner: String!) {
+  subscription OnDeleteUser($owner: String) {
     onDeleteUser(owner: $owner) {
       id
       name
@@ -65,6 +119,9 @@ export const onDeleteUser = /* GraphQL */ `
       hasMilitaryService
       militaryService
       militaryServiceOther
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
       owner
@@ -72,11 +129,12 @@ export const onDeleteUser = /* GraphQL */ `
   }
 `;
 export const onCreateActivity = /* GraphQL */ `
-  subscription OnCreateActivity($owner: String!) {
+  subscription OnCreateActivity($owner: String) {
     onCreateActivity(owner: $owner) {
       id
       name
       date
+      activity
       duration
       distance
       cardio
@@ -84,6 +142,9 @@ export const onCreateActivity = /* GraphQL */ `
       strength
       perceivedExertion
       feeling
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
       owner
@@ -91,11 +152,12 @@ export const onCreateActivity = /* GraphQL */ `
   }
 `;
 export const onUpdateActivity = /* GraphQL */ `
-  subscription OnUpdateActivity($owner: String!) {
+  subscription OnUpdateActivity($owner: String) {
     onUpdateActivity(owner: $owner) {
       id
       name
       date
+      activity
       duration
       distance
       cardio
@@ -103,6 +165,9 @@ export const onUpdateActivity = /* GraphQL */ `
       strength
       perceivedExertion
       feeling
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
       owner
@@ -110,11 +175,12 @@ export const onUpdateActivity = /* GraphQL */ `
   }
 `;
 export const onDeleteActivity = /* GraphQL */ `
-  subscription OnDeleteActivity($owner: String!) {
+  subscription OnDeleteActivity($owner: String) {
     onDeleteActivity(owner: $owner) {
       id
       name
       date
+      activity
       duration
       distance
       cardio
@@ -122,6 +188,9 @@ export const onDeleteActivity = /* GraphQL */ `
       strength
       perceivedExertion
       feeling
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
       owner

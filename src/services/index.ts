@@ -1,1 +1,3 @@
-export * from './user';
+export * from './Activity';
+export * from './Amputations';
+export * from './HealthCheck';

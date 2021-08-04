@@ -1,16 +1,33 @@
-import { withSSRContext } from 'aws-amplify';
-import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
-import React from 'react';
-import { ListActivitysQuery } from '../../../API';
+import React, { useEffect, useState } from 'react';
+import { Activity } from '../../../../models';
 import { PageWrapper } from '../../../components';
-import { callGraphQL, listActivitys } from '../../../graphql';
-import { Activity, mapListActivitiesQuery, mapActivitiesByMonth } from '../../../models/Activity';
+import { listActivities, mapActivitiesByMonth } from '../../../services';
 
-const Activities: React.FC<{ activities: Activity[] }> = ({ activities }) => {
+const Activities: React.FC = () => {
   const router = useRouter();
+  const [activities, setActivities] = useState<Activity[]>([]);
+  const [loading, setLoading] = useState(false);
 
-  if (!activities) {
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await listActivities();
+      setActivities(data);
+      setLoading(false);
+    };
+    setLoading(true);
+    fetchData();
+  }, []);
+
+  if (loading) {
+    return (
+      <PageWrapper title="Activities">
+        <h2>Loading...</h2>
+      </PageWrapper>
+    );
+  }
+
+  if (activities.length === 0) {
     return (
       <PageWrapper title="Activities">
         <h2>No activities have been recorded yet</h2>
@@ -20,18 +37,16 @@ const Activities: React.FC<{ activities: Activity[] }> = ({ activities }) => {
 
   const activitiesByMonth = mapActivitiesByMonth(activities);
 
-  console.log({ activitiesByMonth });
-
   return (
     <PageWrapper title="Activities">
       {activitiesByMonth.map(({ month, activities }) => (
-        <section key={month}>
-          <h3>{month}</h3>
+        <section key={month} className="cursor-pointer">
+          <h3 className="text-xl font-bold">{month}</h3>
           {activities.map(({ id, name, duration, date, strength, flexibility, cardio }) => (
             <section
               className="border border-purple-600 flex justify-between py-1 px-2 my-2"
               role="link"
-              onClick={() => router.push(`/activities/${id}`)}
+              onClick={() => router.push(`/app/activities/${id}`)}
               key={id}
             >
               <article>
@@ -41,17 +56,17 @@ const Activities: React.FC<{ activities: Activity[] }> = ({ activities }) => {
               </article>
               <aside className="my-auto">
                 {flexibility && (
-                  <span className="mx-1 text-white bg-indigo-400 border-radius-5 py-1 px-3">
+                  <span className="mx-1 text-white bg-green-400 border-radius-5 py-1 px-3">
                     Flex
                   </span>
                 )}
                 {strength && (
-                  <span className="mx-1 text-white bg-red-400 border-radius-5 py-1 px-3">
+                  <span className="mx-1 text-white bg-indigo-400 border-radius-5 py-1 px-3">
                     Strength
                   </span>
                 )}
                 {cardio && (
-                  <span className="mx-1 text-white bg-green-400 border-radius-5 py-1 px-3">
+                  <span className="mx-1 text-white bg-red-400 border-radius-5 py-1 px-3">
                     Cardio
                   </span>
                 )}
@@ -63,21 +78,5 @@ const Activities: React.FC<{ activities: Activity[] }> = ({ activities }) => {
     </PageWrapper>
   );
 };
-
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { API } = withSSRContext(context);
-
-  const resp = await callGraphQL<ListActivitysQuery>(listActivitys, API);
-  const activities = mapListActivitiesQuery(resp);
-  return { props: { activities } };
-};
-
-// export const getStaticProps: GetStaticProps = async (context: GetStaticPropsContext) => {
-//   // Fetch necessary data for the blog post using params.id
-//   const { API } = withSSRContext(context);
-//   const resp = await callGraphQL<ListActivitysQuery>(listActivitys, API);
-//   const activities = mapListActivitiesQuery(resp);
-//   return { props: { activities } };
-// };
 
 export default Activities;

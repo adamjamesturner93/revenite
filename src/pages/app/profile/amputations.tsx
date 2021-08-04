@@ -1,52 +1,137 @@
-import React from 'react';
-import { PageWrapper } from '../../../components';
+import React, { useEffect, useState } from 'react';
+import { useFieldArray, useForm } from 'react-hook-form';
+import { v4 } from 'uuid';
+import { Amputation } from '../../../../models';
+import { PageWrapper, Select } from '../../../components';
+import { useAuth } from '../../../hooks';
+import { getAmputations, saveAmputation, updateAmputation } from '../../../services/Amputations';
+import { AmputationLevels, AmputationLimb } from '../../../utils';
 
-// import { useAuth } from '../../hooks';
-// import { useRouter } from 'next/router';
-// const initialState = { email: '', password: '', authCode: '' };
+const AmputationDetails: React.FC = () => {
+  const [currentAmputations, setCurrentAmputations] = useState<Amputation[]>([]);
+  const { getAmputationDetails, updateUserAttributes } = useAuth();
+  const { handleSubmit, control, register, reset, watch } = useForm<{ amputations: Amputation[] }>({
+    mode: 'onTouched',
+    defaultValues: { amputations: currentAmputations },
+  });
 
-const SignInPage: React.FC = () => {
-  //   const [formState, setFormState] = useState(initialState);
-  //   const { email, password } = formState;
-  //   const { signIn } = useAuth();
-  //   const router = useRouter();
+  const { fields, append } = useFieldArray({
+    control,
+    name: 'amputations',
+  });
 
-  //   const onChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
-  //     setFormState((state) => ({
-  //       ...state,
-  //       [event.target.name]: event.target.value,
-  //     }));
-  //   };
+  useEffect(() => {
+    getAmputations()
+      .then((amputations) => {
+        setCurrentAmputations(amputations);
+        reset({ amputations });
+      })
+      .catch(console.error);
+  }, [reset]);
 
-  //   const handleSignIn = async () => {
-  //     try {
-  //       await signIn(email, password);
-  //       router.push('/app/profile');
-  //     } catch (err) {
-  //       console.error({ err });
-  //     }
-  //   };
+  const onSubmit = async (event: { amputations: Amputation[] }) => {
+    const newAmputations: Amputation[] = [];
+    event.amputations.forEach(async (amputation, index) => {
+      if (amputation?.id.indexOf('new') > -1) {
+        const input = { ...amputation, id: v4() };
+        newAmputations.push(await saveAmputation(input));
+      } else {
+        const input = {
+          ...amputation,
+        };
+        newAmputations.push(await updateAmputation(currentAmputations[index], input));
+      }
+    });
+
+    if (!getAmputationDetails()) {
+      await updateUserAttributes({ attribute: 'amputationDetails', value: true });
+    }
+
+    setCurrentAmputations(newAmputations);
+  };
 
   return (
     <PageWrapper title="Amputation Details">
-      <p className="text-gray-600 mt-5">Health check reminders (weekly)</p>
-      <p className="text-gray-600 mt-5">
-        Are you happy to be contacted about other, related, research studies
-      </p>
-      <button
-        className="text-white w-full mt-6 bg-red-600 p-3 rounded"
-        // onClick={handleSubmit}
-      >
-        Close Account
-      </button>
-      <button
-        className="text-white w-full mt-6 bg-purple-600 p-3 rounded"
-        // onClick={handleSubmit}
-      >
-        Register
-      </button>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        {fields.map((field, index) => {
+          const limb = watch(`amputations.${index}.limb`);
+
+          return (
+            <section className="my-3 p-3" key={field.id}>
+              <h3>Limb {index + 1}</h3>
+              <Select
+                register={register}
+                name={`amputations.${index}.limb`}
+                label="Please indicate which limb"
+                options={AmputationLimb}
+                defaultValue={field.limb}
+              />
+              <Select
+                register={register}
+                name={`amputations.${index}.level`}
+                label="Please the amputation level"
+                options={
+                  limb && AmputationLevels[limb]
+                    ? AmputationLevels[limb]
+                    : [{ label: 'Please select a limb', value: 'UNKNOWN' }]
+                }
+                defaultValue={field.level}
+              />
+
+              <h4>Please select all that apply:</h4>
+              <div className="mt-3 flex flex-col sm:flex-row sm:justify-around ">
+                <label className="text-sm">
+                  <input
+                    {...register(`amputations.${index}.prosthesisWorn`)}
+                    defaultChecked={field.prosthesisWorn}
+                    className="mr-2"
+                    type="checkbox"
+                    name={`amputations.${index}.prosthesisWorn`}
+                  />
+                  Prosthesis Worn
+                </label>
+                <label className="text-sm">
+                  <input
+                    {...register(`amputations.${index}.scarring`)}
+                    defaultChecked={field.scarring}
+                    className="mr-2"
+                    type="checkbox"
+                    name={`amputations.${index}.scarring`}
+                  />
+                  Excessive scar tissue/skin
+                </label>
+                <label className="text-sm">
+                  <input
+                    {...register(`amputations.${index}.grafting`)}
+                    defaultChecked={field.grafting}
+                    className="mr-2"
+                    type="checkbox"
+                    name={`amputations.${index}.grafting`}
+                  />
+                  Skin grafting
+                </label>
+              </div>
+            </section>
+          );
+        })}
+        {fields.length < 4 && (
+          <button
+            className="text-gray w-full mt-6 bg-gray-300 p-3 rounded"
+            type="button"
+            onClick={() => append({ id: `new-${Math.random()}` })}
+          >
+            Add amputation
+          </button>
+        )}
+        <button className="text-white w-full mt-6 bg-purple-600 p-3 rounded" type="submit">
+          Save Changes
+        </button>
+        <button className="text-gray-700 w-full mt-6 bg-gray-300 p-3 rounded" type="reset">
+          Cancel (Reset Changes)
+        </button>
+      </form>
     </PageWrapper>
   );
 };
 
-export default SignInPage;
+export default AmputationDetails;

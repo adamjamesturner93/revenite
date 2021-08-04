@@ -2,6 +2,63 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const createAmputation = /* GraphQL */ `
+  mutation CreateAmputation(
+    $input: CreateAmputationInput!
+    $condition: ModelAmputationConditionInput
+  ) {
+    createAmputation(input: $input, condition: $condition) {
+      id
+      limb
+      level
+      prosthesisWorn
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const updateAmputation = /* GraphQL */ `
+  mutation UpdateAmputation(
+    $input: UpdateAmputationInput!
+    $condition: ModelAmputationConditionInput
+  ) {
+    updateAmputation(input: $input, condition: $condition) {
+      id
+      limb
+      level
+      prosthesisWorn
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const deleteAmputation = /* GraphQL */ `
+  mutation DeleteAmputation(
+    $input: DeleteAmputationInput!
+    $condition: ModelAmputationConditionInput
+  ) {
+    deleteAmputation(input: $input, condition: $condition) {
+      id
+      limb
+      level
+      prosthesisWorn
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
 export const createUser = /* GraphQL */ `
   mutation CreateUser(
     $input: CreateUserInput!
@@ -22,6 +79,9 @@ export const createUser = /* GraphQL */ `
       hasMilitaryService
       militaryService
       militaryServiceOther
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
       owner
@@ -48,6 +108,9 @@ export const updateUser = /* GraphQL */ `
       hasMilitaryService
       militaryService
       militaryServiceOther
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
       owner
@@ -74,6 +137,9 @@ export const deleteUser = /* GraphQL */ `
       hasMilitaryService
       militaryService
       militaryServiceOther
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
       owner
@@ -89,6 +155,7 @@ export const createActivity = /* GraphQL */ `
       id
       name
       date
+      activity
       duration
       distance
       cardio
@@ -96,6 +163,9 @@ export const createActivity = /* GraphQL */ `
       strength
       perceivedExertion
       feeling
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
       owner
@@ -111,6 +181,7 @@ export const updateActivity = /* GraphQL */ `
       id
       name
       date
+      activity
       duration
       distance
       cardio
@@ -118,6 +189,9 @@ export const updateActivity = /* GraphQL */ `
       strength
       perceivedExertion
       feeling
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
       owner
@@ -133,6 +207,7 @@ export const deleteActivity = /* GraphQL */ `
       id
       name
       date
+      activity
       duration
       distance
       cardio
@@ -140,6 +215,9 @@ export const deleteActivity = /* GraphQL */ `
       strength
       perceivedExertion
       feeling
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
       owner

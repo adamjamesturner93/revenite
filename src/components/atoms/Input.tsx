@@ -1,20 +1,22 @@
 import React from 'react';
-import { UseFormRegister } from 'react-hook-form';
+import { RegisterOptions, UseFormRegister } from 'react-hook-form';
 import { inputClasses } from '../../utils';
 
 export const Input: React.FC<
   {
     register?: UseFormRegister<any>;
+    options?: RegisterOptions;
     name?: string;
     errorMessage?: string;
     valid?: boolean;
     label?: string;
     initialValue?: string;
   } & React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
-> = ({ register, name, errorMessage, valid, label, ...rest }) => {
-  const classes = inputClasses(errorMessage, valid);
+> = ({ register, options = {}, name, errorMessage, valid, label, ...rest }) => {
+  const disabled = rest.disabled || !register || !name;
+  const classes = inputClasses(errorMessage, valid, disabled);
 
-  if (!register || !name) {
+  if (rest.disabled || !register || !name) {
     return (
       <div className="mt-3">
         <label className="text-sm">
@@ -25,11 +27,15 @@ export const Input: React.FC<
     );
   }
 
+  const props = register && name && { ...register(name, options) };
+
+  if (!props) throw new Error();
+
   return (
     <div className="mt-3">
       <label className="text-sm">
         {label}
-        <input {...register(name)} {...rest} className={classes} />
+        <input {...props} {...rest} className={classes} />
       </label>
       {errorMessage && <span className="text-sm px-2 text-red-500">{errorMessage}</span>}
     </div>

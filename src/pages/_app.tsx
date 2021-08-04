@@ -40,7 +40,7 @@ const App: React.FC<AppProps> = ({ Component, pageProps, router }) => {
 
         <meta name="theme-color" content="#5B21B6" />
         <meta name="description" content="Revenite" />
-        <link rel="icon" type="image/png" sizes="196x196" href="favicon-196.png" />
+        {/* <link rel="icon" type="image/png" sizes="196x196" href="favicon196.png" /> */}
 
         <link rel="apple-touch-icon" href="apple-icon-180.png" />
 
