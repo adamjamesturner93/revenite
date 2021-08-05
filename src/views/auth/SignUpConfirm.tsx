@@ -8,7 +8,8 @@ type SignUpConfirmFormData = {
 
 export const SignUpConfirm: React.FC<{
   confirmSignUp: (authCode: string) => void;
-}> = ({ confirmSignUp }) => {
+  error?: string;
+}> = ({ confirmSignUp, error }) => {
   const {
     handleSubmit,
     register,
@@ -36,7 +37,8 @@ export const SignUpConfirm: React.FC<{
           valid={touchedFields.authCode && !errors.authCode}
         />
 
-        <button className="text-white w-full mt-6 bg-purple-600 p-3 rounded" type="submit">
+        <p className="text-sm px-3 mt-6 text-red-500">{error}</p>
+        <button className="text-white w-full mt-3 bg-purple-600 p-3 rounded" type="submit">
           Sign Up
         </button>
       </form>

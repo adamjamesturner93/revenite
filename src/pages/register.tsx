@@ -12,26 +12,31 @@ const RegisterPage: React.FC = () => {
   const { push } = useRouter();
   const { email, password } = formState;
   const { signUp, signUpConfirm } = useAuth();
+  const [error, setError] = useState<string>();
 
   const handleSignUp = async (formEmail: string, formPassword: string) => {
     try {
+      setError(undefined);
       setFormState({
         email: formEmail,
         password: formPassword,
       });
-
       await signUp(formEmail, formPassword);
       setUiState('signUpConfirm');
     } catch (err) {
       console.error({ err });
+      setError(err.message);
     }
   };
+
   const handleSignUpConfirm = async (authCode: string) => {
     try {
+      setError(undefined);
       await signUpConfirm(email, password, authCode);
       push('/app/dashboard');
     } catch (err) {
       console.error({ err });
+      setError(err.message);
     }
   };
 
@@ -39,10 +44,14 @@ const RegisterPage: React.FC = () => {
     signUp: (
       <SignUp
         signUp={(formEmail: string, formPassword: string) => handleSignUp(formEmail, formPassword)}
+        error={error}
       />
     ),
     signUpConfirm: (
-      <SignUpConfirm confirmSignUp={(authCode: string) => handleSignUpConfirm(authCode)} />
+      <SignUpConfirm
+        confirmSignUp={(authCode: string) => handleSignUpConfirm(authCode)}
+        error={error}
+      />
     ),
   };
 

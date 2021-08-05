@@ -97,7 +97,11 @@ const AuthProvider: React.FC = ({ children }) => {
 
   const signIn = async (email: string, password: string) => {
     try {
-      setUser(await Auth.signIn({ username: email, password }));
+      const u = await Auth.signIn({ username: email, password });
+      setUser((state) => ({
+        ...state,
+        user: u,
+      }));
     } catch (err) {
       const error = err as Error;
       console.error(error);

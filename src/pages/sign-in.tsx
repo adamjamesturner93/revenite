@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { useAuth } from '../hooks';
 import { useRouter } from 'next/router';
 import { PageWrapper } from '../components';
-import { SocialSignIn } from '../views';
+// import { SocialSignIn } from '../views';
 import { useForm } from 'react-hook-form';
 
 type SignIn = { email: string; password: string; authCode: string };
@@ -23,19 +23,24 @@ const SignInPage: React.FC = () => {
 
   const { signIn } = useAuth();
   const router = useRouter();
+  const [error, setError] = useState();
 
   const onSubmit = async (event: SignIn) => {
     try {
+      setError(undefined);
       await signIn(event.email, event.password);
-      router.push('/app/profile');
+      router.push('/app/dashboard');
+      console.log('PUSHED TO /app/dashboard');
     } catch (err) {
       console.error({ err });
+      setError(err.message);
     }
   };
 
   return (
     <PageWrapper title="Sign in to your account">
       <form onSubmit={handleSubmit(onSubmit)}>
+        {error}
         <section className="mt-10">
           <Input
             register={register}
@@ -48,7 +53,6 @@ const SignInPage: React.FC = () => {
         </section>
         <section className="mt-4">
           <label className="text-sm">Password</label>
-
           <Link href="/password-reset">
             <a className="text-sm ml-8 sm:ml-48 cursor-pointer text-purple-600">
               Forgot your password?
@@ -63,7 +67,8 @@ const SignInPage: React.FC = () => {
             valid={touchedFields.password && !errors.password}
           />
         </section>
-        <button className="text-white w-full mt-6 bg-purple-600 p-3 rounded" type="submit">
+        <p className="text-sm px-3 mt-6 text-red-500">{error}</p>
+        <button className="text-white w-full mt-3 bg-purple-600 p-3 rounded" type="submit">
           Sign In
         </button>
         {/* <SocialSignIn /> */}

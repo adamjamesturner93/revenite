@@ -13,7 +13,8 @@ type SignUpFormData = {
 
 export const SignUp: React.FC<{
   signUp: (formEmail: string, formPassword: string) => void;
-}> = ({ signUp }) => {
+  error?: string;
+}> = ({ signUp, error }) => {
   const {
     handleSubmit,
     register,
@@ -116,8 +117,8 @@ export const SignUp: React.FC<{
             <p className="text-sm px-2 text-red-500">{errors.terms?.message}</p>
           )}
         </section>
-
-        <button className="text-white w-full mt-6 bg-purple-600 p-3 rounded" type="submit">
+        <p className="text-sm px-3 mt-6 text-red-500">{error}</p>
+        <button className="text-white w-full mt-3 bg-purple-600 p-3 rounded" type="submit">
           Register
         </button>
         <p className="mt-12 text-sm font-light">
