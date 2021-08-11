@@ -6,6 +6,7 @@ import { Activity } from '../../../../models';
 import { saveActivity } from '../../../services';
 import { ActivitiesOptions, getActivityDropdownOptions, ExertionOptions } from '../../../utils';
 import { useAuth } from '../../../hooks';
+import { toast } from 'react-toastify';
 
 type ActivityFormData = {
   name: string;
@@ -68,6 +69,12 @@ const AddActivity: React.FC = () => {
       if (!getFirstActivity()) {
         await updateUserAttributes({ attribute: 'firstActivity', value: true });
       }
+
+      toast('Saved successfully', {
+        type: 'success',
+        position: 'bottom-center',
+      });
+
       router.push(`/app/activities/${activity.id}`);
     } catch (error) {
       console.error(error);
@@ -113,23 +120,25 @@ const AddActivity: React.FC = () => {
           options={getActivityDropdownOptions()}
         />
         <Input
-          label="Duration"
+          label="Duration (minutes)"
           name="duration"
           register={register}
           type="number"
           errorMessage={errors.duration?.message}
           valid={touchedFields.duration && !errors.duration}
           min={0}
+          step={0.01}
         />
         {isDistanceVisible && (
           <Input
-            label="Distance"
+            label="Distance (km)"
             name="distance"
             register={register}
             errorMessage={errors.distance?.message}
             valid={touchedFields.distance && !errors.distance}
             type="number"
             min={0}
+            step={0.01}
           />
         )}
         <section className="mt-3">

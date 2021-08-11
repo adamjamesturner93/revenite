@@ -7,6 +7,7 @@ import { User } from '../../../../models';
 
 import { useAuth } from '../../../hooks';
 import { DataStore } from 'aws-amplify';
+import { toast } from 'react-toastify';
 
 export const getUser = async () => (await DataStore.query(User))[0];
 
@@ -57,6 +58,12 @@ export const PersonalDetails: React.FC = () => {
     if (!getPersonalDetails()) {
       await updateUserAttributes({ attribute: 'personalDetails', value: true });
     }
+
+    toast('Saved successfully', {
+      type: 'success',
+      position: 'bottom-center',
+    });
+
     setCurrentUser(user);
   };
 

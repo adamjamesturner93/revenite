@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { Activity } from '../../../../models';
 import { PageWrapper } from '../../../components';
 import { listActivities, mapActivitiesByMonth } from '../../../services';
+import { formatTime } from '../../../utils/prettifyMins';
 
 const Activities: React.FC = () => {
   const router = useRouter();
@@ -51,7 +52,7 @@ const Activities: React.FC = () => {
             >
               <article>
                 <h3 className="text-gray-700">{name}</h3>
-                <p className="text-gray-500">{duration} minutes</p>
+                <p className="text-gray-500">{formatTime(+duration)}</p>
                 <p className="text-gray-500">{new Date(date).toDateString()}</p>
               </article>
               <aside className="my-auto">

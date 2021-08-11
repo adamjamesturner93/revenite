@@ -5,6 +5,7 @@ import { format } from 'date-fns';
 import { Activity } from '../../../../models';
 import { getActivity } from '../../../services';
 import { ActivitiesOptions, ExertionOptions } from '../../../utils';
+import { formatTime } from '../../../utils/prettifyMins';
 
 const ViewActivity: React.FC<{ id: string }> = ({ id }) => {
   const [activity, setActivity] = useState<Activity>();
@@ -42,11 +43,9 @@ const ViewActivity: React.FC<{ id: string }> = ({ id }) => {
     <PageWrapper title={activity.name}>
       <form>
         <Input label="Date" value={format(new Date(activity.date), 'PPP')} />
-        <Input title="Activity" value={activityOption.label} />
-        <Input title="Duration" type="number" value={activity.duration} />
-        {activityOption.distance && (
-          <Input title="Distance" type="number" value={activity.distance} />
-        )}
+        <Input label="Activity" value={activityOption.label} />
+        <Input label="Duration" value={formatTime(+activity.duration)} />
+        {activityOption.distance && <Input label="Distance" value={`${activity.distance} km`} />}
 
         <section className="mt-3">
           <label className="text-sm">Workout type</label>

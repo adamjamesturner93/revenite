@@ -13,6 +13,12 @@ details[open] summary ~ * {
   animation: sweep 0.5s ease-in-out;
 }
 
+body {
+  max-width: 100vw;
+  max-height: 100vh;
+  overflow: scroll;
+}
+
 @keyframes sweep {
   0% {
     opacity: 0;
@@ -107,4 +113,8 @@ footer {
 
 .bg-strava {
   background-color: #fc4c02;
+}
+
+input[type='range'] {
+  padding: 8px 0;
 }

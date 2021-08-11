@@ -5,7 +5,7 @@ import { listHealthChecks } from '../../../services';
 import { HealthCheck } from '../../../../models';
 import { HealthCheckTab } from '../../../views';
 
-const Activities: React.FC = () => {
+const HealtchChecks: React.FC = () => {
   const [openTab, setOpenTab] = React.useState(1);
   const [healthChecks, setHealthChecks] = useState<HealthCheck[]>([]);
   const [loading, setLoading] = useState(false);
@@ -36,6 +36,8 @@ const Activities: React.FC = () => {
     );
   }
 
+  console.log(healthChecks);
+
   const sevenDaysBefore = subDays(new Date(), 7);
   const twentyEightDaysBefore = subDays(new Date(), 28);
 
@@ -57,12 +59,12 @@ const Activities: React.FC = () => {
           <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">
             <div className="px-4 py-5 flex-auto">
               <div className="tab-content tab-space">
-                {/* {openTab === 1 && (
+                {openTab === 1 && (
                   <Tab>
                     <HealthCheckTab
                       label="This week:"
                       timePeriod="week"
-                      activities={healthChecks.filter((a) =>
+                      healthChecks={healthChecks.filter((a) =>
                         isAfter(new Date(a.date), sevenDaysBefore),
                       )}
                     />
@@ -70,10 +72,10 @@ const Activities: React.FC = () => {
                 )}
                 {openTab === 2 && (
                   <Tab>
-                    <ActivityTab
+                    <HealthCheckTab
                       timePeriod="month"
                       label="This month:"
-                      activities={healthChecks.filter((a) =>
+                      healthChecks={healthChecks.filter((a) =>
                         isAfter(new Date(a.date), twentyEightDaysBefore),
                       )}
                     />
@@ -81,9 +83,13 @@ const Activities: React.FC = () => {
                 )}
                 {openTab === 3 && (
                   <Tab>
-                    <ActivityTab timePeriod="forever" label="All time:" activities={healthChecks} />
+                    <HealthCheckTab
+                      timePeriod="forever"
+                      label="All time:"
+                      healthChecks={healthChecks}
+                    />
                   </Tab>
-                )} */}
+                )}
               </div>
             </div>
           </div>
@@ -93,4 +99,4 @@ const Activities: React.FC = () => {
   );
 };
 
-export default Activities;
+export default HealtchChecks;

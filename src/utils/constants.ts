@@ -187,6 +187,7 @@ export const ActivitiesOptions: Record<
     strength: false,
     distance: false,
   },
+  stretch: { label: 'Stretch', cardio: false, flex: true, strength: false, distance: false },
   swim: { label: 'Swim', cardio: true, flex: false, strength: false, distance: true },
   treadmill: { label: 'Treadmill', cardio: true, flex: false, strength: false, distance: true },
   walk: { label: 'Walk', cardio: true, flex: false, strength: false, distance: true },

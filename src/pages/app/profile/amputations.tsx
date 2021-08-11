@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useFieldArray, useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
 import { v4 } from 'uuid';
 import { Amputation } from '../../../../models';
 import { PageWrapper, Select } from '../../../components';
@@ -29,23 +30,31 @@ const AmputationDetails: React.FC = () => {
       .catch(console.error);
   }, [reset]);
 
-  const onSubmit = async (event: { amputations: Amputation[] }) => {
+  const onSubmit = async ({ amputations }: { amputations: Amputation[] }) => {
     const newAmputations: Amputation[] = [];
-    event.amputations.forEach(async (amputation, index) => {
-      if (amputation?.id.indexOf('new') > -1) {
-        const input = { ...amputation, id: v4() };
-        newAmputations.push(await saveAmputation(input));
-      } else {
-        const input = {
-          ...amputation,
-        };
-        newAmputations.push(await updateAmputation(currentAmputations[index], input));
-      }
-    });
+
+    if (fields.length > 0) {
+      amputations.forEach(async (amputation, index) => {
+        if (amputation?.id.indexOf('new') > -1) {
+          const input = { ...amputation, id: v4() };
+          newAmputations.push(await saveAmputation(input));
+        } else {
+          const input = {
+            ...amputation,
+          };
+          newAmputations.push(await updateAmputation(currentAmputations[index], input));
+        }
+      });
+    }
 
     if (!getAmputationDetails()) {
       await updateUserAttributes({ attribute: 'amputationDetails', value: true });
     }
+
+    toast('Saved successfully', {
+      type: 'success',
+      position: 'bottom-center',
+    });
 
     setCurrentAmputations(newAmputations);
   };
@@ -124,7 +133,7 @@ const AmputationDetails: React.FC = () => {
           </button>
         )}
         <button className="text-white w-full mt-6 bg-purple-600 p-3 rounded" type="submit">
-          Save Changes
+          {fields.length === 0 ? 'I have no amputations' : 'Save'}
         </button>
         <button className="text-gray-700 w-full mt-6 bg-gray-300 p-3 rounded" type="reset">
           Cancel (Reset Changes)

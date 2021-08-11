@@ -1,7 +1,7 @@
 import React from 'react';
 import { Doughnut } from 'react-chartjs-2';
-import { minutesToHours } from 'date-fns';
 import { Activity } from '../../models';
+import { formatTime } from '../utils/prettifyMins';
 
 type Data = {
   cardio: number;
@@ -44,14 +44,6 @@ export const ActivityTab: React.FC<{ activities: Activity[]; label: string; time
       .reduce((acc, curr) => acc + +curr.duration, 0);
 
     const data: Data = { cardio, strength, flex };
-
-    const formatTime = (mins: number): string => {
-      if (mins < 60) return `${mins} minutes`;
-
-      const hours = minutesToHours(mins);
-      const minutes = mins - hours * 60;
-      return `${hours}hrs ${minutes} minutes`;
-    };
 
     return (
       <React.Fragment>

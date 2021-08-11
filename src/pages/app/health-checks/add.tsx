@@ -7,6 +7,7 @@ import { v4 } from 'uuid';
 import { saveHealthCheck } from '../../../services';
 import { useRouter } from 'next/router';
 import { useAuth } from '../../../hooks';
+import { toast } from 'react-toastify';
 
 const DEFAULT_SCORE = '7';
 
@@ -52,6 +53,11 @@ const AddHealthCheck: React.FC = () => {
     });
 
     await updateUserAttributes({ attribute: 'lastHealthCheck', value: new Date() });
+
+    toast('Saved successfully', {
+      type: 'success',
+      position: 'bottom-center',
+    });
 
     router.push(`/app/health-checks/${saved.id}`);
   };
