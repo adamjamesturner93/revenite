@@ -108,10 +108,15 @@ export const SignUp: React.FC<{
               type="checkbox"
               className="mr-2"
             />{' '}
-            I agree to the{' '}
-            <Link href="/terms">
-              <a className="cursor-pointer text-purple-600">Terms and Conditions</a>
-            </Link>
+            I have read and understand{' '}
+            <a
+              href="https://revenite-docs.s3.eu-west-1.amazonaws.com/ICREC-Participant-Information-Sheet.pdf"
+              target="_blank"
+              className="cursor-pointer text-purple-600"
+              rel="noreferrer"
+            >
+              Participant Information Sheet
+            </a>
           </label>
           {errors.terms?.message && (
             <p className="text-sm px-2 text-red-500">{errors.terms?.message}</p>

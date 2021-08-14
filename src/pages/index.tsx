@@ -96,17 +96,22 @@ const Home: React.FC = () => {
       <Partnerships />
 
       <footer className="move-up-15vh w-full flex flex-col align-middle justify-center mx-auto p-6 pt-16 pb-6 text-sm text-center md:text-left fade-in bg-gray-700">
-        {/*<section className="container w-full mx-auto flex align-middle justify-center p-6">
-          <a className="text-xl text-gray-100 no-underline hover:no-underline px-6" href="#">
+        <section className="container w-full mx-auto flex align-middle justify-center p-6">
+          {/* <a className="text-xl text-gray-100 no-underline hover:no-underline px-6" href="#">
             Privacy
+          </a> */}
+          <a
+            className="text-xl text-gray-100 no-underline hover:no-underline px-6"
+            href="https://revenite-docs.s3.eu-west-1.amazonaws.com/ICREC-Participant-Information-Sheet.pdf"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Participant Information Sheet
           </a>
-          <a className="text-xl text-gray-100 no-underline hover:no-underline px-6" href="#">
-            Security
-          </a>
-          <a className="text-xl text-gray-100 no-underline hover:no-underline px-6" href="#">
+          {/* <a className="text-xl text-gray-100 no-underline hover:no-underline px-6" href="#">
             GDPR
-          </a>
-        </section> */}
+          </a> */}
+        </section>
         <section className="container w-full mx-auto flex flex-col align-middle justify-center p-6">
           <a className="text-xl text-gray-100 text-center no-underline hover:no-underline" href="#">
             &copy; Revenite 2021 - AdamJamesTurner93

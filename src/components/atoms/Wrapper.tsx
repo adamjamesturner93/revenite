@@ -24,7 +24,7 @@ export const SectionWrapper: React.FC = ({ children }) => (
 export const PageWrapper: React.FC<{ title?: string }> = ({ title, children }) => (
   <div className="gb-gray-50 flex flex-grow ">
     <div className="flex flex-col flex-grow items-center">
-      <div className="max-w-full md:w-540 lg:my-14">
+      <div className="max-w-full w-full md:w-540 lg:my-14">
         <div className="bg-white py-4 px-4 shadow-form rounded">
           {title && <h1 className="text-center text-3xl">{title}</h1>}
           {children}
