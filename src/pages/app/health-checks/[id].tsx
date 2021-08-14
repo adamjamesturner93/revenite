@@ -43,7 +43,7 @@ const ViewHealthCheck: React.FC<{ id: string }> = ({ id }) => {
   const getAmputation = (id?: string) => amputations.find((a) => a.id === id);
 
   return (
-    <PageWrapper title="Health Check">
+    <PageWrapper title="Health Check" back="/app/health-checks/list">
       <form>
         <h2 className="text-xl">Body Check</h2>
         <section className="my-3 pt-0 p-3">

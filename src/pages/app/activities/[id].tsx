@@ -3,13 +3,17 @@ import { GetServerSideProps } from 'next';
 import { Input, PageWrapper } from '../../../components';
 import { format } from 'date-fns';
 import { Activity } from '../../../../models';
-import { getActivity } from '../../../services';
+import { getActivity, deleteActivity } from '../../../services';
 import { ActivitiesOptions, ExertionOptions } from '../../../utils';
 import { formatTime } from '../../../utils/prettifyMins';
+import { FaTimes } from 'react-icons/fa';
+import { useRouter } from 'next/router';
+import { toast } from 'react-toastify';
 
 const ViewActivity: React.FC<{ id: string }> = ({ id }) => {
   const [activity, setActivity] = useState<Activity>();
   const [loading, setLoading] = useState(false);
+  const { push } = useRouter();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -38,9 +42,29 @@ const ViewActivity: React.FC<{ id: string }> = ({ id }) => {
   }
 
   const activityOption = ActivitiesOptions[activity.activity || ''];
-
+  const onDelete = async () => {
+    const resp = window.confirm('Are you sure you want to delete this activity?');
+    if (resp) {
+      try {
+        await deleteActivity(id);
+        toast.success('Activity deleted successfully');
+        push('/app/activities/list');
+      } catch (error) {
+        toast.error('Activity failed to delete');
+      }
+    }
+  };
+  const deleteButton = (
+    <button
+      className="m-4 flex border border-gray-700 hover:border-purple-600 hover:text-purple-600 p-4 rounded-full items-center justify-center"
+      title="Delete"
+      onClick={onDelete}
+    >
+      <FaTimes />
+    </button>
+  );
   return (
-    <PageWrapper title={activity.name}>
+    <PageWrapper title={activity.name} back="/app/activities/list" right={deleteButton}>
       <form>
         <Input label="Date" value={format(new Date(activity.date), 'PPP')} />
         <Input label="Activity" value={activityOption.label} />

@@ -12,6 +12,8 @@ type ListActivitiesByMonth = {
 
 export const listActivities = async () => await DataStore.query(Activity);
 
+export const deleteActivity = async (id: string) => await DataStore.delete(Activity, id);
+
 export const getActivity = async (id: string) => await DataStore.query(Activity, id);
 
 export const saveActivity = async (activity: Activity) => await DataStore.save(activity);
