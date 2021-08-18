@@ -20,7 +20,9 @@ const Dashboard: React.FC = () => {
         <article role="listbox">
           <p role="listitem" className="flex py-2">
             <FaLightbulb
-              className={`mr-3 self-center ${getPersonalDetails() && 'text-yellow-400'}`}
+              className={`mr-3 w-4 min-w-4 self-center ${
+                getPersonalDetails() && 'text-yellow-400'
+              }`}
             />{' '}
             Provide some personal details{' '}
             <FaArrowRight
@@ -31,7 +33,9 @@ const Dashboard: React.FC = () => {
           </p>
           <p role="listitem" className="flex py-2">
             <FaLightbulb
-              className={`mr-3 self-center ${getAmputationDetails() && 'text-yellow-400'}`}
+              className={`mr-3 w-4 min-w-4 self-center ${
+                getAmputationDetails() && 'text-yellow-400'
+              }`}
             />{' '}
             Provide details of any Amputations you have{' '}
             <FaArrowRight
@@ -42,7 +46,7 @@ const Dashboard: React.FC = () => {
           </p>
           <p role="listitem" className="flex py-2">
             <FaLightbulb
-              className={`mr-3 self-center ${getFirstActivity() && 'text-yellow-400'}`}
+              className={`mr-3 w-4 min-w-4 self-center ${getFirstActivity() && 'text-yellow-400'}`}
             />{' '}
             Record your first activity{' '}
             <FaArrowRight
@@ -53,7 +57,9 @@ const Dashboard: React.FC = () => {
           </p>
           <p role="listitem" className="flex py-2">
             <FaLightbulb
-              className={`mr-3 self-center ${!!getLastHealthCheck() && 'text-yellow-400'}`}
+              className={`mr-3 w-4 min-w-4 self-center ${
+                !!getLastHealthCheck() && 'text-yellow-400'
+              }`}
             />{' '}
             Record your first health check{' '}
             <FaArrowRight
@@ -63,7 +69,9 @@ const Dashboard: React.FC = () => {
             />
           </p>
           <p role="listitem" className="flex py-2">
-            <FaLightbulb className={`mr-3 self-center ${getFirstApp() && 'text-yellow-400'}`} />{' '}
+            <FaLightbulb
+              className={`mr-3 w-4 min-w-4 self-center ${getFirstApp() && 'text-yellow-400'}`}
+            />{' '}
             Connect to a fitness app (e.g. Strava){' '}
             <FaArrowRight
               role="link"
@@ -73,7 +81,7 @@ const Dashboard: React.FC = () => {
           </p>
           {/* <p role="listitem" className="flex py-2">
             <FaLightbulb
-              className={`mr-3 self-center ${getPersonalDetails() && 'text-yellow-400'}`}
+              className={`mr-3 w-4 min-w-4 self-center ${getPersonalDetails() && 'text-yellow-400'}`}
             />{' '} Add Revenite to your mobile home page{' '}
             <FaArrowRight
               role="link"

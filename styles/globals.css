@@ -118,3 +118,7 @@ footer {
 input[type='range'] {
   padding: 8px 0;
 }
+
+.min-w-4 {
+  min-width: 1rem;
+}
