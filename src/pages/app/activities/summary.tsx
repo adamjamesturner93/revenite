@@ -4,21 +4,25 @@ import { PageWrapper, Tab, TabLink } from '../../../components';
 import { listActivities } from '../../../services';
 import { Activity } from '../../../../models';
 import { ActivityTab } from '../../../views';
+import { useAuth } from '../../../hooks';
 
 const Activities: React.FC = () => {
   const [openTab, setOpenTab] = React.useState(1);
   const [activities, setActivities] = useState<Activity[]>([]);
   const [loading, setLoading] = useState(false);
+  const {
+    user: { user },
+  } = useAuth();
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await listActivities();
+      const data = await listActivities(user?.username || '');
       setActivities(data);
       setLoading(false);
     };
     setLoading(true);
     fetchData();
-  }, []);
+  }, [user?.username]);
 
   if (loading) {
     return (

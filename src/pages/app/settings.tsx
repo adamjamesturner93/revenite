@@ -1,7 +1,27 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { PageWrapper, Strava } from '../../components';
+import { useAuth } from '../../hooks';
+import { getStravaConnection } from '../../services/Strava';
 
 const Settings: React.FC = () => {
+  const [isStravaUser, setIsStravaUser] = useState(false);
+  const {
+    user: { user },
+  } = useAuth();
+
+  useEffect(() => {
+    const userId = user?.username;
+    console.log(user?.attributes);
+    if (!userId) return;
+    getStravaConnection(userId).then((data) => {
+      const user = data[0];
+      console.log(user);
+      if (user) {
+        setIsStravaUser(true);
+      }
+    });
+  }, [user]);
+
   return (
     <PageWrapper title="Settings">
       {/* <button
@@ -14,13 +34,24 @@ const Settings: React.FC = () => {
                 <p className="ml-3">Connect with Strava</p>
               </div>
             </button> */}
-      <button
-        className="mt-10 w-full flex border bg-strava p-2 rounded-full items-center justify-center"
-        onClick={() => console.log('NOT IMPLEMENTED')}
-      >
-        {/* https://developers.strava.com/ */}
-        <Strava />
-      </button>
+
+      {isStravaUser ? (
+        <a
+          className="mt-10 w-full flex border bg-strava p-5 rounded-full items-center justify-center text-white"
+          href="#"
+          rel="noreferrer"
+        >
+          Connected to Strava
+        </a>
+      ) : (
+        <a
+          className="mt-10 w-full flex border bg-strava p-2 rounded-full items-center justify-center"
+          href={`http://www.strava.com/oauth/authorize?client_id=69123&response_type=code&redirect_uri=http://localhost:3000/api/strava/exchange_token?user=${user?.username}&approval_prompt=force&scope=activity:read_all`}
+          rel="noreferrer"
+        >
+          <Strava />
+        </a>
+      )}
       {/* <button
               className="mt-10 flex border border-gray-300 p-2 rounded-full items-center justify-center"
               onClick={() => console.log('NOT IMPLEMENTED')}

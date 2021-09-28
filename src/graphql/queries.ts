@@ -2,6 +2,383 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const getStravaActivity = /* GraphQL */ `
+  query GetStravaActivity($id: ID!) {
+    getStravaActivity(id: $id) {
+      id
+      userId
+      stravaActivity
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listStravaActivitys = /* GraphQL */ `
+  query ListStravaActivitys(
+    $filter: ModelStravaActivityFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listStravaActivitys(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        userId
+        stravaActivity
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const syncStravaActivities = /* GraphQL */ `
+  query SyncStravaActivities(
+    $filter: ModelStravaActivityFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncStravaActivities(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        userId
+        stravaActivity
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const getStravaUser = /* GraphQL */ `
+  query GetStravaUser($id: ID!) {
+    getStravaUser(id: $id) {
+      id
+      access_token
+      refresh_token
+      expires_at
+      athleteId
+      scope_activity
+      scope_read
+      state
+      country
+      city
+      userId
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listStravaUsers = /* GraphQL */ `
+  query ListStravaUsers(
+    $filter: ModelStravaUserFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listStravaUsers(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        access_token
+        refresh_token
+        expires_at
+        athleteId
+        scope_activity
+        scope_read
+        state
+        country
+        city
+        userId
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const syncStravaUsers = /* GraphQL */ `
+  query SyncStravaUsers(
+    $filter: ModelStravaUserFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncStravaUsers(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        access_token
+        refresh_token
+        expires_at
+        athleteId
+        scope_activity
+        scope_read
+        state
+        country
+        city
+        userId
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const getSocketCheck = /* GraphQL */ `
+  query GetSocketCheck($id: ID!) {
+    getSocketCheck(id: $id) {
+      id
+      healthcheckID
+      socketComfortScore
+      blistered
+      bleeding
+      bruised
+      hot
+      painful
+      red
+      sore
+      sweaty
+      loose
+      tight
+      amputationID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const listSocketChecks = /* GraphQL */ `
+  query ListSocketChecks(
+    $filter: ModelSocketCheckFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listSocketChecks(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        healthcheckID
+        socketComfortScore
+        blistered
+        bleeding
+        bruised
+        hot
+        painful
+        red
+        sore
+        sweaty
+        loose
+        tight
+        amputationID
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const syncSocketChecks = /* GraphQL */ `
+  query SyncSocketChecks(
+    $filter: ModelSocketCheckFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncSocketChecks(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        healthcheckID
+        socketComfortScore
+        blistered
+        bleeding
+        bruised
+        hot
+        painful
+        red
+        sore
+        sweaty
+        loose
+        tight
+        amputationID
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const getHealthCheck = /* GraphQL */ `
+  query GetHealthCheck($id: ID!) {
+    getHealthCheck(id: $id) {
+      id
+      bodyScore
+      aching
+      painful
+      sore
+      tight
+      tired
+      other
+      details
+      otherComments
+      date
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      SocketChecks {
+        items {
+          id
+          healthcheckID
+          socketComfortScore
+          blistered
+          bleeding
+          bruised
+          hot
+          painful
+          red
+          sore
+          sweaty
+          loose
+          tight
+          amputationID
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+        startedAt
+      }
+      owner
+    }
+  }
+`;
+export const listHealthChecks = /* GraphQL */ `
+  query ListHealthChecks(
+    $filter: ModelHealthCheckFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listHealthChecks(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        bodyScore
+        aching
+        painful
+        sore
+        tight
+        tired
+        other
+        details
+        otherComments
+        date
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        SocketChecks {
+          nextToken
+          startedAt
+        }
+        owner
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const syncHealthChecks = /* GraphQL */ `
+  query SyncHealthChecks(
+    $filter: ModelHealthCheckFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncHealthChecks(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        bodyScore
+        aching
+        painful
+        sore
+        tight
+        tired
+        other
+        details
+        otherComments
+        date
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        SocketChecks {
+          nextToken
+          startedAt
+        }
+        owner
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
 export const getAmputation = /* GraphQL */ `
   query GetAmputation($id: ID!) {
     getAmputation(id: $id) {
@@ -9,11 +386,39 @@ export const getAmputation = /* GraphQL */ `
       limb
       level
       prosthesisWorn
+      scarring
+      grafting
       _version
       _deleted
       _lastChangedAt
       createdAt
       updatedAt
+      SocketChecks {
+        items {
+          id
+          healthcheckID
+          socketComfortScore
+          blistered
+          bleeding
+          bruised
+          hot
+          painful
+          red
+          sore
+          sweaty
+          loose
+          tight
+          amputationID
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+        startedAt
+      }
       owner
     }
   }
@@ -30,11 +435,17 @@ export const listAmputations = /* GraphQL */ `
         limb
         level
         prosthesisWorn
+        scarring
+        grafting
         _version
         _deleted
         _lastChangedAt
         createdAt
         updatedAt
+        SocketChecks {
+          nextToken
+          startedAt
+        }
         owner
       }
       nextToken
@@ -60,11 +471,17 @@ export const syncAmputations = /* GraphQL */ `
         limb
         level
         prosthesisWorn
+        scarring
+        grafting
         _version
         _deleted
         _lastChangedAt
         createdAt
         updatedAt
+        SocketChecks {
+          nextToken
+          startedAt
+        }
         owner
       }
       nextToken
@@ -178,7 +595,6 @@ export const getActivity = /* GraphQL */ `
       id
       name
       date
-      activity
       duration
       distance
       cardio
@@ -186,6 +602,9 @@ export const getActivity = /* GraphQL */ `
       strength
       perceivedExertion
       feeling
+      activity
+      stravaId
+      userId
       _version
       _deleted
       _lastChangedAt
@@ -206,7 +625,6 @@ export const listActivitys = /* GraphQL */ `
         id
         name
         date
-        activity
         duration
         distance
         cardio
@@ -214,6 +632,9 @@ export const listActivitys = /* GraphQL */ `
         strength
         perceivedExertion
         feeling
+        activity
+        stravaId
+        userId
         _version
         _deleted
         _lastChangedAt
@@ -243,7 +664,6 @@ export const syncActivities = /* GraphQL */ `
         id
         name
         date
-        activity
         duration
         distance
         cardio
@@ -251,6 +671,9 @@ export const syncActivities = /* GraphQL */ `
         strength
         perceivedExertion
         feeling
+        activity
+        stravaId
+        userId
         _version
         _deleted
         _lastChangedAt

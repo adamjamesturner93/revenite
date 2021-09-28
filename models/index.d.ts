@@ -20,6 +20,30 @@ export enum AmputationEnum {
 
 
 
+export declare class StravaActivity {
+  readonly id: string;
+  readonly userId: string;
+  readonly stravaActivity: string;
+  constructor(init: ModelInit<StravaActivity>);
+  static copyOf(source: StravaActivity, mutator: (draft: MutableModel<StravaActivity>) => MutableModel<StravaActivity> | void): StravaActivity;
+}
+
+export declare class StravaUser {
+  readonly id: string;
+  readonly access_token: string;
+  readonly refresh_token: string;
+  readonly expires_at: number;
+  readonly athleteId: number;
+  readonly scope_activity: boolean;
+  readonly scope_read: boolean;
+  readonly state?: string;
+  readonly country?: string;
+  readonly city?: string;
+  readonly userId: string;
+  constructor(init: ModelInit<StravaUser>);
+  static copyOf(source: StravaUser, mutator: (draft: MutableModel<StravaUser>) => MutableModel<StravaUser> | void): StravaUser;
+}
+
 export declare class SocketCheck {
   readonly id: string;
   readonly healthcheckID?: string;
@@ -97,8 +121,10 @@ export declare class Activity {
   readonly flexibility?: boolean;
   readonly strength?: boolean;
   readonly perceivedExertion: string;
-  readonly feeling: string;
+  readonly feeling?: string;
   readonly activity?: string;
+  readonly stravaId?: string;
+  readonly userId: string;
   constructor(init: ModelInit<Activity>);
   static copyOf(source: Activity, mutator: (draft: MutableModel<Activity>) => MutableModel<Activity> | void): Activity;
 }

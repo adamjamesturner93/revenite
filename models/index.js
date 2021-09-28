@@ -20,9 +20,11 @@ const AmputationEnum = {
   "RIGHT_ARM": "RIGHT_ARM"
 };
 
-const { SocketCheck, HealthCheck, Amputation, User, Activity } = initSchema(schema);
+const { StravaActivity, StravaUser, SocketCheck, HealthCheck, Amputation, User, Activity } = initSchema(schema);
 
 export {
+  StravaActivity,
+  StravaUser,
   SocketCheck,
   HealthCheck,
   Amputation,

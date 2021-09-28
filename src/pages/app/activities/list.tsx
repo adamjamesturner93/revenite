@@ -2,17 +2,19 @@ import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { Activity } from '../../../../models';
 import { PageWrapper } from '../../../components';
+import { useAuth } from '../../../hooks';
 import { listActivities, mapActivitiesByMonth } from '../../../services';
 import { formatTime } from '../../../utils/prettifyMins';
 
 const Activities: React.FC = () => {
   const router = useRouter();
+  const { user } = useAuth();
   const [activities, setActivities] = useState<Activity[]>([]);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await listActivities();
+      const data = await listActivities(user.user?.username || '');
       setActivities(data);
       setLoading(false);
     };

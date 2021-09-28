@@ -41,7 +41,7 @@ const ViewActivity: React.FC<{ id: string }> = ({ id }) => {
     );
   }
 
-  const activityOption = ActivitiesOptions[activity.activity || ''];
+  const activityOption = ActivitiesOptions[activity.activity?.toLowerCase() || ''];
   const onDelete = async () => {
     const resp = window.confirm('Are you sure you want to delete this activity?');
     if (resp) {
@@ -118,17 +118,18 @@ const ViewActivity: React.FC<{ id: string }> = ({ id }) => {
             {activity.perceivedExertion} - {ExertionOptions[+activity.perceivedExertion]}
           </p>
         </section>
-
-        <section className="mt-3">
-          <Input
-            label="How is your body feeling?"
-            value={activity.feeling}
-            min={1}
-            max={10}
-            type="range"
-          />
-          <p className="text-xs">{activity.feeling}</p>
-        </section>
+        {activity.feeling ? (
+          <section className="mt-3">
+            <Input
+              label="How is your body feeling?"
+              value={activity.feeling}
+              min={1}
+              max={10}
+              type="range"
+            />
+            <p className="text-xs">{activity.feeling}</p>
+          </section>
+        ) : null}
       </form>
     </PageWrapper>
   );

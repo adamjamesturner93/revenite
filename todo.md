@@ -11,9 +11,13 @@
 - [x] Please add stretch to the activity list
 - [x] Add unit of time for duration of activity
 - [x] Add unit of distance for distance activities
+- [x] Can’t delete an activity once it is added (I have a duplicate, I think because I didn’t know if it had saved!)
+- [x] Lightbulbs are inconsistent sizes
 
-- [ ] Lightbulbs are inconsistent sizes
+- [ ] Add Strava 
+
 - [ ] Health Check Summary is blank - please add average scores for each amputation and body, how many times each checkbox has been selected out of how many health checks.
-- [ ] Can’t delete an activity once it is added (I have a duplicate, I think because I didn’t know if it had saved!)
 - [ ] Add activity duration - two boxes for hours/mins
 - [ ] Add activity distance - choice of km/miles
+- [ ] Add Fitbit
+- [ ] Add Garmin 
