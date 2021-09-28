@@ -12,10 +12,6 @@ frontend:
         - yarn install
     build:
       commands:
-        - echo "STRAVA__CLIENT_ID=$STRAVA__CLIENT_ID" >> .env
-        - echo "STRAVA__CLIENT_SECRET=$STRAVA__CLIENT_SECRET" >> .env
-        - echo "STRAVA__VERIFY=$STRAVA__VERIFY" >> .env
-        - echo "STRAVA__REDIRECT=$STRAVA__REDIRECT" >> .env
         - yarn run build
   artifacts:
     baseDirectory: .next
