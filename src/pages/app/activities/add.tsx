@@ -23,6 +23,9 @@ type ActivityFormData = {
 
 const AddActivity: React.FC = () => {
   const router = useRouter();
+  const {
+    user: { user },
+  } = useAuth();
   const { getFirstActivity, updateUserAttributes } = useAuth();
   const [isDistanceVisible, setIsDistanceVisible] = useState(true);
   const {
@@ -62,6 +65,7 @@ const AddActivity: React.FC = () => {
         distance: '' + event.distance,
         perceivedExertion: '' + event.perceivedExertion,
         feeling: '' + event.feeling,
+        userId: user?.username || '',
       });
 
       const activity = await saveActivity(input);
