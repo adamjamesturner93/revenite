@@ -83,170 +83,174 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   const { API, DataStore }: { API: GraphQLAPIClass; DataStore: DataStoreClass } = withSSRContext({
     req,
   });
-
-  switch (method) {
-    case 'GET': {
-      // Your verify token. Should be a random string.
-      const VERIFY_TOKEN = process.env.STRAVA__VERIFY;
-      // Parses the query params
-      const mode = req.query['hub.mode'];
-      const token = req.query['hub.verify_token'];
-      const challenge = req.query['hub.challenge'];
-      // Checks if a token and mode is in the query string of the request
-      if (mode && token) {
-        // Verifies that the mode and token sent are valid
-        if (mode === 'subscribe' && token === VERIFY_TOKEN) {
-          // Responds with the challenge token from the request
-          console.log('WEBHOOK_VERIFIED');
-          res.json({ 'hub.challenge': challenge });
-        } else {
-          // Responds with '403 Forbidden' if verify tokens do not match
-          res.status(403).end();
+  try {
+    switch (method) {
+      case 'GET': {
+        console.log('verifying_token');
+        // Your verify token. Should be a random string.
+        const VERIFY_TOKEN = process.env.STRAVA__VERIFY;
+        // Parses the query params
+        const mode = req.query['hub.mode'];
+        const token = req.query['hub.verify_token'];
+        const challenge = req.query['hub.challenge'];
+        // Checks if a token and mode is in the query string of the request
+        if (mode && token) {
+          // Verifies that the mode and token sent are valid
+          if (mode === 'subscribe' && token === VERIFY_TOKEN) {
+            // Responds with the challenge token from the request
+            console.log('WEBHOOK_VERIFIED');
+            res.json({ 'hub.challenge': challenge });
+          } else {
+            // Responds with '403 Forbidden' if verify tokens do not match
+            res.status(403).end();
+          }
         }
-      }
-      res.status(500).end();
-      break;
-    }
-    case 'POST': {
-      const { object_id, owner_id: athleteId, aspect_type, updates } = req.body;
-      const uri = `https://www.strava.com/api/v3/activities/${object_id}`;
-
-      const user = (
-        await DataStore.query(StravaUser, (user) => user.athleteId('eq', athleteId))
-      )[0];
-
-      if (!user) {
-        console.error('No user registered with that athlete id');
         res.status(500).end();
+        break;
       }
+      case 'POST': {
+        const { object_id, owner_id: athleteId, aspect_type, updates } = req.body;
+        const uri = `https://www.strava.com/api/v3/activities/${object_id}`;
 
-      const current = new Date().valueOf() / 1000;
-      const { id, userId } = user;
-      let { access_token, expires_at, refresh_token } = user;
+        const user = (
+          await DataStore.query(StravaUser, (user) => user.athleteId('eq', athleteId))
+        )[0];
 
-      if (expires_at < current) {
-        console.log('expired');
-        const resp = await fetch(
-          `https://www.strava.com/oauth/token?client_id=${process.env.STRAVA__CLIENT_ID}&client_secret=${process.env.STRAVA__CLIENT_SECRET}&refresh_token=${refresh_token}&grant_type=refresh_token`,
-          {
-            method: 'POST',
-          },
-        );
+        if (!user) {
+          console.error('No user registered with that athlete id');
+          res.status(500).end();
+        }
 
-        const data = await resp.json();
-        refresh_token = data.refresh_token;
-        access_token = data.access_token;
-        expires_at = data.expires_at;
+        const current = new Date().valueOf() / 1000;
+        const { id, userId } = user;
+        let { access_token, expires_at, refresh_token } = user;
 
-        const stravaUser: UpdateStravaUserInput = {
-          id,
-          refresh_token,
-          expires_at,
-          access_token,
-        };
-
-        await API.graphql({
-          query: updateStravaUser,
-          variables: { input: stravaUser },
-          authMode: GRAPHQL_AUTH_MODE.API_KEY,
-        });
-      }
-
-      switch (aspect_type) {
-        case 'create': {
-          const resp = await fetch(uri, {
-            headers: {
-              Authorization: `Bearer ${access_token}`,
+        if (expires_at < current) {
+          console.log('expired');
+          const resp = await fetch(
+            `https://www.strava.com/oauth/token?client_id=${process.env.STRAVA__CLIENT_ID}&client_secret=${process.env.STRAVA__CLIENT_SECRET}&refresh_token=${refresh_token}&grant_type=refresh_token`,
+            {
+              method: 'POST',
             },
-          });
-          const activity: StravaActivity = await resp.json();
-          const { cardio, flex, strength, distance } =
-            ActivitiesOptions[activity.type.toLowerCase()];
-          const date = new Date(activity.start_date);
+          );
 
-          const appActivity: CreateActivityInput = {
-            date: format(date, 'yyyy-MM-dd'),
-            distance: distance ? '' + activity.distance : '',
-            duration: '' + Math.floor(activity.elapsed_time / 60),
-            feeling: '5',
-            perceivedExertion: '' + activity.perceived_exertion,
-            activity: activity.type,
-            cardio,
-            flexibility: flex,
-            strength,
-            name: activity.name,
-            id: v4(),
-            stravaId: '' + activity.id,
-            userId,
+          const data = await resp.json();
+          refresh_token = data.refresh_token;
+          access_token = data.access_token;
+          expires_at = data.expires_at;
+
+          const stravaUser: UpdateStravaUserInput = {
+            id,
+            refresh_token,
+            expires_at,
+            access_token,
           };
 
           await API.graphql({
-            query: createActivity,
-            variables: { input: appActivity },
+            query: updateStravaUser,
+            variables: { input: stravaUser },
             authMode: GRAPHQL_AUTH_MODE.API_KEY,
           });
-          await API.graphql({
-            query: createStravaActivity,
-            variables: {
-              input: {
-                id: v4(),
-                userId,
-                stravaActivity: JSON.stringify(activity),
+        }
+
+        switch (aspect_type) {
+          case 'create': {
+            const resp = await fetch(uri, {
+              headers: {
+                Authorization: `Bearer ${access_token}`,
               },
-            },
-            authMode: GRAPHQL_AUTH_MODE.API_KEY,
-          });
+            });
+            const activity: StravaActivity = await resp.json();
+            const { cardio, flex, strength, distance } =
+              ActivitiesOptions[activity.type.toLowerCase()];
+            const date = new Date(activity.start_date);
+
+            const appActivity: CreateActivityInput = {
+              date: format(date, 'yyyy-MM-dd'),
+              distance: distance ? '' + activity.distance : '',
+              duration: '' + Math.floor(activity.elapsed_time / 60),
+              feeling: '5',
+              perceivedExertion: '' + activity.perceived_exertion,
+              activity: activity.type,
+              cardio,
+              flexibility: flex,
+              strength,
+              name: activity.name,
+              id: v4(),
+              stravaId: '' + activity.id,
+              userId,
+            };
+
+            await API.graphql({
+              query: createActivity,
+              variables: { input: appActivity },
+              authMode: GRAPHQL_AUTH_MODE.API_KEY,
+            });
+            await API.graphql({
+              query: createStravaActivity,
+              variables: {
+                input: {
+                  id: v4(),
+                  userId,
+                  stravaActivity: JSON.stringify(activity),
+                },
+              },
+              authMode: GRAPHQL_AUTH_MODE.API_KEY,
+            });
+          }
+          case 'update': {
+            const response = (await API.graphql({
+              query: listActivitys,
+              variables: { input: { stravaId: object_id } },
+              authMode: GRAPHQL_AUTH_MODE.API_KEY,
+            })) as GraphQLResult<{ listActivitys: { items: Activity[] } }>;
+
+            const { id, name, activity } = response.data?.listActivitys?.items.find(
+              (a) => a.stravaId === '' + object_id,
+            ) || { id: '', name: '', activity: '' };
+
+            const update: UpdateActivityInput = {
+              id,
+              name: updates.title ?? name,
+              activity: updates.type ?? activity,
+            };
+
+            await API.graphql({
+              query: updateActivity,
+              variables: { input: update },
+              authMode: GRAPHQL_AUTH_MODE.API_KEY,
+            });
+          }
+          case 'delete': {
+            const response = (await API.graphql({
+              query: listActivitys,
+              variables: { input: { stravaId: object_id } },
+              authMode: GRAPHQL_AUTH_MODE.API_KEY,
+            })) as GraphQLResult<{ listActivitys: { items: Activity[] } }>;
+
+            const { id } = response.data?.listActivitys?.items.find(
+              (a) => a.stravaId === '' + object_id,
+            ) || { id: '' };
+
+            const deleteQuery: DeleteActivityInput = {
+              id,
+            };
+
+            await API.graphql({
+              query: deleteActivity,
+              variables: { input: deleteQuery },
+              authMode: GRAPHQL_AUTH_MODE.API_KEY,
+            });
+          }
         }
-        case 'update': {
-          const response = (await API.graphql({
-            query: listActivitys,
-            variables: { input: { stravaId: object_id } },
-            authMode: GRAPHQL_AUTH_MODE.API_KEY,
-          })) as GraphQLResult<{ listActivitys: { items: Activity[] } }>;
 
-          const { id, name, activity } = response.data?.listActivitys?.items.find(
-            (a) => a.stravaId === '' + object_id,
-          ) || { id: '', name: '', activity: '' };
-
-          const update: UpdateActivityInput = {
-            id,
-            name: updates.title ?? name,
-            activity: updates.type ?? activity,
-          };
-
-          await API.graphql({
-            query: updateActivity,
-            variables: { input: update },
-            authMode: GRAPHQL_AUTH_MODE.API_KEY,
-          });
-        }
-        case 'delete': {
-          const response = (await API.graphql({
-            query: listActivitys,
-            variables: { input: { stravaId: object_id } },
-            authMode: GRAPHQL_AUTH_MODE.API_KEY,
-          })) as GraphQLResult<{ listActivitys: { items: Activity[] } }>;
-
-          const { id } = response.data?.listActivitys?.items.find(
-            (a) => a.stravaId === '' + object_id,
-          ) || { id: '' };
-
-          const deleteQuery: DeleteActivityInput = {
-            id,
-          };
-
-          await API.graphql({
-            query: deleteActivity,
-            variables: { input: deleteQuery },
-            authMode: GRAPHQL_AUTH_MODE.API_KEY,
-          });
-        }
+        res.status(200).send('EVENT_RECEIVED');
+        break;
       }
-
-      res.status(200).send('EVENT_RECEIVED');
-      break;
+      default:
+        break;
     }
-    default:
-      break;
+  } catch (error) {
+    console.error(error);
   }
 };
