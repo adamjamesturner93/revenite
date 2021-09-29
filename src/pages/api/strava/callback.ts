@@ -86,7 +86,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     switch (method) {
       case 'GET': {
-        console.log('verifying_token');
         // Your verify token. Should be a random string.
         const VERIFY_TOKEN = process.env.STRAVA__VERIFY;
         // Parses the query params
@@ -99,7 +98,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
           if (mode === 'subscribe' && token === VERIFY_TOKEN) {
             // Responds with the challenge token from the request
             console.log('WEBHOOK_VERIFIED');
-            res.json({ 'hub.challenge': challenge });
+            res.status(200).json({ 'hub.challenge': challenge });
           } else {
             // Responds with '403 Forbidden' if verify tokens do not match
             res.status(403).end();

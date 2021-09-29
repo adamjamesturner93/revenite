@@ -9,6 +9,8 @@ const Settings: React.FC = () => {
     user: { user },
   } = useAuth();
 
+  const { origin } = window.location;
+
   useEffect(() => {
     const userId = user?.username;
     console.log(user?.attributes);
@@ -46,7 +48,7 @@ const Settings: React.FC = () => {
       ) : (
         <a
           className="mt-10 w-full flex border bg-strava p-2 rounded-full items-center justify-center"
-          href={`http://www.strava.com/oauth/authorize?client_id=69123&response_type=code&redirect_uri=http://localhost:3000/api/strava/exchange_token?user=${user?.username}&approval_prompt=force&scope=activity:read_all`}
+          href={`http://www.strava.com/oauth/authorize?client_id=69123&response_type=code&redirect_uri=${origin}/api/strava/exchange_token?user=${user?.username}&approval_prompt=force&scope=activity:read_all`}
           rel="noreferrer"
         >
           <Strava />
