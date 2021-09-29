@@ -98,7 +98,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
           if (mode === 'subscribe' && token === VERIFY_TOKEN) {
             // Responds with the challenge token from the request
             console.log('WEBHOOK_VERIFIED');
-            res.status(200).json({ 'hub.challenge': challenge });
+            res.status(200).send({ 'hub.challenge': challenge });
           } else {
             // Responds with '403 Forbidden' if verify tokens do not match
             res.status(403).end();
@@ -253,3 +253,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     console.error(error);
   }
 };
+
+// https://dev.revenite.org/api/strava/callback?hub.mode=subscribe&hub.verify_token=1EBD4EDE-6DCD-4987-BBE3-E423DC9E2E93&hub.challenge=15f7d1a91c1f40f8a748fd134752feb3
+
+// http://localhost:3000/api/strava/callback?hub.mode=subscribe&hub.verify_token=1EBD4EDE-6DCD-4987-BBE3-E423DC9E2E93&hub.challenge=15f7d1a91c1f40f8a748fd134752feb3

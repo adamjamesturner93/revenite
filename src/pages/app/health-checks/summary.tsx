@@ -36,8 +36,6 @@ const HealtchChecks: React.FC = () => {
     );
   }
 
-  console.log(healthChecks);
-
   const sevenDaysBefore = subDays(new Date(), 7);
   const twentyEightDaysBefore = subDays(new Date(), 28);
 

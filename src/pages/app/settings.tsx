@@ -13,11 +13,9 @@ const Settings: React.FC = () => {
 
   useEffect(() => {
     const userId = user?.username;
-    console.log(user?.attributes);
     if (!userId) return;
     getStravaConnection(userId).then((data) => {
       const user = data[0];
-      console.log(user);
       if (user) {
         setIsStravaUser(true);
       }

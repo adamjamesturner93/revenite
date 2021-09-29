@@ -30,7 +30,6 @@ const SignInPage: React.FC = () => {
       setError(undefined);
       await signIn(event.email, event.password);
       router.push('/app/dashboard');
-      console.log('PUSHED TO /app/dashboard');
     } catch (err) {
       console.error({ err });
       setError(err.message);
