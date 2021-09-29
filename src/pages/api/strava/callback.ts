@@ -6,8 +6,6 @@ import {
   Activity,
   CreateActivityInput,
   DeleteActivityInput,
-  GetActivityQuery,
-  ListActivitysQuery,
   UpdateActivityInput,
   UpdateStravaUserInput,
 } from '../../../API.js';
@@ -21,7 +19,7 @@ import {
   updateStravaUser,
 } from '../../../graphql/mutations';
 import { ActivitiesOptions } from '../../../utils/constants';
-import { endOfQuarter, format } from 'date-fns';
+import { format } from 'date-fns';
 import { v4 } from 'uuid';
 import { listActivitys } from '../../../graphql/queries';
 
@@ -97,7 +95,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
           // Verifies that the mode and token sent are valid
           if (mode === 'subscribe' && token === VERIFY_TOKEN) {
             // Responds with the challenge token from the request
-            console.log('WEBHOOK_VERIFIED');
             res.status(200).send({ 'hub.challenge': challenge });
           } else {
             // Responds with '403 Forbidden' if verify tokens do not match
