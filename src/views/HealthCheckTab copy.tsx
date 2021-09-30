@@ -74,82 +74,66 @@ export const HealthCheckTab: React.FC<{
 
   const limbData = amputations.map((amputation) => ({
     label: checkMap[amputation.limb!].label,
-    data: Object.values(
-      sortedChecks
-        .map((c) => c.SocketChecks?.filter((s) => s?.amputationID === amputation.id))
-        .flat()
-        .reduce(
-          (acc, cur) => {
-            return {
-              blistered: cur?.blistered ? acc.blistered + 1 : acc.blistered,
-              bleeding: cur?.bleeding ? acc.bleeding + 1 : acc.bleeding,
-              bruised: cur?.bruised ? acc.bruised + 1 : acc.bruised,
-              hot: cur?.hot ? acc.hot + 1 : acc.hot,
-              painful: cur?.painful ? acc.painful + 1 : acc.painful,
-              red: cur?.red ? acc.red + 1 : acc.red,
-              sore: cur?.sore ? acc.sore + 1 : acc.sore,
-              sweaty: cur?.sweaty ? acc.sweaty + 1 : acc.sweaty,
-              loose: cur?.loose ? acc.loose + 1 : acc.loose,
-              tight: cur?.tight ? acc.tight + 1 : acc.tight,
-            };
-          },
-          {
-            blistered: 0,
-            bleeding: 0,
-            bruised: 0,
-            hot: 0,
-            painful: 0,
-            red: 0,
-            sore: 0,
-            sweaty: 0,
-            loose: 0,
-            tight: 0,
-          },
-        ),
-    ),
+    data: sortedChecks
+      .map((c) => c.SocketChecks?.filter((s) => s?.amputationID === amputation.id))
+      .flat()
+      .reduce(
+        (acc, cur) => {
+          return {
+            Blistered: cur?.blistered ? acc.Blistered + 1 : acc.Blistered,
+            Bleeding: cur?.bleeding ? acc.Bleeding + 1 : acc.Bleeding,
+            Bruised: cur?.bruised ? acc.Bruised + 1 : acc.Bruised,
+            Hot: cur?.hot ? acc.Hot + 1 : acc.Hot,
+            Painful: cur?.painful ? acc.Painful + 1 : acc.Painful,
+            Red: cur?.red ? acc.Red + 1 : acc.Red,
+            Sore: cur?.sore ? acc.Sore + 1 : acc.Sore,
+            Sweaty: cur?.sweaty ? acc.Sweaty + 1 : acc.Sweaty,
+            Loose: cur?.loose ? acc.Loose + 1 : acc.Loose,
+            Tight: cur?.tight ? acc.Tight + 1 : acc.Tight,
+          };
+        },
+        {
+          Blistered: 0,
+          Bleeding: 0,
+          Bruised: 0,
+          Hot: 0,
+          Painful: 0,
+          Red: 0,
+          Sore: 0,
+          Sweaty: 0,
+          Loose: 0,
+          Tight: 0,
+        },
+      ),
     backgroundColor: checkMap[amputation.limb!].color,
     borderColor: checkMap[amputation.limb!].color,
     tension: 0.1,
   }));
 
-  const limbLabels = [
-    'Blistered',
-    'Bleeding',
-    'Bruised',
-    'Hot',
-    'Painful',
-    'Red',
-    'Sore',
-    'Sweaty',
-    'Loose',
-    'Tight',
-  ];
-
   const limbGraphData = {
-    labels: limbLabels,
     datasets: limbData,
   };
 
-  const data = Object.values(
-    sortedChecks.reduce(
-      (acc, cur) => {
-        return {
-          aching: cur?.aching ? acc.aching + 1 : acc.aching,
-          painful: cur?.painful ? acc.painful + 1 : acc.painful,
-          sore: cur?.sore ? acc.sore + 1 : acc.sore,
-          tight: cur?.tight ? acc.tight + 1 : acc.tight,
-          tired: cur?.tired ? acc.tired + 1 : acc.tired,
-        };
-      },
-      {
-        aching: 0,
-        painful: 0,
-        sore: 0,
-        tight: 0,
-        tired: 0,
-      },
-    ),
+  const data = sortedChecks.reduce(
+    (acc, cur) => {
+      return {
+        Aching: cur?.aching ? acc.Aching + 1 : acc.Aching,
+        Painful: cur?.painful ? acc.Painful + 1 : acc.Painful,
+        Sore: cur?.sore ? acc.Sore + 1 : acc.Sore,
+        Tight: cur?.tight ? acc.Tight + 1 : acc.Tight,
+        Tired: cur?.tired ? acc.Tired + 1 : acc.Tired,
+      };
+    },
+    {
+      Aching: 0,
+      Painful: 0,
+      Sore: 0,
+      Tight: 0,
+      Tired: 0,
+    },
   );
+
+  debugger;
   const bodyData = {
     label: 'Body',
     data,
@@ -158,10 +142,7 @@ export const HealthCheckTab: React.FC<{
     tension: 0.1,
   };
 
-  const bodyLabels = ['Aching', 'Painful', 'Sore', 'Tight', 'Tired'];
-
   const bodyGraphData = {
-    labels: bodyLabels,
     datasets: [bodyData],
   };
 
@@ -173,23 +154,11 @@ export const HealthCheckTab: React.FC<{
       },
     },
   };
-
-  const limbOptions = {
+  const barOptions = {
     scales: {
       y: {
         min: 0,
-        max: 5 * Math.ceil(Math.max(...limbData.map((l) => l.data).flat()) / 5),
-        ticks: {
-          stepSize: 1,
-        },
-      },
-    },
-  };
-  const bodyOptions = {
-    scales: {
-      y: {
-        min: 0,
-        max: 5 * Math.ceil(Math.max(...bodyData.data) / 5),
+        max: healthChecks.length,
         ticks: {
           stepSize: 1,
         },
@@ -203,9 +172,9 @@ export const HealthCheckTab: React.FC<{
       <h4>Comfort scores</h4>
       <Line options={lineOptions} data={scoreData} />
       <h4 className="pt-4">Body Check</h4>
-      <Bar options={bodyOptions} data={bodyGraphData} />
+      <Bar options={barOptions} data={bodyGraphData} />
       <h4 className="pt-4">Limb Checks</h4>
-      <Bar options={limbOptions} data={limbGraphData} />
+      <Bar options={barOptions} data={limbGraphData} />
     </React.Fragment>
   );
 };

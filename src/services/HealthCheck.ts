@@ -10,7 +10,21 @@ type ListHealthChecksByMonth = {
   healthChecks: HealthCheck[];
 };
 
-export const listHealthChecks = async () => await DataStore.query(HealthCheck);
+export const listHealthChecks = async () => {
+  const healthCheck = await DataStore.query(HealthCheck);
+  if (!healthCheck) throw new Error('Not found');
+
+  const checks = await Promise.all(
+    healthCheck.map(async (healthCheck) => ({
+      ...healthCheck,
+      SocketChecks: (
+        await DataStore.query(SocketCheck)
+      ).filter((check) => check.healthcheckID === healthCheck.id),
+    })),
+  );
+
+  return checks;
+};
 
 export const getHealthCheck = async (id: string): Promise<HealthCheck> => {
   const healthCheck = await DataStore.query(HealthCheck, id);
