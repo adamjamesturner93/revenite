@@ -101,6 +101,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
             console.error('token and mode valid');
             // Responds with the challenge token from the request
             res.status(200).send({ 'hub.challenge': challenge });
+            res.end();
           } else {
             // Responds with '403 Forbidden' if verify tokens do not match
             res.status(403).end();
