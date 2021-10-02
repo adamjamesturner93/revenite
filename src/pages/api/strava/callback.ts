@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import Amplify, { withSSRContext } from 'aws-amplify';
+import Amplify, { withSSRContext, Logger } from 'aws-amplify';
 import config from '../../../../aws-exports.js';
 import { GraphQLAPIClass, GraphQLResult, GRAPHQL_AUTH_MODE } from '@aws-amplify/api-graphql';
 import {
@@ -78,22 +78,28 @@ Amplify.configure({
 });
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const method = req.method;
+  const logger = new Logger('strava');
   const { API, DataStore }: { API: GraphQLAPIClass; DataStore: DataStoreClass } = withSSRContext({
     req,
   });
   try {
+    logger.log({ method });
     switch (method) {
       case 'GET': {
+        logger.log('VERIFYING');
         // Your verify token. Should be a random string.
         const VERIFY_TOKEN = process.env.STRAVA__VERIFY;
         // Parses the query params
         const mode = req.query['hub.mode'];
         const token = req.query['hub.verify_token'];
         const challenge = req.query['hub.challenge'];
+        logger.log({ VERIFY_TOKEN, mode, token, challenge });
         // Checks if a token and mode is in the query string of the request
         if (mode && token) {
+          logger.log('token and mode present');
           // Verifies that the mode and token sent are valid
           if (mode === 'subscribe' && token === VERIFY_TOKEN) {
+            logger.log('token and mode valid');
             // Responds with the challenge token from the request
             res.status(200).send({ 'hub.challenge': challenge });
           } else {
@@ -101,6 +107,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
             res.status(403).end();
           }
         }
+
+        logger.log("Shouldn't have gotten here");
         res.status(500).end();
         break;
       }
