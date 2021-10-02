@@ -109,7 +109,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         }
 
         console.error("Shouldn't have gotten here");
-        res.status(500).end();
+        res.status(200).end();
         break;
       }
       case 'POST': {
