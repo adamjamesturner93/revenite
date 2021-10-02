@@ -108,18 +108,20 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
           }
         }
 
-        console.error("Shouldn't have gotten here");
         res.status(200).end();
         break;
       }
       case 'POST': {
+        console.error('CREATING ACTIVITY');
         const { object_id, owner_id: athleteId, aspect_type, updates } = req.body;
         const uri = `https://www.strava.com/api/v3/activities/${object_id}`;
 
+        console.error({ object_id, owner_id: athleteId, aspect_type, updates });
         const user = (
           await DataStore.query(StravaUser, (user) => user.athleteId('eq', athleteId))
         )[0];
 
+        console.error({ user });
         if (!user) {
           console.error('No user registered with that athlete id');
           res.status(500).end();
@@ -130,7 +132,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         let { access_token, expires_at, refresh_token } = user;
 
         if (expires_at < current) {
-          console.log('expired');
+          console.error('expired');
           const resp = await fetch(
             `https://www.strava.com/oauth/token?client_id=${process.env.STRAVA__CLIENT_ID}&client_secret=${process.env.STRAVA__CLIENT_SECRET}&refresh_token=${refresh_token}&grant_type=refresh_token`,
             {
@@ -159,6 +161,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
         switch (aspect_type) {
           case 'create': {
+            console.error('creating activity');
             const resp = await fetch(uri, {
               headers: {
                 Authorization: `Bearer ${access_token}`,
@@ -169,6 +172,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
               ActivitiesOptions[activity.type.toLowerCase()];
             const date = new Date(activity.start_date);
 
+            console.error({ activity });
             const appActivity: CreateActivityInput = {
               date: format(date, 'yyyy-MM-dd'),
               distance: distance ? '' + activity.distance : '',
@@ -201,6 +205,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
               },
               authMode: GRAPHQL_AUTH_MODE.API_KEY,
             });
+            console.error('success');
           }
           case 'update': {
             const response = (await API.graphql({
