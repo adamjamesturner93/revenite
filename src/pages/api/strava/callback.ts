@@ -75,40 +75,30 @@ Amplify.configure({
   DataStore: {
     authModeStrategyType: AuthModeStrategyType.MULTI_AUTH,
   },
-  Logging: {
-    logGroupName: 'strava',
-    logStreamName: 'strava-callback',
-  },
 });
-
-const logger = new Logger('logBuddy');
-Amplify.register(logger);
-logger.addPluggable(new AWSCloudWatchProvider());
-
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const method = req.method;
-  const logger = new Logger('strava');
   const { API, DataStore }: { API: GraphQLAPIClass; DataStore: DataStoreClass } = withSSRContext({
     req,
   });
   try {
-    logger.log({ method });
+    console.error({ method });
     switch (method) {
       case 'GET': {
-        logger.log('VERIFYING');
+        console.error('VERIFYING');
         // Your verify token. Should be a random string.
         const VERIFY_TOKEN = process.env.STRAVA__VERIFY;
         // Parses the query params
         const mode = req.query['hub.mode'];
         const token = req.query['hub.verify_token'];
         const challenge = req.query['hub.challenge'];
-        logger.log({ VERIFY_TOKEN, mode, token, challenge });
+        console.error({ VERIFY_TOKEN, mode, token, challenge });
         // Checks if a token and mode is in the query string of the request
         if (mode && token) {
-          logger.log('token and mode present');
+          console.error('token and mode present');
           // Verifies that the mode and token sent are valid
           if (mode === 'subscribe' && token === VERIFY_TOKEN) {
-            logger.log('token and mode valid');
+            console.error('token and mode valid');
             // Responds with the challenge token from the request
             res.status(200).send({ 'hub.challenge': challenge });
           } else {
@@ -117,7 +107,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
           }
         }
 
-        logger.log("Shouldn't have gotten here");
+        console.error("Shouldn't have gotten here");
         res.status(500).end();
         break;
       }
