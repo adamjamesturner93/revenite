@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import Amplify, { withSSRContext, Logger } from 'aws-amplify';
+import Amplify, { withSSRContext, Logger, AWSCloudWatchProvider } from 'aws-amplify';
 import config from '../../../../aws-exports.js';
 import { GraphQLAPIClass, GraphQLResult, GRAPHQL_AUTH_MODE } from '@aws-amplify/api-graphql';
 import {
@@ -75,7 +75,16 @@ Amplify.configure({
   DataStore: {
     authModeStrategyType: AuthModeStrategyType.MULTI_AUTH,
   },
+  Logging: {
+    logGroupName: 'strava',
+    logStreamName: 'strava-callback',
+  },
 });
+
+const logger = new Logger('logBuddy');
+Amplify.register(logger);
+logger.addPluggable(new AWSCloudWatchProvider());
+
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const method = req.method;
   const logger = new Logger('strava');

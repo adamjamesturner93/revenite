@@ -1,14 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { Bar, Doughnut, Line } from 'react-chartjs-2';
+import { Bar, Line } from 'react-chartjs-2';
 import { format, compareAsc } from 'date-fns';
-import {
-  Activity,
-  Amputation,
-  AmputationEnum,
-  AmputationLevelEnum,
-  HealthCheck,
-} from '../../models';
-import { id } from 'date-fns/locale';
+import { Amputation, AmputationEnum, HealthCheck } from '../../models';
 import { getAmputations } from '../services';
 
 export const HealthCheckTab: React.FC<{
@@ -19,9 +12,6 @@ export const HealthCheckTab: React.FC<{
   const [amputations, setAmputations] = useState<Amputation[]>([]);
   const [loading, setLoading] = useState(false);
 
-  if (healthChecks.length === 0) {
-    label = 'No Health Checks have been recorded yet this ';
-  }
   useEffect(() => {
     const fetchData = async () => {
       const amputations = await getAmputations();
@@ -31,6 +21,11 @@ export const HealthCheckTab: React.FC<{
     setLoading(true);
     fetchData();
   }, []);
+
+  if (healthChecks.length === 0) {
+    label = `No Health Checks have been recorded yet this ${timePeriod}`;
+    return <h3 className="text-xl font-bold text-gray-700">{label}</h3>;
+  }
 
   const checkMap: Record<AmputationEnum, { label: string; color: string }> = {
     LEFT_LEG: { label: 'Left Leg', color: 'rgb(35, 122, 192)' },
