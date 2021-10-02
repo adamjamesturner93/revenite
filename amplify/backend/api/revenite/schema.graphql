@@ -1,4 +1,4 @@
-type StravaActivity @model @auth(rules: [{allow: private}]) {
+type StravaActivity @model @auth(rules: [{allow: private}, {allow: public}]) {
   id: ID!
   userId: ID!
   stravaActivity: AWSJSON!
@@ -95,7 +95,7 @@ type User @model @auth(rules: [{allow: owner}]) {
   militaryServiceOther: String
 }
 
-type Activity @model @auth(rules: [{allow: owner}, {allow: public, operations: [create, update, delete]}, {allow: private}]) {
+type Activity @model @auth(rules: [{allow: owner}, {allow: public}, {allow: private}]) {
   id: ID!
   name: String
   date: AWSDate!
