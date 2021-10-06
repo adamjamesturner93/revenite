@@ -30,8 +30,8 @@ export const HealthCheckTab: React.FC<{
   const checkMap: Record<AmputationEnum, { label: string; color: string }> = {
     LEFT_LEG: { label: 'Left Leg', color: 'rgb(35, 122, 192)' },
     LEFT_ARM: { label: 'Left Arm', color: 'rgb(111, 45, 216)' },
-    RIGHT_LEG: { label: 'Right Arm', color: 'rgb(182, 4, 182)' },
-    RIGHT_ARM: { label: 'Right Leg', color: 'rgb(226, 143, 19)' },
+    RIGHT_LEG: { label: 'Right Leg', color: 'rgb(182, 4, 182)' },
+    RIGHT_ARM: { label: 'Right Arm', color: 'rgb(226, 143, 19)' },
   };
 
   if (loading) return <p>Loading...</p>;

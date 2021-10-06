@@ -82,23 +82,20 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     req,
   });
   try {
-    console.error({ method });
+    console.log({ method });
     switch (method) {
       case 'GET': {
-        console.error('VERIFYING');
+        console.log('VERIFYING');
         // Your verify token. Should be a random string.
         const VERIFY_TOKEN = process.env.STRAVA__VERIFY;
         // Parses the query params
         const mode = req.query['hub.mode'];
         const token = req.query['hub.verify_token'];
         const challenge = req.query['hub.challenge'];
-        console.error({ VERIFY_TOKEN, mode, token, challenge });
         // Checks if a token and mode is in the query string of the request
         if (mode && token) {
-          console.error('token and mode present');
           // Verifies that the mode and token sent are valid
           if (mode === 'subscribe' && token === VERIFY_TOKEN) {
-            console.error('token and mode valid');
             // Responds with the challenge token from the request
             res.status(200).send({ 'hub.challenge': challenge });
             res.end();
@@ -112,16 +109,16 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         break;
       }
       case 'POST': {
-        console.error('CREATING ACTIVITY');
+        console.log('MUTATING ACTIVITY');
         const { object_id, owner_id: athleteId, aspect_type, updates } = req.body;
         const uri = `https://www.strava.com/api/v3/activities/${object_id}`;
 
-        console.error({ object_id, owner_id: athleteId, aspect_type, updates });
+        console.log({ object_id, owner_id: athleteId, aspect_type, updates });
         const user = (
           await DataStore.query(StravaUser, (user) => user.athleteId('eq', athleteId))
         )[0];
 
-        console.error({ user });
+        console.log({ user });
         if (!user) {
           console.error('No user registered with that athlete id');
           res.status(500).end();
@@ -132,7 +129,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         let { access_token, expires_at, refresh_token } = user;
 
         if (expires_at < current) {
-          console.error('expired');
+          console.error('Token has expired, refreshing');
           const resp = await fetch(
             `https://www.strava.com/oauth/token?client_id=${process.env.STRAVA__CLIENT_ID}&client_secret=${process.env.STRAVA__CLIENT_SECRET}&refresh_token=${refresh_token}&grant_type=refresh_token`,
             {
@@ -161,7 +158,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
         switch (aspect_type) {
           case 'create': {
-            console.error('creating activity');
+            console.log('creating activity');
             const resp = await fetch(uri, {
               headers: {
                 Authorization: `Bearer ${access_token}`,
@@ -172,7 +169,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
               ActivitiesOptions[activity.type.toLowerCase()];
             const date = new Date(activity.start_date);
 
-            console.error({ activity });
+            console.log({ activity });
             const appActivity: CreateActivityInput = {
               date: format(date, 'yyyy-MM-dd'),
               distance: distance ? '' + activity.distance : '',
@@ -205,21 +202,24 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
               },
               authMode: GRAPHQL_AUTH_MODE.API_KEY,
             });
-            console.error('success');
+            console.log('create success');
+            break;
           }
           case 'update': {
+            console.log('updating activity');
             const response = (await API.graphql({
               query: listActivitys,
               variables: { input: { stravaId: object_id } },
               authMode: GRAPHQL_AUTH_MODE.API_KEY,
             })) as GraphQLResult<{ listActivitys: { items: Activity[] } }>;
 
-            const { id, name, activity } = response.data?.listActivitys?.items.find(
+            const { id, name, activity, _version } = response.data?.listActivitys?.items.find(
               (a) => a.stravaId === '' + object_id,
             ) || { id: '', name: '', activity: '' };
 
             const update: UpdateActivityInput = {
               id,
+              _version,
               name: updates.title ?? name,
               activity: updates.type ?? activity,
             };
@@ -229,27 +229,38 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
               variables: { input: update },
               authMode: GRAPHQL_AUTH_MODE.API_KEY,
             });
+            console.log('update success');
+            break;
           }
           case 'delete': {
+            console.log('deleting activity');
             const response = (await API.graphql({
               query: listActivitys,
               variables: { input: { stravaId: object_id } },
               authMode: GRAPHQL_AUTH_MODE.API_KEY,
             })) as GraphQLResult<{ listActivitys: { items: Activity[] } }>;
+            console.log(response.data?.listActivitys?.items);
 
-            const { id } = response.data?.listActivitys?.items.find(
+            const data = response.data?.listActivitys?.items.filter(
               (a) => a.stravaId === '' + object_id,
-            ) || { id: '' };
+            );
 
-            const deleteQuery: DeleteActivityInput = {
-              id,
-            };
+            const queries =
+              data?.map(({ id, _version }) =>
+                API.graphql({
+                  query: deleteActivity,
+                  variables: {
+                    input: {
+                      id,
+                      _version,
+                    },
+                  },
+                  authMode: GRAPHQL_AUTH_MODE.API_KEY,
+                }),
+              ) || [];
 
-            await API.graphql({
-              query: deleteActivity,
-              variables: { input: deleteQuery },
-              authMode: GRAPHQL_AUTH_MODE.API_KEY,
-            });
+            await Promise.allSettled(queries);
+            break;
           }
         }
 
@@ -261,6 +272,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     }
   } catch (error) {
     console.error(error);
+    res.status(500).end();
   }
 };
 
