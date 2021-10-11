@@ -4,5 +4,5 @@ export const formatTime = (mins: number): string => {
 
   const hours = minutesToHours(mins);
   const minutes = mins - hours * 60;
-  return `${hours}hrs ${minutes} minutes`;
+  return `${hours}hrs ${minutes.toPrecision(2)} minutes`;
 };

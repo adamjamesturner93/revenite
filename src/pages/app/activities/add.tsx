@@ -4,7 +4,12 @@ import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
 import { Activity } from '../../../../models';
 import { saveActivity } from '../../../services';
-import { ActivitiesOptions, getActivityDropdownOptions, ExertionOptions } from '../../../utils';
+import {
+  ActivitiesOptions,
+  getActivityDropdownOptions,
+  ExertionOptions,
+  FatigueOptions,
+} from '../../../utils';
 import { useAuth } from '../../../hooks';
 import { toast } from 'react-toastify';
 
@@ -38,7 +43,7 @@ const AddActivity: React.FC = () => {
   } = useForm<ActivityFormData>({
     defaultValues: {
       perceivedExertion: 5,
-      feeling: 5,
+      feeling: 4,
     },
     mode: 'onTouched',
   });
@@ -186,12 +191,14 @@ const AddActivity: React.FC = () => {
             label="How is your body feeling?"
             register={register}
             type="range"
-            min="0"
-            max="10"
+            min="1"
+            max="7"
             step="1"
             name="feeling"
           />
-          <p className="text-xs">{feeling}</p>
+          <p className="text-xs">
+            {feeling} - {FatigueOptions[feeling]}
+          </p>
         </section>
         <button className="text-white w-full mt-6 bg-purple-600 p-3 rounded" type="submit">
           Save Activity

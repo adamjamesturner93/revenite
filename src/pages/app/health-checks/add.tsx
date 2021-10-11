@@ -8,8 +8,9 @@ import { saveHealthCheck } from '../../../services';
 import { useRouter } from 'next/router';
 import { useAuth } from '../../../hooks';
 import { toast } from 'react-toastify';
+import { FatigueOptions } from '../../../utils';
 
-const DEFAULT_SCORE = '7';
+const DEFAULT_SCORE = '4';
 
 const AddHealthCheck: React.FC = () => {
   const router = useRouter();
@@ -70,14 +71,18 @@ const AddHealthCheck: React.FC = () => {
         <h2 className="text-xl">Body Check</h2>
         <section className="my-3 pt-0 p-3">
           <Input
-            label={`How is your body feeling today? ${bodyScore}`}
+            label={`How is your body feeling today?`}
             name="bodyScore"
             type="range"
             min="1"
-            max="10"
+            max="7"
             step="1"
             register={register}
           />
+          <p className="text-xs">
+            {bodyScore} - {FatigueOptions[+bodyScore]}
+          </p>
+
           {+bodyScore < +DEFAULT_SCORE && (
             <React.Fragment>
               <p className="text-sm">Please explain your score (select all that apply)?</p>
@@ -112,12 +117,11 @@ const AddHealthCheck: React.FC = () => {
           fields.map((field, index) => {
             const socketScore = watch(`socketChecks.${index}.socketComfortScore`) || DEFAULT_SCORE;
             return (
-              <section className="my-3 pt-0 p-3" key={field.id}>
+              <section className="my-2 pt-0 p-3" key={field.id}>
                 <Input
-                  label={`How is your ${amputations[index]?.limb?.replace(
-                    /_/g,
-                    ' ',
-                  )} feeling today? ${socketScore}`}
+                  label={`On a scale of 0-10, how is your ${amputations[index]?.limb
+                    ?.replace(/_/g, ' ')
+                    .toLocaleLowerCase()} feeling today? ${socketScore}`}
                   name={`socketChecks.${index}.socketComfortScore`}
                   type="range"
                   defaultValue={field.socketComfortScore}

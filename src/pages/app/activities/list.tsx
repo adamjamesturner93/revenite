@@ -15,7 +15,7 @@ const Activities: React.FC = () => {
   useEffect(() => {
     const fetchData = async () => {
       const data = await listActivities(user.user?.username || '');
-      console.log({ user, data });
+
       setActivities(data);
       setLoading(false);
     };

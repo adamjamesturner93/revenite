@@ -4,7 +4,7 @@ import { Input, PageWrapper } from '../../../components';
 import { format } from 'date-fns';
 import { Activity } from '../../../../models';
 import { getActivity, deleteActivity } from '../../../services';
-import { ActivitiesOptions, ExertionOptions } from '../../../utils';
+import { ActivitiesOptions, ExertionOptions, FatigueOptions } from '../../../utils';
 import { formatTime } from '../../../utils/prettifyMins';
 import { FaTimes } from 'react-icons/fa';
 import { useRouter } from 'next/router';
@@ -127,7 +127,9 @@ const ViewActivity: React.FC<{ id: string }> = ({ id }) => {
               max={10}
               type="range"
             />
-            <p className="text-xs">{activity.feeling}</p>
+            <p className="text-xs">
+              {activity.feeling} - {FatigueOptions[+activity.feeling]}
+            </p>
           </section>
         ) : null}
       </form>

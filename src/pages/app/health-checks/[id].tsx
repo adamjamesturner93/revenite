@@ -4,6 +4,7 @@ import { Amputation, HealthCheck } from '../../../../models';
 import { Input, PageWrapper } from '../../../components';
 import { getHealthCheck } from '../../../services';
 import { getAmputations } from '../../../services/Amputations';
+import { FatigueOptions } from '../../../utils';
 
 const DEFAULT_SCORE = '7';
 
@@ -48,14 +49,18 @@ const ViewHealthCheck: React.FC<{ id: string }> = ({ id }) => {
         <h2 className="text-xl">Body Check</h2>
         <section className="my-3 pt-0 p-3">
           <Input
-            label={`How is your body feeling today? ${healthCheck.bodyScore}`}
+            label={`How is your body feeling today?`}
             defaultValue={healthCheck.bodyScore}
             name="bodyScore"
             type="range"
             min="1"
-            max="10"
+            max="7"
             step="1"
           />
+          <p className="text-xs">
+            {healthCheck.bodyScore} - {FatigueOptions[+healthCheck.bodyScore]}
+          </p>
+
           {+healthCheck.bodyScore < +DEFAULT_SCORE && (
             <React.Fragment>
               <p className="text-sm">Please explain your score (select all that apply)?</p>
@@ -93,13 +98,12 @@ const ViewHealthCheck: React.FC<{ id: string }> = ({ id }) => {
               return check ? (
                 <section className="my-3 pt-0 p-3" key={check.id}>
                   <Input
-                    label={`How is your ${amputations[index]?.limb?.replace(
-                      /_/g,
-                      ' ',
-                    )} feeling today? ${check.socketComfortScore}`}
+                    label={`On a scale of 0-10, how is your ${amputations[index]?.limb
+                      ?.replace(/_/g, ' ')
+                      .toLocaleLowerCase()} feeling today? ${check.socketComfortScore}`}
                     type="range"
                     defaultValue={check.socketComfortScore}
-                    min="1"
+                    min="0"
                     max="10"
                     step="1"
                   />
