@@ -2,6 +2,441 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const onCreateSocketCheck = /* GraphQL */ `
+  subscription OnCreateSocketCheck($owner: String!) {
+    onCreateSocketCheck(owner: $owner) {
+      id
+      healthcheckID
+      socketComfortScore
+      blistered
+      bleeding
+      bruised
+      hot
+      painful
+      red
+      sore
+      sweaty
+      loose
+      tight
+      amputationID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onUpdateSocketCheck = /* GraphQL */ `
+  subscription OnUpdateSocketCheck($owner: String!) {
+    onUpdateSocketCheck(owner: $owner) {
+      id
+      healthcheckID
+      socketComfortScore
+      blistered
+      bleeding
+      bruised
+      hot
+      painful
+      red
+      sore
+      sweaty
+      loose
+      tight
+      amputationID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onDeleteSocketCheck = /* GraphQL */ `
+  subscription OnDeleteSocketCheck($owner: String!) {
+    onDeleteSocketCheck(owner: $owner) {
+      id
+      healthcheckID
+      socketComfortScore
+      blistered
+      bleeding
+      bruised
+      hot
+      painful
+      red
+      sore
+      sweaty
+      loose
+      tight
+      amputationID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onCreateHealthCheck = /* GraphQL */ `
+  subscription OnCreateHealthCheck($owner: String!) {
+    onCreateHealthCheck(owner: $owner) {
+      id
+      bodyScore
+      aching
+      painful
+      sore
+      tight
+      tired
+      other
+      details
+      otherComments
+      SocketChecks {
+        items {
+          id
+          healthcheckID
+          socketComfortScore
+          blistered
+          bleeding
+          bruised
+          hot
+          painful
+          red
+          sore
+          sweaty
+          loose
+          tight
+          amputationID
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+        startedAt
+      }
+      date
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onUpdateHealthCheck = /* GraphQL */ `
+  subscription OnUpdateHealthCheck($owner: String!) {
+    onUpdateHealthCheck(owner: $owner) {
+      id
+      bodyScore
+      aching
+      painful
+      sore
+      tight
+      tired
+      other
+      details
+      otherComments
+      SocketChecks {
+        items {
+          id
+          healthcheckID
+          socketComfortScore
+          blistered
+          bleeding
+          bruised
+          hot
+          painful
+          red
+          sore
+          sweaty
+          loose
+          tight
+          amputationID
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+        startedAt
+      }
+      date
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onDeleteHealthCheck = /* GraphQL */ `
+  subscription OnDeleteHealthCheck($owner: String!) {
+    onDeleteHealthCheck(owner: $owner) {
+      id
+      bodyScore
+      aching
+      painful
+      sore
+      tight
+      tired
+      other
+      details
+      otherComments
+      SocketChecks {
+        items {
+          id
+          healthcheckID
+          socketComfortScore
+          blistered
+          bleeding
+          bruised
+          hot
+          painful
+          red
+          sore
+          sweaty
+          loose
+          tight
+          amputationID
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+        startedAt
+      }
+      date
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onCreateAmputation = /* GraphQL */ `
+  subscription OnCreateAmputation($owner: String!) {
+    onCreateAmputation(owner: $owner) {
+      id
+      limb
+      level
+      prosthesisWorn
+      SocketChecks {
+        items {
+          id
+          healthcheckID
+          socketComfortScore
+          blistered
+          bleeding
+          bruised
+          hot
+          painful
+          red
+          sore
+          sweaty
+          loose
+          tight
+          amputationID
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+        startedAt
+      }
+      scarring
+      grafting
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onUpdateAmputation = /* GraphQL */ `
+  subscription OnUpdateAmputation($owner: String!) {
+    onUpdateAmputation(owner: $owner) {
+      id
+      limb
+      level
+      prosthesisWorn
+      SocketChecks {
+        items {
+          id
+          healthcheckID
+          socketComfortScore
+          blistered
+          bleeding
+          bruised
+          hot
+          painful
+          red
+          sore
+          sweaty
+          loose
+          tight
+          amputationID
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+        startedAt
+      }
+      scarring
+      grafting
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onDeleteAmputation = /* GraphQL */ `
+  subscription OnDeleteAmputation($owner: String!) {
+    onDeleteAmputation(owner: $owner) {
+      id
+      limb
+      level
+      prosthesisWorn
+      SocketChecks {
+        items {
+          id
+          healthcheckID
+          socketComfortScore
+          blistered
+          bleeding
+          bruised
+          hot
+          painful
+          red
+          sore
+          sweaty
+          loose
+          tight
+          amputationID
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+        startedAt
+      }
+      scarring
+      grafting
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onCreateUser = /* GraphQL */ `
+  subscription OnCreateUser($owner: String!) {
+    onCreateUser(owner: $owner) {
+      id
+      name
+      display_name
+      dateOfBirth
+      gender
+      weight
+      height
+      sex
+      ethnicGroup
+      ethnicIdentity
+      ethnicIdentityOther
+      hasMilitaryService
+      militaryService
+      militaryServiceOther
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onUpdateUser = /* GraphQL */ `
+  subscription OnUpdateUser($owner: String!) {
+    onUpdateUser(owner: $owner) {
+      id
+      name
+      display_name
+      dateOfBirth
+      gender
+      weight
+      height
+      sex
+      ethnicGroup
+      ethnicIdentity
+      ethnicIdentityOther
+      hasMilitaryService
+      militaryService
+      militaryServiceOther
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onDeleteUser = /* GraphQL */ `
+  subscription OnDeleteUser($owner: String!) {
+    onDeleteUser(owner: $owner) {
+      id
+      name
+      display_name
+      dateOfBirth
+      gender
+      weight
+      height
+      sex
+      ethnicGroup
+      ethnicIdentity
+      ethnicIdentityOther
+      hasMilitaryService
+      militaryService
+      militaryServiceOther
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
 export const onCreateStravaActivity = /* GraphQL */ `
   subscription OnCreateStravaActivity {
     onCreateStravaActivity {
@@ -107,441 +542,6 @@ export const onDeleteStravaUser = /* GraphQL */ `
       _lastChangedAt
       createdAt
       updatedAt
-    }
-  }
-`;
-export const onCreateSocketCheck = /* GraphQL */ `
-  subscription OnCreateSocketCheck($owner: String) {
-    onCreateSocketCheck(owner: $owner) {
-      id
-      healthcheckID
-      socketComfortScore
-      blistered
-      bleeding
-      bruised
-      hot
-      painful
-      red
-      sore
-      sweaty
-      loose
-      tight
-      amputationID
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-      owner
-    }
-  }
-`;
-export const onUpdateSocketCheck = /* GraphQL */ `
-  subscription OnUpdateSocketCheck($owner: String) {
-    onUpdateSocketCheck(owner: $owner) {
-      id
-      healthcheckID
-      socketComfortScore
-      blistered
-      bleeding
-      bruised
-      hot
-      painful
-      red
-      sore
-      sweaty
-      loose
-      tight
-      amputationID
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-      owner
-    }
-  }
-`;
-export const onDeleteSocketCheck = /* GraphQL */ `
-  subscription OnDeleteSocketCheck($owner: String) {
-    onDeleteSocketCheck(owner: $owner) {
-      id
-      healthcheckID
-      socketComfortScore
-      blistered
-      bleeding
-      bruised
-      hot
-      painful
-      red
-      sore
-      sweaty
-      loose
-      tight
-      amputationID
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-      owner
-    }
-  }
-`;
-export const onCreateHealthCheck = /* GraphQL */ `
-  subscription OnCreateHealthCheck($owner: String) {
-    onCreateHealthCheck(owner: $owner) {
-      id
-      bodyScore
-      aching
-      painful
-      sore
-      tight
-      tired
-      other
-      details
-      otherComments
-      date
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-      SocketChecks {
-        items {
-          id
-          healthcheckID
-          socketComfortScore
-          blistered
-          bleeding
-          bruised
-          hot
-          painful
-          red
-          sore
-          sweaty
-          loose
-          tight
-          amputationID
-          _version
-          _deleted
-          _lastChangedAt
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
-        startedAt
-      }
-      owner
-    }
-  }
-`;
-export const onUpdateHealthCheck = /* GraphQL */ `
-  subscription OnUpdateHealthCheck($owner: String) {
-    onUpdateHealthCheck(owner: $owner) {
-      id
-      bodyScore
-      aching
-      painful
-      sore
-      tight
-      tired
-      other
-      details
-      otherComments
-      date
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-      SocketChecks {
-        items {
-          id
-          healthcheckID
-          socketComfortScore
-          blistered
-          bleeding
-          bruised
-          hot
-          painful
-          red
-          sore
-          sweaty
-          loose
-          tight
-          amputationID
-          _version
-          _deleted
-          _lastChangedAt
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
-        startedAt
-      }
-      owner
-    }
-  }
-`;
-export const onDeleteHealthCheck = /* GraphQL */ `
-  subscription OnDeleteHealthCheck($owner: String) {
-    onDeleteHealthCheck(owner: $owner) {
-      id
-      bodyScore
-      aching
-      painful
-      sore
-      tight
-      tired
-      other
-      details
-      otherComments
-      date
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-      SocketChecks {
-        items {
-          id
-          healthcheckID
-          socketComfortScore
-          blistered
-          bleeding
-          bruised
-          hot
-          painful
-          red
-          sore
-          sweaty
-          loose
-          tight
-          amputationID
-          _version
-          _deleted
-          _lastChangedAt
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
-        startedAt
-      }
-      owner
-    }
-  }
-`;
-export const onCreateAmputation = /* GraphQL */ `
-  subscription OnCreateAmputation($owner: String) {
-    onCreateAmputation(owner: $owner) {
-      id
-      limb
-      level
-      prosthesisWorn
-      scarring
-      grafting
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-      SocketChecks {
-        items {
-          id
-          healthcheckID
-          socketComfortScore
-          blistered
-          bleeding
-          bruised
-          hot
-          painful
-          red
-          sore
-          sweaty
-          loose
-          tight
-          amputationID
-          _version
-          _deleted
-          _lastChangedAt
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
-        startedAt
-      }
-      owner
-    }
-  }
-`;
-export const onUpdateAmputation = /* GraphQL */ `
-  subscription OnUpdateAmputation($owner: String) {
-    onUpdateAmputation(owner: $owner) {
-      id
-      limb
-      level
-      prosthesisWorn
-      scarring
-      grafting
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-      SocketChecks {
-        items {
-          id
-          healthcheckID
-          socketComfortScore
-          blistered
-          bleeding
-          bruised
-          hot
-          painful
-          red
-          sore
-          sweaty
-          loose
-          tight
-          amputationID
-          _version
-          _deleted
-          _lastChangedAt
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
-        startedAt
-      }
-      owner
-    }
-  }
-`;
-export const onDeleteAmputation = /* GraphQL */ `
-  subscription OnDeleteAmputation($owner: String) {
-    onDeleteAmputation(owner: $owner) {
-      id
-      limb
-      level
-      prosthesisWorn
-      scarring
-      grafting
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-      SocketChecks {
-        items {
-          id
-          healthcheckID
-          socketComfortScore
-          blistered
-          bleeding
-          bruised
-          hot
-          painful
-          red
-          sore
-          sweaty
-          loose
-          tight
-          amputationID
-          _version
-          _deleted
-          _lastChangedAt
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
-        startedAt
-      }
-      owner
-    }
-  }
-`;
-export const onCreateUser = /* GraphQL */ `
-  subscription OnCreateUser($owner: String) {
-    onCreateUser(owner: $owner) {
-      id
-      name
-      display_name
-      dateOfBirth
-      gender
-      weight
-      height
-      sex
-      ethnicGroup
-      ethnicIdentity
-      ethnicIdentityOther
-      hasMilitaryService
-      militaryService
-      militaryServiceOther
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-      owner
-    }
-  }
-`;
-export const onUpdateUser = /* GraphQL */ `
-  subscription OnUpdateUser($owner: String) {
-    onUpdateUser(owner: $owner) {
-      id
-      name
-      display_name
-      dateOfBirth
-      gender
-      weight
-      height
-      sex
-      ethnicGroup
-      ethnicIdentity
-      ethnicIdentityOther
-      hasMilitaryService
-      militaryService
-      militaryServiceOther
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-      owner
-    }
-  }
-`;
-export const onDeleteUser = /* GraphQL */ `
-  subscription OnDeleteUser($owner: String) {
-    onDeleteUser(owner: $owner) {
-      id
-      name
-      display_name
-      dateOfBirth
-      gender
-      weight
-      height
-      sex
-      ethnicGroup
-      ethnicIdentity
-      ethnicIdentityOther
-      hasMilitaryService
-      militaryService
-      militaryServiceOther
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-      owner
     }
   }
 `;

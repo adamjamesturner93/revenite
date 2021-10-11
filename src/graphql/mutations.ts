@@ -2,107 +2,6 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const createStravaActivity = /* GraphQL */ `
-  mutation CreateStravaActivity(
-    $input: CreateStravaActivityInput!
-    $condition: ModelStravaActivityConditionInput
-  ) {
-    createStravaActivity(input: $input, condition: $condition) {
-      id
-      userId
-      stravaActivity
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const updateStravaActivity = /* GraphQL */ `
-  mutation UpdateStravaActivity(
-    $input: UpdateStravaActivityInput!
-    $condition: ModelStravaActivityConditionInput
-  ) {
-    updateStravaActivity(input: $input, condition: $condition) {
-      id
-      userId
-      stravaActivity
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const deleteStravaActivity = /* GraphQL */ `
-  mutation DeleteStravaActivity(
-    $input: DeleteStravaActivityInput!
-    $condition: ModelStravaActivityConditionInput
-  ) {
-    deleteStravaActivity(input: $input, condition: $condition) {
-      id
-      userId
-      stravaActivity
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const createStravaUser = /* GraphQL */ `
-  mutation CreateStravaUser(
-    $input: CreateStravaUserInput!
-    $condition: ModelStravaUserConditionInput
-  ) {
-    createStravaUser(input: $input, condition: $condition) {
-      id
-      access_token
-      refresh_token
-      expires_at
-      athleteId
-      scope_activity
-      scope_read
-      state
-      country
-      city
-      userId
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const updateStravaUser = /* GraphQL */ `
-  mutation UpdateStravaUser(
-    $input: UpdateStravaUserInput!
-    $condition: ModelStravaUserConditionInput
-  ) {
-    updateStravaUser(input: $input, condition: $condition) {
-      id
-      access_token
-      refresh_token
-      expires_at
-      athleteId
-      scope_activity
-      scope_read
-      state
-      country
-      city
-      userId
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-    }
-  }
-`;
 export const deleteStravaUser = /* GraphQL */ `
   mutation DeleteStravaUser(
     $input: DeleteStravaUserInput!
@@ -231,12 +130,6 @@ export const createHealthCheck = /* GraphQL */ `
       other
       details
       otherComments
-      date
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
       SocketChecks {
         items {
           id
@@ -263,6 +156,12 @@ export const createHealthCheck = /* GraphQL */ `
         nextToken
         startedAt
       }
+      date
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
       owner
     }
   }
@@ -283,12 +182,6 @@ export const updateHealthCheck = /* GraphQL */ `
       other
       details
       otherComments
-      date
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
       SocketChecks {
         items {
           id
@@ -315,6 +208,12 @@ export const updateHealthCheck = /* GraphQL */ `
         nextToken
         startedAt
       }
+      date
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
       owner
     }
   }
@@ -335,12 +234,6 @@ export const deleteHealthCheck = /* GraphQL */ `
       other
       details
       otherComments
-      date
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
       SocketChecks {
         items {
           id
@@ -367,6 +260,12 @@ export const deleteHealthCheck = /* GraphQL */ `
         nextToken
         startedAt
       }
+      date
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
       owner
     }
   }
@@ -381,13 +280,6 @@ export const createAmputation = /* GraphQL */ `
       limb
       level
       prosthesisWorn
-      scarring
-      grafting
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
       SocketChecks {
         items {
           id
@@ -414,6 +306,13 @@ export const createAmputation = /* GraphQL */ `
         nextToken
         startedAt
       }
+      scarring
+      grafting
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
       owner
     }
   }
@@ -428,13 +327,6 @@ export const updateAmputation = /* GraphQL */ `
       limb
       level
       prosthesisWorn
-      scarring
-      grafting
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
       SocketChecks {
         items {
           id
@@ -461,6 +353,13 @@ export const updateAmputation = /* GraphQL */ `
         nextToken
         startedAt
       }
+      scarring
+      grafting
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
       owner
     }
   }
@@ -475,13 +374,6 @@ export const deleteAmputation = /* GraphQL */ `
       limb
       level
       prosthesisWorn
-      scarring
-      grafting
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
       SocketChecks {
         items {
           id
@@ -508,6 +400,13 @@ export const deleteAmputation = /* GraphQL */ `
         nextToken
         startedAt
       }
+      scarring
+      grafting
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
       owner
     }
   }
@@ -596,6 +495,107 @@ export const deleteUser = /* GraphQL */ `
       createdAt
       updatedAt
       owner
+    }
+  }
+`;
+export const createStravaActivity = /* GraphQL */ `
+  mutation CreateStravaActivity(
+    $input: CreateStravaActivityInput!
+    $condition: ModelStravaActivityConditionInput
+  ) {
+    createStravaActivity(input: $input, condition: $condition) {
+      id
+      userId
+      stravaActivity
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateStravaActivity = /* GraphQL */ `
+  mutation UpdateStravaActivity(
+    $input: UpdateStravaActivityInput!
+    $condition: ModelStravaActivityConditionInput
+  ) {
+    updateStravaActivity(input: $input, condition: $condition) {
+      id
+      userId
+      stravaActivity
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteStravaActivity = /* GraphQL */ `
+  mutation DeleteStravaActivity(
+    $input: DeleteStravaActivityInput!
+    $condition: ModelStravaActivityConditionInput
+  ) {
+    deleteStravaActivity(input: $input, condition: $condition) {
+      id
+      userId
+      stravaActivity
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createStravaUser = /* GraphQL */ `
+  mutation CreateStravaUser(
+    $input: CreateStravaUserInput!
+    $condition: ModelStravaUserConditionInput
+  ) {
+    createStravaUser(input: $input, condition: $condition) {
+      id
+      access_token
+      refresh_token
+      expires_at
+      athleteId
+      scope_activity
+      scope_read
+      state
+      country
+      city
+      userId
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateStravaUser = /* GraphQL */ `
+  mutation UpdateStravaUser(
+    $input: UpdateStravaUserInput!
+    $condition: ModelStravaUserConditionInput
+  ) {
+    updateStravaUser(input: $input, condition: $condition) {
+      id
+      access_token
+      refresh_token
+      expires_at
+      athleteId
+      scope_activity
+      scope_read
+      state
+      country
+      city
+      userId
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
     }
   }
 `;

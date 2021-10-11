@@ -2,22 +2,28 @@
 /* eslint-disable */
 //  This file was automatically generated and should not be edited.
 
-export type CreateStravaActivityInput = {
-  id?: string | null,
-  userId: string,
-  stravaActivity: string,
+export type DeleteStravaUserInput = {
+  id: string,
   _version?: number | null,
 };
 
-export type ModelStravaActivityConditionInput = {
+export type ModelStravaUserConditionInput = {
+  access_token?: ModelStringInput | null,
+  refresh_token?: ModelStringInput | null,
+  expires_at?: ModelIntInput | null,
+  athleteId?: ModelIntInput | null,
+  scope_activity?: ModelBooleanInput | null,
+  scope_read?: ModelBooleanInput | null,
+  state?: ModelStringInput | null,
+  country?: ModelStringInput | null,
+  city?: ModelStringInput | null,
   userId?: ModelIDInput | null,
-  stravaActivity?: ModelStringInput | null,
-  and?: Array< ModelStravaActivityConditionInput | null > | null,
-  or?: Array< ModelStravaActivityConditionInput | null > | null,
-  not?: ModelStravaActivityConditionInput | null,
+  and?: Array< ModelStravaUserConditionInput | null > | null,
+  or?: Array< ModelStravaUserConditionInput | null > | null,
+  not?: ModelStravaUserConditionInput | null,
 };
 
-export type ModelIDInput = {
+export type ModelStringInput = {
   ne?: string | null,
   eq?: string | null,
   le?: string | null,
@@ -57,77 +63,6 @@ export type ModelSizeInput = {
   between?: Array< number | null > | null,
 };
 
-export type ModelStringInput = {
-  ne?: string | null,
-  eq?: string | null,
-  le?: string | null,
-  lt?: string | null,
-  ge?: string | null,
-  gt?: string | null,
-  contains?: string | null,
-  notContains?: string | null,
-  between?: Array< string | null > | null,
-  beginsWith?: string | null,
-  attributeExists?: boolean | null,
-  attributeType?: ModelAttributeTypes | null,
-  size?: ModelSizeInput | null,
-};
-
-export type StravaActivity = {
-  __typename: "StravaActivity",
-  id: string,
-  userId: string,
-  stravaActivity: string,
-  _version: number,
-  _deleted?: boolean | null,
-  _lastChangedAt: number,
-  createdAt: string,
-  updatedAt: string,
-};
-
-export type UpdateStravaActivityInput = {
-  id: string,
-  userId?: string | null,
-  stravaActivity?: string | null,
-  _version?: number | null,
-};
-
-export type DeleteStravaActivityInput = {
-  id: string,
-  _version?: number | null,
-};
-
-export type CreateStravaUserInput = {
-  id?: string | null,
-  access_token: string,
-  refresh_token: string,
-  expires_at: number,
-  athleteId: number,
-  scope_activity: boolean,
-  scope_read: boolean,
-  state?: string | null,
-  country?: string | null,
-  city?: string | null,
-  userId: string,
-  _version?: number | null,
-};
-
-export type ModelStravaUserConditionInput = {
-  access_token?: ModelStringInput | null,
-  refresh_token?: ModelStringInput | null,
-  expires_at?: ModelIntInput | null,
-  athleteId?: ModelIntInput | null,
-  scope_activity?: ModelBooleanInput | null,
-  scope_read?: ModelBooleanInput | null,
-  state?: ModelStringInput | null,
-  country?: ModelStringInput | null,
-  city?: ModelStringInput | null,
-  userId?: ModelIDInput | null,
-  and?: Array< ModelStravaUserConditionInput | null > | null,
-  or?: Array< ModelStravaUserConditionInput | null > | null,
-  not?: ModelStravaUserConditionInput | null,
-};
-
 export type ModelIntInput = {
   ne?: number | null,
   eq?: number | null,
@@ -145,6 +80,22 @@ export type ModelBooleanInput = {
   eq?: boolean | null,
   attributeExists?: boolean | null,
   attributeType?: ModelAttributeTypes | null,
+};
+
+export type ModelIDInput = {
+  ne?: string | null,
+  eq?: string | null,
+  le?: string | null,
+  lt?: string | null,
+  ge?: string | null,
+  gt?: string | null,
+  contains?: string | null,
+  notContains?: string | null,
+  between?: Array< string | null > | null,
+  beginsWith?: string | null,
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
+  size?: ModelSizeInput | null,
 };
 
 export type StravaUser = {
@@ -165,26 +116,6 @@ export type StravaUser = {
   _lastChangedAt: number,
   createdAt: string,
   updatedAt: string,
-};
-
-export type UpdateStravaUserInput = {
-  id: string,
-  access_token?: string | null,
-  refresh_token?: string | null,
-  expires_at?: number | null,
-  athleteId?: number | null,
-  scope_activity?: boolean | null,
-  scope_read?: boolean | null,
-  state?: string | null,
-  country?: string | null,
-  city?: string | null,
-  userId?: string | null,
-  _version?: number | null,
-};
-
-export type DeleteStravaUserInput = {
-  id: string,
-  _version?: number | null,
 };
 
 export type CreateSocketCheckInput = {
@@ -314,13 +245,13 @@ export type HealthCheck = {
   other?: boolean | null,
   details?: string | null,
   otherComments?: string | null,
+  SocketChecks?: ModelSocketCheckConnection | null,
   date: string,
   _version: number,
   _deleted?: boolean | null,
   _lastChangedAt: number,
   createdAt: string,
   updatedAt: string,
-  SocketChecks?: ModelSocketCheckConnection | null,
   owner?: string | null,
 };
 
@@ -408,6 +339,7 @@ export type Amputation = {
   limb?: AmputationEnum | null,
   level?: AmputationLevelEnum | null,
   prosthesisWorn?: boolean | null,
+  SocketChecks?: ModelSocketCheckConnection | null,
   scarring?: boolean | null,
   grafting?: boolean | null,
   _version: number,
@@ -415,7 +347,6 @@ export type Amputation = {
   _lastChangedAt: number,
   createdAt: string,
   updatedAt: string,
-  SocketChecks?: ModelSocketCheckConnection | null,
   owner?: string | null,
 };
 
@@ -518,6 +449,75 @@ export type DeleteUserInput = {
   _version?: number | null,
 };
 
+export type CreateStravaActivityInput = {
+  id?: string | null,
+  userId: string,
+  stravaActivity: string,
+  _version?: number | null,
+};
+
+export type ModelStravaActivityConditionInput = {
+  userId?: ModelIDInput | null,
+  stravaActivity?: ModelStringInput | null,
+  and?: Array< ModelStravaActivityConditionInput | null > | null,
+  or?: Array< ModelStravaActivityConditionInput | null > | null,
+  not?: ModelStravaActivityConditionInput | null,
+};
+
+export type StravaActivity = {
+  __typename: "StravaActivity",
+  id: string,
+  userId: string,
+  stravaActivity: string,
+  _version: number,
+  _deleted?: boolean | null,
+  _lastChangedAt: number,
+  createdAt: string,
+  updatedAt: string,
+};
+
+export type UpdateStravaActivityInput = {
+  id: string,
+  userId?: string | null,
+  stravaActivity?: string | null,
+  _version?: number | null,
+};
+
+export type DeleteStravaActivityInput = {
+  id: string,
+  _version?: number | null,
+};
+
+export type CreateStravaUserInput = {
+  id?: string | null,
+  access_token: string,
+  refresh_token: string,
+  expires_at: number,
+  athleteId: number,
+  scope_activity: boolean,
+  scope_read: boolean,
+  state?: string | null,
+  country?: string | null,
+  city?: string | null,
+  userId: string,
+  _version?: number | null,
+};
+
+export type UpdateStravaUserInput = {
+  id: string,
+  access_token?: string | null,
+  refresh_token?: string | null,
+  expires_at?: number | null,
+  athleteId?: number | null,
+  scope_activity?: boolean | null,
+  scope_read?: boolean | null,
+  state?: string | null,
+  country?: string | null,
+  city?: string | null,
+  userId?: string | null,
+  _version?: number | null,
+};
+
 export type CreateActivityInput = {
   id?: string | null,
   name?: string | null,
@@ -596,46 +596,6 @@ export type UpdateActivityInput = {
 export type DeleteActivityInput = {
   id: string,
   _version?: number | null,
-};
-
-export type ModelStravaActivityFilterInput = {
-  id?: ModelIDInput | null,
-  userId?: ModelIDInput | null,
-  stravaActivity?: ModelStringInput | null,
-  and?: Array< ModelStravaActivityFilterInput | null > | null,
-  or?: Array< ModelStravaActivityFilterInput | null > | null,
-  not?: ModelStravaActivityFilterInput | null,
-};
-
-export type ModelStravaActivityConnection = {
-  __typename: "ModelStravaActivityConnection",
-  items?:  Array<StravaActivity | null > | null,
-  nextToken?: string | null,
-  startedAt?: number | null,
-};
-
-export type ModelStravaUserFilterInput = {
-  id?: ModelIDInput | null,
-  access_token?: ModelStringInput | null,
-  refresh_token?: ModelStringInput | null,
-  expires_at?: ModelIntInput | null,
-  athleteId?: ModelIntInput | null,
-  scope_activity?: ModelBooleanInput | null,
-  scope_read?: ModelBooleanInput | null,
-  state?: ModelStringInput | null,
-  country?: ModelStringInput | null,
-  city?: ModelStringInput | null,
-  userId?: ModelIDInput | null,
-  and?: Array< ModelStravaUserFilterInput | null > | null,
-  or?: Array< ModelStravaUserFilterInput | null > | null,
-  not?: ModelStravaUserFilterInput | null,
-};
-
-export type ModelStravaUserConnection = {
-  __typename: "ModelStravaUserConnection",
-  items?:  Array<StravaUser | null > | null,
-  nextToken?: string | null,
-  startedAt?: number | null,
 };
 
 export type ModelSocketCheckFilterInput = {
@@ -728,6 +688,46 @@ export type ModelUserConnection = {
   startedAt?: number | null,
 };
 
+export type ModelStravaActivityFilterInput = {
+  id?: ModelIDInput | null,
+  userId?: ModelIDInput | null,
+  stravaActivity?: ModelStringInput | null,
+  and?: Array< ModelStravaActivityFilterInput | null > | null,
+  or?: Array< ModelStravaActivityFilterInput | null > | null,
+  not?: ModelStravaActivityFilterInput | null,
+};
+
+export type ModelStravaActivityConnection = {
+  __typename: "ModelStravaActivityConnection",
+  items?:  Array<StravaActivity | null > | null,
+  nextToken?: string | null,
+  startedAt?: number | null,
+};
+
+export type ModelStravaUserFilterInput = {
+  id?: ModelIDInput | null,
+  access_token?: ModelStringInput | null,
+  refresh_token?: ModelStringInput | null,
+  expires_at?: ModelIntInput | null,
+  athleteId?: ModelIntInput | null,
+  scope_activity?: ModelBooleanInput | null,
+  scope_read?: ModelBooleanInput | null,
+  state?: ModelStringInput | null,
+  country?: ModelStringInput | null,
+  city?: ModelStringInput | null,
+  userId?: ModelIDInput | null,
+  and?: Array< ModelStravaUserFilterInput | null > | null,
+  or?: Array< ModelStravaUserFilterInput | null > | null,
+  not?: ModelStravaUserFilterInput | null,
+};
+
+export type ModelStravaUserConnection = {
+  __typename: "ModelStravaUserConnection",
+  items?:  Array<StravaUser | null > | null,
+  nextToken?: string | null,
+  startedAt?: number | null,
+};
+
 export type ModelActivityFilterInput = {
   id?: ModelIDInput | null,
   name?: ModelStringInput | null,
@@ -752,117 +752,6 @@ export type ModelActivityConnection = {
   items?:  Array<Activity | null > | null,
   nextToken?: string | null,
   startedAt?: number | null,
-};
-
-export type CreateStravaActivityMutationVariables = {
-  input: CreateStravaActivityInput,
-  condition?: ModelStravaActivityConditionInput | null,
-};
-
-export type CreateStravaActivityMutation = {
-  createStravaActivity?:  {
-    __typename: "StravaActivity",
-    id: string,
-    userId: string,
-    stravaActivity: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type UpdateStravaActivityMutationVariables = {
-  input: UpdateStravaActivityInput,
-  condition?: ModelStravaActivityConditionInput | null,
-};
-
-export type UpdateStravaActivityMutation = {
-  updateStravaActivity?:  {
-    __typename: "StravaActivity",
-    id: string,
-    userId: string,
-    stravaActivity: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type DeleteStravaActivityMutationVariables = {
-  input: DeleteStravaActivityInput,
-  condition?: ModelStravaActivityConditionInput | null,
-};
-
-export type DeleteStravaActivityMutation = {
-  deleteStravaActivity?:  {
-    __typename: "StravaActivity",
-    id: string,
-    userId: string,
-    stravaActivity: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type CreateStravaUserMutationVariables = {
-  input: CreateStravaUserInput,
-  condition?: ModelStravaUserConditionInput | null,
-};
-
-export type CreateStravaUserMutation = {
-  createStravaUser?:  {
-    __typename: "StravaUser",
-    id: string,
-    access_token: string,
-    refresh_token: string,
-    expires_at: number,
-    athleteId: number,
-    scope_activity: boolean,
-    scope_read: boolean,
-    state?: string | null,
-    country?: string | null,
-    city?: string | null,
-    userId: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type UpdateStravaUserMutationVariables = {
-  input: UpdateStravaUserInput,
-  condition?: ModelStravaUserConditionInput | null,
-};
-
-export type UpdateStravaUserMutation = {
-  updateStravaUser?:  {
-    __typename: "StravaUser",
-    id: string,
-    access_token: string,
-    refresh_token: string,
-    expires_at: number,
-    athleteId: number,
-    scope_activity: boolean,
-    scope_read: boolean,
-    state?: string | null,
-    country?: string | null,
-    city?: string | null,
-    userId: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
 };
 
 export type DeleteStravaUserMutationVariables = {
@@ -1003,12 +892,6 @@ export type CreateHealthCheckMutation = {
     other?: boolean | null,
     details?: string | null,
     otherComments?: string | null,
-    date: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
-    createdAt: string,
-    updatedAt: string,
     SocketChecks?:  {
       __typename: "ModelSocketCheckConnection",
       items?:  Array< {
@@ -1037,6 +920,12 @@ export type CreateHealthCheckMutation = {
       nextToken?: string | null,
       startedAt?: number | null,
     } | null,
+    date: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
     owner?: string | null,
   } | null,
 };
@@ -1059,12 +948,6 @@ export type UpdateHealthCheckMutation = {
     other?: boolean | null,
     details?: string | null,
     otherComments?: string | null,
-    date: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
-    createdAt: string,
-    updatedAt: string,
     SocketChecks?:  {
       __typename: "ModelSocketCheckConnection",
       items?:  Array< {
@@ -1093,6 +976,12 @@ export type UpdateHealthCheckMutation = {
       nextToken?: string | null,
       startedAt?: number | null,
     } | null,
+    date: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
     owner?: string | null,
   } | null,
 };
@@ -1115,12 +1004,6 @@ export type DeleteHealthCheckMutation = {
     other?: boolean | null,
     details?: string | null,
     otherComments?: string | null,
-    date: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
-    createdAt: string,
-    updatedAt: string,
     SocketChecks?:  {
       __typename: "ModelSocketCheckConnection",
       items?:  Array< {
@@ -1149,6 +1032,12 @@ export type DeleteHealthCheckMutation = {
       nextToken?: string | null,
       startedAt?: number | null,
     } | null,
+    date: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
     owner?: string | null,
   } | null,
 };
@@ -1165,13 +1054,6 @@ export type CreateAmputationMutation = {
     limb?: AmputationEnum | null,
     level?: AmputationLevelEnum | null,
     prosthesisWorn?: boolean | null,
-    scarring?: boolean | null,
-    grafting?: boolean | null,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
-    createdAt: string,
-    updatedAt: string,
     SocketChecks?:  {
       __typename: "ModelSocketCheckConnection",
       items?:  Array< {
@@ -1200,6 +1082,13 @@ export type CreateAmputationMutation = {
       nextToken?: string | null,
       startedAt?: number | null,
     } | null,
+    scarring?: boolean | null,
+    grafting?: boolean | null,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
     owner?: string | null,
   } | null,
 };
@@ -1216,13 +1105,6 @@ export type UpdateAmputationMutation = {
     limb?: AmputationEnum | null,
     level?: AmputationLevelEnum | null,
     prosthesisWorn?: boolean | null,
-    scarring?: boolean | null,
-    grafting?: boolean | null,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
-    createdAt: string,
-    updatedAt: string,
     SocketChecks?:  {
       __typename: "ModelSocketCheckConnection",
       items?:  Array< {
@@ -1251,6 +1133,13 @@ export type UpdateAmputationMutation = {
       nextToken?: string | null,
       startedAt?: number | null,
     } | null,
+    scarring?: boolean | null,
+    grafting?: boolean | null,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
     owner?: string | null,
   } | null,
 };
@@ -1267,13 +1156,6 @@ export type DeleteAmputationMutation = {
     limb?: AmputationEnum | null,
     level?: AmputationLevelEnum | null,
     prosthesisWorn?: boolean | null,
-    scarring?: boolean | null,
-    grafting?: boolean | null,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
-    createdAt: string,
-    updatedAt: string,
     SocketChecks?:  {
       __typename: "ModelSocketCheckConnection",
       items?:  Array< {
@@ -1302,6 +1184,13 @@ export type DeleteAmputationMutation = {
       nextToken?: string | null,
       startedAt?: number | null,
     } | null,
+    scarring?: boolean | null,
+    grafting?: boolean | null,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
     owner?: string | null,
   } | null,
 };
@@ -1399,6 +1288,117 @@ export type DeleteUserMutation = {
   } | null,
 };
 
+export type CreateStravaActivityMutationVariables = {
+  input: CreateStravaActivityInput,
+  condition?: ModelStravaActivityConditionInput | null,
+};
+
+export type CreateStravaActivityMutation = {
+  createStravaActivity?:  {
+    __typename: "StravaActivity",
+    id: string,
+    userId: string,
+    stravaActivity: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type UpdateStravaActivityMutationVariables = {
+  input: UpdateStravaActivityInput,
+  condition?: ModelStravaActivityConditionInput | null,
+};
+
+export type UpdateStravaActivityMutation = {
+  updateStravaActivity?:  {
+    __typename: "StravaActivity",
+    id: string,
+    userId: string,
+    stravaActivity: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeleteStravaActivityMutationVariables = {
+  input: DeleteStravaActivityInput,
+  condition?: ModelStravaActivityConditionInput | null,
+};
+
+export type DeleteStravaActivityMutation = {
+  deleteStravaActivity?:  {
+    __typename: "StravaActivity",
+    id: string,
+    userId: string,
+    stravaActivity: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type CreateStravaUserMutationVariables = {
+  input: CreateStravaUserInput,
+  condition?: ModelStravaUserConditionInput | null,
+};
+
+export type CreateStravaUserMutation = {
+  createStravaUser?:  {
+    __typename: "StravaUser",
+    id: string,
+    access_token: string,
+    refresh_token: string,
+    expires_at: number,
+    athleteId: number,
+    scope_activity: boolean,
+    scope_read: boolean,
+    state?: string | null,
+    country?: string | null,
+    city?: string | null,
+    userId: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type UpdateStravaUserMutationVariables = {
+  input: UpdateStravaUserInput,
+  condition?: ModelStravaUserConditionInput | null,
+};
+
+export type UpdateStravaUserMutation = {
+  updateStravaUser?:  {
+    __typename: "StravaUser",
+    id: string,
+    access_token: string,
+    refresh_token: string,
+    expires_at: number,
+    athleteId: number,
+    scope_activity: boolean,
+    scope_read: boolean,
+    state?: string | null,
+    country?: string | null,
+    city?: string | null,
+    userId: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
 export type CreateActivityMutationVariables = {
   input: CreateActivityInput,
   condition?: ModelActivityConditionInput | null,
@@ -1486,6 +1486,469 @@ export type DeleteActivityMutation = {
     createdAt: string,
     updatedAt: string,
     owner?: string | null,
+  } | null,
+};
+
+export type SyncSocketChecksQueryVariables = {
+  filter?: ModelSocketCheckFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+  lastSync?: number | null,
+};
+
+export type SyncSocketChecksQuery = {
+  syncSocketChecks?:  {
+    __typename: "ModelSocketCheckConnection",
+    items?:  Array< {
+      __typename: "SocketCheck",
+      id: string,
+      healthcheckID?: string | null,
+      socketComfortScore: string,
+      blistered?: boolean | null,
+      bleeding?: boolean | null,
+      bruised?: boolean | null,
+      hot?: boolean | null,
+      painful?: boolean | null,
+      red?: boolean | null,
+      sore?: boolean | null,
+      sweaty?: boolean | null,
+      loose?: boolean | null,
+      tight?: boolean | null,
+      amputationID?: string | null,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    } | null > | null,
+    nextToken?: string | null,
+    startedAt?: number | null,
+  } | null,
+};
+
+export type GetSocketCheckQueryVariables = {
+  id: string,
+};
+
+export type GetSocketCheckQuery = {
+  getSocketCheck?:  {
+    __typename: "SocketCheck",
+    id: string,
+    healthcheckID?: string | null,
+    socketComfortScore: string,
+    blistered?: boolean | null,
+    bleeding?: boolean | null,
+    bruised?: boolean | null,
+    hot?: boolean | null,
+    painful?: boolean | null,
+    red?: boolean | null,
+    sore?: boolean | null,
+    sweaty?: boolean | null,
+    loose?: boolean | null,
+    tight?: boolean | null,
+    amputationID?: string | null,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type ListSocketChecksQueryVariables = {
+  filter?: ModelSocketCheckFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListSocketChecksQuery = {
+  listSocketChecks?:  {
+    __typename: "ModelSocketCheckConnection",
+    items?:  Array< {
+      __typename: "SocketCheck",
+      id: string,
+      healthcheckID?: string | null,
+      socketComfortScore: string,
+      blistered?: boolean | null,
+      bleeding?: boolean | null,
+      bruised?: boolean | null,
+      hot?: boolean | null,
+      painful?: boolean | null,
+      red?: boolean | null,
+      sore?: boolean | null,
+      sweaty?: boolean | null,
+      loose?: boolean | null,
+      tight?: boolean | null,
+      amputationID?: string | null,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    } | null > | null,
+    nextToken?: string | null,
+    startedAt?: number | null,
+  } | null,
+};
+
+export type SyncHealthChecksQueryVariables = {
+  filter?: ModelHealthCheckFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+  lastSync?: number | null,
+};
+
+export type SyncHealthChecksQuery = {
+  syncHealthChecks?:  {
+    __typename: "ModelHealthCheckConnection",
+    items?:  Array< {
+      __typename: "HealthCheck",
+      id: string,
+      bodyScore: string,
+      aching?: boolean | null,
+      painful?: boolean | null,
+      sore?: boolean | null,
+      tight?: boolean | null,
+      tired?: boolean | null,
+      other?: boolean | null,
+      details?: string | null,
+      otherComments?: string | null,
+      SocketChecks?:  {
+        __typename: "ModelSocketCheckConnection",
+        nextToken?: string | null,
+        startedAt?: number | null,
+      } | null,
+      date: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    } | null > | null,
+    nextToken?: string | null,
+    startedAt?: number | null,
+  } | null,
+};
+
+export type GetHealthCheckQueryVariables = {
+  id: string,
+};
+
+export type GetHealthCheckQuery = {
+  getHealthCheck?:  {
+    __typename: "HealthCheck",
+    id: string,
+    bodyScore: string,
+    aching?: boolean | null,
+    painful?: boolean | null,
+    sore?: boolean | null,
+    tight?: boolean | null,
+    tired?: boolean | null,
+    other?: boolean | null,
+    details?: string | null,
+    otherComments?: string | null,
+    SocketChecks?:  {
+      __typename: "ModelSocketCheckConnection",
+      items?:  Array< {
+        __typename: "SocketCheck",
+        id: string,
+        healthcheckID?: string | null,
+        socketComfortScore: string,
+        blistered?: boolean | null,
+        bleeding?: boolean | null,
+        bruised?: boolean | null,
+        hot?: boolean | null,
+        painful?: boolean | null,
+        red?: boolean | null,
+        sore?: boolean | null,
+        sweaty?: boolean | null,
+        loose?: boolean | null,
+        tight?: boolean | null,
+        amputationID?: string | null,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      } | null > | null,
+      nextToken?: string | null,
+      startedAt?: number | null,
+    } | null,
+    date: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type ListHealthChecksQueryVariables = {
+  filter?: ModelHealthCheckFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListHealthChecksQuery = {
+  listHealthChecks?:  {
+    __typename: "ModelHealthCheckConnection",
+    items?:  Array< {
+      __typename: "HealthCheck",
+      id: string,
+      bodyScore: string,
+      aching?: boolean | null,
+      painful?: boolean | null,
+      sore?: boolean | null,
+      tight?: boolean | null,
+      tired?: boolean | null,
+      other?: boolean | null,
+      details?: string | null,
+      otherComments?: string | null,
+      SocketChecks?:  {
+        __typename: "ModelSocketCheckConnection",
+        nextToken?: string | null,
+        startedAt?: number | null,
+      } | null,
+      date: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    } | null > | null,
+    nextToken?: string | null,
+    startedAt?: number | null,
+  } | null,
+};
+
+export type SyncAmputationsQueryVariables = {
+  filter?: ModelAmputationFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+  lastSync?: number | null,
+};
+
+export type SyncAmputationsQuery = {
+  syncAmputations?:  {
+    __typename: "ModelAmputationConnection",
+    items?:  Array< {
+      __typename: "Amputation",
+      id: string,
+      limb?: AmputationEnum | null,
+      level?: AmputationLevelEnum | null,
+      prosthesisWorn?: boolean | null,
+      SocketChecks?:  {
+        __typename: "ModelSocketCheckConnection",
+        nextToken?: string | null,
+        startedAt?: number | null,
+      } | null,
+      scarring?: boolean | null,
+      grafting?: boolean | null,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    } | null > | null,
+    nextToken?: string | null,
+    startedAt?: number | null,
+  } | null,
+};
+
+export type GetAmputationQueryVariables = {
+  id: string,
+};
+
+export type GetAmputationQuery = {
+  getAmputation?:  {
+    __typename: "Amputation",
+    id: string,
+    limb?: AmputationEnum | null,
+    level?: AmputationLevelEnum | null,
+    prosthesisWorn?: boolean | null,
+    SocketChecks?:  {
+      __typename: "ModelSocketCheckConnection",
+      items?:  Array< {
+        __typename: "SocketCheck",
+        id: string,
+        healthcheckID?: string | null,
+        socketComfortScore: string,
+        blistered?: boolean | null,
+        bleeding?: boolean | null,
+        bruised?: boolean | null,
+        hot?: boolean | null,
+        painful?: boolean | null,
+        red?: boolean | null,
+        sore?: boolean | null,
+        sweaty?: boolean | null,
+        loose?: boolean | null,
+        tight?: boolean | null,
+        amputationID?: string | null,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      } | null > | null,
+      nextToken?: string | null,
+      startedAt?: number | null,
+    } | null,
+    scarring?: boolean | null,
+    grafting?: boolean | null,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type ListAmputationsQueryVariables = {
+  filter?: ModelAmputationFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListAmputationsQuery = {
+  listAmputations?:  {
+    __typename: "ModelAmputationConnection",
+    items?:  Array< {
+      __typename: "Amputation",
+      id: string,
+      limb?: AmputationEnum | null,
+      level?: AmputationLevelEnum | null,
+      prosthesisWorn?: boolean | null,
+      SocketChecks?:  {
+        __typename: "ModelSocketCheckConnection",
+        nextToken?: string | null,
+        startedAt?: number | null,
+      } | null,
+      scarring?: boolean | null,
+      grafting?: boolean | null,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    } | null > | null,
+    nextToken?: string | null,
+    startedAt?: number | null,
+  } | null,
+};
+
+export type SyncUsersQueryVariables = {
+  filter?: ModelUserFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+  lastSync?: number | null,
+};
+
+export type SyncUsersQuery = {
+  syncUsers?:  {
+    __typename: "ModelUserConnection",
+    items?:  Array< {
+      __typename: "User",
+      id: string,
+      name?: string | null,
+      display_name?: string | null,
+      dateOfBirth?: string | null,
+      gender?: string | null,
+      weight?: string | null,
+      height?: string | null,
+      sex?: string | null,
+      ethnicGroup?: string | null,
+      ethnicIdentity?: string | null,
+      ethnicIdentityOther?: string | null,
+      hasMilitaryService?: string | null,
+      militaryService?: string | null,
+      militaryServiceOther?: string | null,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    } | null > | null,
+    nextToken?: string | null,
+    startedAt?: number | null,
+  } | null,
+};
+
+export type GetUserQueryVariables = {
+  id: string,
+};
+
+export type GetUserQuery = {
+  getUser?:  {
+    __typename: "User",
+    id: string,
+    name?: string | null,
+    display_name?: string | null,
+    dateOfBirth?: string | null,
+    gender?: string | null,
+    weight?: string | null,
+    height?: string | null,
+    sex?: string | null,
+    ethnicGroup?: string | null,
+    ethnicIdentity?: string | null,
+    ethnicIdentityOther?: string | null,
+    hasMilitaryService?: string | null,
+    militaryService?: string | null,
+    militaryServiceOther?: string | null,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type ListUsersQueryVariables = {
+  filter?: ModelUserFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListUsersQuery = {
+  listUsers?:  {
+    __typename: "ModelUserConnection",
+    items?:  Array< {
+      __typename: "User",
+      id: string,
+      name?: string | null,
+      display_name?: string | null,
+      dateOfBirth?: string | null,
+      gender?: string | null,
+      weight?: string | null,
+      height?: string | null,
+      sex?: string | null,
+      ethnicGroup?: string | null,
+      ethnicIdentity?: string | null,
+      ethnicIdentityOther?: string | null,
+      hasMilitaryService?: string | null,
+      militaryService?: string | null,
+      militaryServiceOther?: string | null,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    } | null > | null,
+    nextToken?: string | null,
+    startedAt?: number | null,
   } | null,
 };
 
@@ -1651,469 +2114,6 @@ export type SyncStravaUsersQuery = {
   } | null,
 };
 
-export type GetSocketCheckQueryVariables = {
-  id: string,
-};
-
-export type GetSocketCheckQuery = {
-  getSocketCheck?:  {
-    __typename: "SocketCheck",
-    id: string,
-    healthcheckID?: string | null,
-    socketComfortScore: string,
-    blistered?: boolean | null,
-    bleeding?: boolean | null,
-    bruised?: boolean | null,
-    hot?: boolean | null,
-    painful?: boolean | null,
-    red?: boolean | null,
-    sore?: boolean | null,
-    sweaty?: boolean | null,
-    loose?: boolean | null,
-    tight?: boolean | null,
-    amputationID?: string | null,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
-    createdAt: string,
-    updatedAt: string,
-    owner?: string | null,
-  } | null,
-};
-
-export type ListSocketChecksQueryVariables = {
-  filter?: ModelSocketCheckFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-};
-
-export type ListSocketChecksQuery = {
-  listSocketChecks?:  {
-    __typename: "ModelSocketCheckConnection",
-    items?:  Array< {
-      __typename: "SocketCheck",
-      id: string,
-      healthcheckID?: string | null,
-      socketComfortScore: string,
-      blistered?: boolean | null,
-      bleeding?: boolean | null,
-      bruised?: boolean | null,
-      hot?: boolean | null,
-      painful?: boolean | null,
-      red?: boolean | null,
-      sore?: boolean | null,
-      sweaty?: boolean | null,
-      loose?: boolean | null,
-      tight?: boolean | null,
-      amputationID?: string | null,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
-      createdAt: string,
-      updatedAt: string,
-      owner?: string | null,
-    } | null > | null,
-    nextToken?: string | null,
-    startedAt?: number | null,
-  } | null,
-};
-
-export type SyncSocketChecksQueryVariables = {
-  filter?: ModelSocketCheckFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-  lastSync?: number | null,
-};
-
-export type SyncSocketChecksQuery = {
-  syncSocketChecks?:  {
-    __typename: "ModelSocketCheckConnection",
-    items?:  Array< {
-      __typename: "SocketCheck",
-      id: string,
-      healthcheckID?: string | null,
-      socketComfortScore: string,
-      blistered?: boolean | null,
-      bleeding?: boolean | null,
-      bruised?: boolean | null,
-      hot?: boolean | null,
-      painful?: boolean | null,
-      red?: boolean | null,
-      sore?: boolean | null,
-      sweaty?: boolean | null,
-      loose?: boolean | null,
-      tight?: boolean | null,
-      amputationID?: string | null,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
-      createdAt: string,
-      updatedAt: string,
-      owner?: string | null,
-    } | null > | null,
-    nextToken?: string | null,
-    startedAt?: number | null,
-  } | null,
-};
-
-export type GetHealthCheckQueryVariables = {
-  id: string,
-};
-
-export type GetHealthCheckQuery = {
-  getHealthCheck?:  {
-    __typename: "HealthCheck",
-    id: string,
-    bodyScore: string,
-    aching?: boolean | null,
-    painful?: boolean | null,
-    sore?: boolean | null,
-    tight?: boolean | null,
-    tired?: boolean | null,
-    other?: boolean | null,
-    details?: string | null,
-    otherComments?: string | null,
-    date: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
-    createdAt: string,
-    updatedAt: string,
-    SocketChecks?:  {
-      __typename: "ModelSocketCheckConnection",
-      items?:  Array< {
-        __typename: "SocketCheck",
-        id: string,
-        healthcheckID?: string | null,
-        socketComfortScore: string,
-        blistered?: boolean | null,
-        bleeding?: boolean | null,
-        bruised?: boolean | null,
-        hot?: boolean | null,
-        painful?: boolean | null,
-        red?: boolean | null,
-        sore?: boolean | null,
-        sweaty?: boolean | null,
-        loose?: boolean | null,
-        tight?: boolean | null,
-        amputationID?: string | null,
-        _version: number,
-        _deleted?: boolean | null,
-        _lastChangedAt: number,
-        createdAt: string,
-        updatedAt: string,
-        owner?: string | null,
-      } | null > | null,
-      nextToken?: string | null,
-      startedAt?: number | null,
-    } | null,
-    owner?: string | null,
-  } | null,
-};
-
-export type ListHealthChecksQueryVariables = {
-  filter?: ModelHealthCheckFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-};
-
-export type ListHealthChecksQuery = {
-  listHealthChecks?:  {
-    __typename: "ModelHealthCheckConnection",
-    items?:  Array< {
-      __typename: "HealthCheck",
-      id: string,
-      bodyScore: string,
-      aching?: boolean | null,
-      painful?: boolean | null,
-      sore?: boolean | null,
-      tight?: boolean | null,
-      tired?: boolean | null,
-      other?: boolean | null,
-      details?: string | null,
-      otherComments?: string | null,
-      date: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
-      createdAt: string,
-      updatedAt: string,
-      SocketChecks?:  {
-        __typename: "ModelSocketCheckConnection",
-        nextToken?: string | null,
-        startedAt?: number | null,
-      } | null,
-      owner?: string | null,
-    } | null > | null,
-    nextToken?: string | null,
-    startedAt?: number | null,
-  } | null,
-};
-
-export type SyncHealthChecksQueryVariables = {
-  filter?: ModelHealthCheckFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-  lastSync?: number | null,
-};
-
-export type SyncHealthChecksQuery = {
-  syncHealthChecks?:  {
-    __typename: "ModelHealthCheckConnection",
-    items?:  Array< {
-      __typename: "HealthCheck",
-      id: string,
-      bodyScore: string,
-      aching?: boolean | null,
-      painful?: boolean | null,
-      sore?: boolean | null,
-      tight?: boolean | null,
-      tired?: boolean | null,
-      other?: boolean | null,
-      details?: string | null,
-      otherComments?: string | null,
-      date: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
-      createdAt: string,
-      updatedAt: string,
-      SocketChecks?:  {
-        __typename: "ModelSocketCheckConnection",
-        nextToken?: string | null,
-        startedAt?: number | null,
-      } | null,
-      owner?: string | null,
-    } | null > | null,
-    nextToken?: string | null,
-    startedAt?: number | null,
-  } | null,
-};
-
-export type GetAmputationQueryVariables = {
-  id: string,
-};
-
-export type GetAmputationQuery = {
-  getAmputation?:  {
-    __typename: "Amputation",
-    id: string,
-    limb?: AmputationEnum | null,
-    level?: AmputationLevelEnum | null,
-    prosthesisWorn?: boolean | null,
-    scarring?: boolean | null,
-    grafting?: boolean | null,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
-    createdAt: string,
-    updatedAt: string,
-    SocketChecks?:  {
-      __typename: "ModelSocketCheckConnection",
-      items?:  Array< {
-        __typename: "SocketCheck",
-        id: string,
-        healthcheckID?: string | null,
-        socketComfortScore: string,
-        blistered?: boolean | null,
-        bleeding?: boolean | null,
-        bruised?: boolean | null,
-        hot?: boolean | null,
-        painful?: boolean | null,
-        red?: boolean | null,
-        sore?: boolean | null,
-        sweaty?: boolean | null,
-        loose?: boolean | null,
-        tight?: boolean | null,
-        amputationID?: string | null,
-        _version: number,
-        _deleted?: boolean | null,
-        _lastChangedAt: number,
-        createdAt: string,
-        updatedAt: string,
-        owner?: string | null,
-      } | null > | null,
-      nextToken?: string | null,
-      startedAt?: number | null,
-    } | null,
-    owner?: string | null,
-  } | null,
-};
-
-export type ListAmputationsQueryVariables = {
-  filter?: ModelAmputationFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-};
-
-export type ListAmputationsQuery = {
-  listAmputations?:  {
-    __typename: "ModelAmputationConnection",
-    items?:  Array< {
-      __typename: "Amputation",
-      id: string,
-      limb?: AmputationEnum | null,
-      level?: AmputationLevelEnum | null,
-      prosthesisWorn?: boolean | null,
-      scarring?: boolean | null,
-      grafting?: boolean | null,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
-      createdAt: string,
-      updatedAt: string,
-      SocketChecks?:  {
-        __typename: "ModelSocketCheckConnection",
-        nextToken?: string | null,
-        startedAt?: number | null,
-      } | null,
-      owner?: string | null,
-    } | null > | null,
-    nextToken?: string | null,
-    startedAt?: number | null,
-  } | null,
-};
-
-export type SyncAmputationsQueryVariables = {
-  filter?: ModelAmputationFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-  lastSync?: number | null,
-};
-
-export type SyncAmputationsQuery = {
-  syncAmputations?:  {
-    __typename: "ModelAmputationConnection",
-    items?:  Array< {
-      __typename: "Amputation",
-      id: string,
-      limb?: AmputationEnum | null,
-      level?: AmputationLevelEnum | null,
-      prosthesisWorn?: boolean | null,
-      scarring?: boolean | null,
-      grafting?: boolean | null,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
-      createdAt: string,
-      updatedAt: string,
-      SocketChecks?:  {
-        __typename: "ModelSocketCheckConnection",
-        nextToken?: string | null,
-        startedAt?: number | null,
-      } | null,
-      owner?: string | null,
-    } | null > | null,
-    nextToken?: string | null,
-    startedAt?: number | null,
-  } | null,
-};
-
-export type GetUserQueryVariables = {
-  id: string,
-};
-
-export type GetUserQuery = {
-  getUser?:  {
-    __typename: "User",
-    id: string,
-    name?: string | null,
-    display_name?: string | null,
-    dateOfBirth?: string | null,
-    gender?: string | null,
-    weight?: string | null,
-    height?: string | null,
-    sex?: string | null,
-    ethnicGroup?: string | null,
-    ethnicIdentity?: string | null,
-    ethnicIdentityOther?: string | null,
-    hasMilitaryService?: string | null,
-    militaryService?: string | null,
-    militaryServiceOther?: string | null,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
-    createdAt: string,
-    updatedAt: string,
-    owner?: string | null,
-  } | null,
-};
-
-export type ListUsersQueryVariables = {
-  filter?: ModelUserFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-};
-
-export type ListUsersQuery = {
-  listUsers?:  {
-    __typename: "ModelUserConnection",
-    items?:  Array< {
-      __typename: "User",
-      id: string,
-      name?: string | null,
-      display_name?: string | null,
-      dateOfBirth?: string | null,
-      gender?: string | null,
-      weight?: string | null,
-      height?: string | null,
-      sex?: string | null,
-      ethnicGroup?: string | null,
-      ethnicIdentity?: string | null,
-      ethnicIdentityOther?: string | null,
-      hasMilitaryService?: string | null,
-      militaryService?: string | null,
-      militaryServiceOther?: string | null,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
-      createdAt: string,
-      updatedAt: string,
-      owner?: string | null,
-    } | null > | null,
-    nextToken?: string | null,
-    startedAt?: number | null,
-  } | null,
-};
-
-export type SyncUsersQueryVariables = {
-  filter?: ModelUserFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-  lastSync?: number | null,
-};
-
-export type SyncUsersQuery = {
-  syncUsers?:  {
-    __typename: "ModelUserConnection",
-    items?:  Array< {
-      __typename: "User",
-      id: string,
-      name?: string | null,
-      display_name?: string | null,
-      dateOfBirth?: string | null,
-      gender?: string | null,
-      weight?: string | null,
-      height?: string | null,
-      sex?: string | null,
-      ethnicGroup?: string | null,
-      ethnicIdentity?: string | null,
-      ethnicIdentityOther?: string | null,
-      hasMilitaryService?: string | null,
-      militaryService?: string | null,
-      militaryServiceOther?: string | null,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
-      createdAt: string,
-      updatedAt: string,
-      owner?: string | null,
-    } | null > | null,
-    nextToken?: string | null,
-    startedAt?: number | null,
-  } | null,
-};
-
 export type GetActivityQueryVariables = {
   id: string,
 };
@@ -2213,6 +2213,501 @@ export type SyncActivitiesQuery = {
     } | null > | null,
     nextToken?: string | null,
     startedAt?: number | null,
+  } | null,
+};
+
+export type OnCreateSocketCheckSubscriptionVariables = {
+  owner: string,
+};
+
+export type OnCreateSocketCheckSubscription = {
+  onCreateSocketCheck?:  {
+    __typename: "SocketCheck",
+    id: string,
+    healthcheckID?: string | null,
+    socketComfortScore: string,
+    blistered?: boolean | null,
+    bleeding?: boolean | null,
+    bruised?: boolean | null,
+    hot?: boolean | null,
+    painful?: boolean | null,
+    red?: boolean | null,
+    sore?: boolean | null,
+    sweaty?: boolean | null,
+    loose?: boolean | null,
+    tight?: boolean | null,
+    amputationID?: string | null,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type OnUpdateSocketCheckSubscriptionVariables = {
+  owner: string,
+};
+
+export type OnUpdateSocketCheckSubscription = {
+  onUpdateSocketCheck?:  {
+    __typename: "SocketCheck",
+    id: string,
+    healthcheckID?: string | null,
+    socketComfortScore: string,
+    blistered?: boolean | null,
+    bleeding?: boolean | null,
+    bruised?: boolean | null,
+    hot?: boolean | null,
+    painful?: boolean | null,
+    red?: boolean | null,
+    sore?: boolean | null,
+    sweaty?: boolean | null,
+    loose?: boolean | null,
+    tight?: boolean | null,
+    amputationID?: string | null,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type OnDeleteSocketCheckSubscriptionVariables = {
+  owner: string,
+};
+
+export type OnDeleteSocketCheckSubscription = {
+  onDeleteSocketCheck?:  {
+    __typename: "SocketCheck",
+    id: string,
+    healthcheckID?: string | null,
+    socketComfortScore: string,
+    blistered?: boolean | null,
+    bleeding?: boolean | null,
+    bruised?: boolean | null,
+    hot?: boolean | null,
+    painful?: boolean | null,
+    red?: boolean | null,
+    sore?: boolean | null,
+    sweaty?: boolean | null,
+    loose?: boolean | null,
+    tight?: boolean | null,
+    amputationID?: string | null,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type OnCreateHealthCheckSubscriptionVariables = {
+  owner: string,
+};
+
+export type OnCreateHealthCheckSubscription = {
+  onCreateHealthCheck?:  {
+    __typename: "HealthCheck",
+    id: string,
+    bodyScore: string,
+    aching?: boolean | null,
+    painful?: boolean | null,
+    sore?: boolean | null,
+    tight?: boolean | null,
+    tired?: boolean | null,
+    other?: boolean | null,
+    details?: string | null,
+    otherComments?: string | null,
+    SocketChecks?:  {
+      __typename: "ModelSocketCheckConnection",
+      items?:  Array< {
+        __typename: "SocketCheck",
+        id: string,
+        healthcheckID?: string | null,
+        socketComfortScore: string,
+        blistered?: boolean | null,
+        bleeding?: boolean | null,
+        bruised?: boolean | null,
+        hot?: boolean | null,
+        painful?: boolean | null,
+        red?: boolean | null,
+        sore?: boolean | null,
+        sweaty?: boolean | null,
+        loose?: boolean | null,
+        tight?: boolean | null,
+        amputationID?: string | null,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      } | null > | null,
+      nextToken?: string | null,
+      startedAt?: number | null,
+    } | null,
+    date: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type OnUpdateHealthCheckSubscriptionVariables = {
+  owner: string,
+};
+
+export type OnUpdateHealthCheckSubscription = {
+  onUpdateHealthCheck?:  {
+    __typename: "HealthCheck",
+    id: string,
+    bodyScore: string,
+    aching?: boolean | null,
+    painful?: boolean | null,
+    sore?: boolean | null,
+    tight?: boolean | null,
+    tired?: boolean | null,
+    other?: boolean | null,
+    details?: string | null,
+    otherComments?: string | null,
+    SocketChecks?:  {
+      __typename: "ModelSocketCheckConnection",
+      items?:  Array< {
+        __typename: "SocketCheck",
+        id: string,
+        healthcheckID?: string | null,
+        socketComfortScore: string,
+        blistered?: boolean | null,
+        bleeding?: boolean | null,
+        bruised?: boolean | null,
+        hot?: boolean | null,
+        painful?: boolean | null,
+        red?: boolean | null,
+        sore?: boolean | null,
+        sweaty?: boolean | null,
+        loose?: boolean | null,
+        tight?: boolean | null,
+        amputationID?: string | null,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      } | null > | null,
+      nextToken?: string | null,
+      startedAt?: number | null,
+    } | null,
+    date: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type OnDeleteHealthCheckSubscriptionVariables = {
+  owner: string,
+};
+
+export type OnDeleteHealthCheckSubscription = {
+  onDeleteHealthCheck?:  {
+    __typename: "HealthCheck",
+    id: string,
+    bodyScore: string,
+    aching?: boolean | null,
+    painful?: boolean | null,
+    sore?: boolean | null,
+    tight?: boolean | null,
+    tired?: boolean | null,
+    other?: boolean | null,
+    details?: string | null,
+    otherComments?: string | null,
+    SocketChecks?:  {
+      __typename: "ModelSocketCheckConnection",
+      items?:  Array< {
+        __typename: "SocketCheck",
+        id: string,
+        healthcheckID?: string | null,
+        socketComfortScore: string,
+        blistered?: boolean | null,
+        bleeding?: boolean | null,
+        bruised?: boolean | null,
+        hot?: boolean | null,
+        painful?: boolean | null,
+        red?: boolean | null,
+        sore?: boolean | null,
+        sweaty?: boolean | null,
+        loose?: boolean | null,
+        tight?: boolean | null,
+        amputationID?: string | null,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      } | null > | null,
+      nextToken?: string | null,
+      startedAt?: number | null,
+    } | null,
+    date: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type OnCreateAmputationSubscriptionVariables = {
+  owner: string,
+};
+
+export type OnCreateAmputationSubscription = {
+  onCreateAmputation?:  {
+    __typename: "Amputation",
+    id: string,
+    limb?: AmputationEnum | null,
+    level?: AmputationLevelEnum | null,
+    prosthesisWorn?: boolean | null,
+    SocketChecks?:  {
+      __typename: "ModelSocketCheckConnection",
+      items?:  Array< {
+        __typename: "SocketCheck",
+        id: string,
+        healthcheckID?: string | null,
+        socketComfortScore: string,
+        blistered?: boolean | null,
+        bleeding?: boolean | null,
+        bruised?: boolean | null,
+        hot?: boolean | null,
+        painful?: boolean | null,
+        red?: boolean | null,
+        sore?: boolean | null,
+        sweaty?: boolean | null,
+        loose?: boolean | null,
+        tight?: boolean | null,
+        amputationID?: string | null,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      } | null > | null,
+      nextToken?: string | null,
+      startedAt?: number | null,
+    } | null,
+    scarring?: boolean | null,
+    grafting?: boolean | null,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type OnUpdateAmputationSubscriptionVariables = {
+  owner: string,
+};
+
+export type OnUpdateAmputationSubscription = {
+  onUpdateAmputation?:  {
+    __typename: "Amputation",
+    id: string,
+    limb?: AmputationEnum | null,
+    level?: AmputationLevelEnum | null,
+    prosthesisWorn?: boolean | null,
+    SocketChecks?:  {
+      __typename: "ModelSocketCheckConnection",
+      items?:  Array< {
+        __typename: "SocketCheck",
+        id: string,
+        healthcheckID?: string | null,
+        socketComfortScore: string,
+        blistered?: boolean | null,
+        bleeding?: boolean | null,
+        bruised?: boolean | null,
+        hot?: boolean | null,
+        painful?: boolean | null,
+        red?: boolean | null,
+        sore?: boolean | null,
+        sweaty?: boolean | null,
+        loose?: boolean | null,
+        tight?: boolean | null,
+        amputationID?: string | null,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      } | null > | null,
+      nextToken?: string | null,
+      startedAt?: number | null,
+    } | null,
+    scarring?: boolean | null,
+    grafting?: boolean | null,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type OnDeleteAmputationSubscriptionVariables = {
+  owner: string,
+};
+
+export type OnDeleteAmputationSubscription = {
+  onDeleteAmputation?:  {
+    __typename: "Amputation",
+    id: string,
+    limb?: AmputationEnum | null,
+    level?: AmputationLevelEnum | null,
+    prosthesisWorn?: boolean | null,
+    SocketChecks?:  {
+      __typename: "ModelSocketCheckConnection",
+      items?:  Array< {
+        __typename: "SocketCheck",
+        id: string,
+        healthcheckID?: string | null,
+        socketComfortScore: string,
+        blistered?: boolean | null,
+        bleeding?: boolean | null,
+        bruised?: boolean | null,
+        hot?: boolean | null,
+        painful?: boolean | null,
+        red?: boolean | null,
+        sore?: boolean | null,
+        sweaty?: boolean | null,
+        loose?: boolean | null,
+        tight?: boolean | null,
+        amputationID?: string | null,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
+        createdAt: string,
+        updatedAt: string,
+        owner?: string | null,
+      } | null > | null,
+      nextToken?: string | null,
+      startedAt?: number | null,
+    } | null,
+    scarring?: boolean | null,
+    grafting?: boolean | null,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type OnCreateUserSubscriptionVariables = {
+  owner: string,
+};
+
+export type OnCreateUserSubscription = {
+  onCreateUser?:  {
+    __typename: "User",
+    id: string,
+    name?: string | null,
+    display_name?: string | null,
+    dateOfBirth?: string | null,
+    gender?: string | null,
+    weight?: string | null,
+    height?: string | null,
+    sex?: string | null,
+    ethnicGroup?: string | null,
+    ethnicIdentity?: string | null,
+    ethnicIdentityOther?: string | null,
+    hasMilitaryService?: string | null,
+    militaryService?: string | null,
+    militaryServiceOther?: string | null,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type OnUpdateUserSubscriptionVariables = {
+  owner: string,
+};
+
+export type OnUpdateUserSubscription = {
+  onUpdateUser?:  {
+    __typename: "User",
+    id: string,
+    name?: string | null,
+    display_name?: string | null,
+    dateOfBirth?: string | null,
+    gender?: string | null,
+    weight?: string | null,
+    height?: string | null,
+    sex?: string | null,
+    ethnicGroup?: string | null,
+    ethnicIdentity?: string | null,
+    ethnicIdentityOther?: string | null,
+    hasMilitaryService?: string | null,
+    militaryService?: string | null,
+    militaryServiceOther?: string | null,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type OnDeleteUserSubscriptionVariables = {
+  owner: string,
+};
+
+export type OnDeleteUserSubscription = {
+  onDeleteUser?:  {
+    __typename: "User",
+    id: string,
+    name?: string | null,
+    display_name?: string | null,
+    dateOfBirth?: string | null,
+    gender?: string | null,
+    weight?: string | null,
+    height?: string | null,
+    sex?: string | null,
+    ethnicGroup?: string | null,
+    ethnicIdentity?: string | null,
+    ethnicIdentityOther?: string | null,
+    hasMilitaryService?: string | null,
+    militaryService?: string | null,
+    militaryServiceOther?: string | null,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
   } | null,
 };
 
@@ -2321,501 +2816,6 @@ export type OnDeleteStravaUserSubscription = {
     _lastChangedAt: number,
     createdAt: string,
     updatedAt: string,
-  } | null,
-};
-
-export type OnCreateSocketCheckSubscriptionVariables = {
-  owner?: string | null,
-};
-
-export type OnCreateSocketCheckSubscription = {
-  onCreateSocketCheck?:  {
-    __typename: "SocketCheck",
-    id: string,
-    healthcheckID?: string | null,
-    socketComfortScore: string,
-    blistered?: boolean | null,
-    bleeding?: boolean | null,
-    bruised?: boolean | null,
-    hot?: boolean | null,
-    painful?: boolean | null,
-    red?: boolean | null,
-    sore?: boolean | null,
-    sweaty?: boolean | null,
-    loose?: boolean | null,
-    tight?: boolean | null,
-    amputationID?: string | null,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
-    createdAt: string,
-    updatedAt: string,
-    owner?: string | null,
-  } | null,
-};
-
-export type OnUpdateSocketCheckSubscriptionVariables = {
-  owner?: string | null,
-};
-
-export type OnUpdateSocketCheckSubscription = {
-  onUpdateSocketCheck?:  {
-    __typename: "SocketCheck",
-    id: string,
-    healthcheckID?: string | null,
-    socketComfortScore: string,
-    blistered?: boolean | null,
-    bleeding?: boolean | null,
-    bruised?: boolean | null,
-    hot?: boolean | null,
-    painful?: boolean | null,
-    red?: boolean | null,
-    sore?: boolean | null,
-    sweaty?: boolean | null,
-    loose?: boolean | null,
-    tight?: boolean | null,
-    amputationID?: string | null,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
-    createdAt: string,
-    updatedAt: string,
-    owner?: string | null,
-  } | null,
-};
-
-export type OnDeleteSocketCheckSubscriptionVariables = {
-  owner?: string | null,
-};
-
-export type OnDeleteSocketCheckSubscription = {
-  onDeleteSocketCheck?:  {
-    __typename: "SocketCheck",
-    id: string,
-    healthcheckID?: string | null,
-    socketComfortScore: string,
-    blistered?: boolean | null,
-    bleeding?: boolean | null,
-    bruised?: boolean | null,
-    hot?: boolean | null,
-    painful?: boolean | null,
-    red?: boolean | null,
-    sore?: boolean | null,
-    sweaty?: boolean | null,
-    loose?: boolean | null,
-    tight?: boolean | null,
-    amputationID?: string | null,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
-    createdAt: string,
-    updatedAt: string,
-    owner?: string | null,
-  } | null,
-};
-
-export type OnCreateHealthCheckSubscriptionVariables = {
-  owner?: string | null,
-};
-
-export type OnCreateHealthCheckSubscription = {
-  onCreateHealthCheck?:  {
-    __typename: "HealthCheck",
-    id: string,
-    bodyScore: string,
-    aching?: boolean | null,
-    painful?: boolean | null,
-    sore?: boolean | null,
-    tight?: boolean | null,
-    tired?: boolean | null,
-    other?: boolean | null,
-    details?: string | null,
-    otherComments?: string | null,
-    date: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
-    createdAt: string,
-    updatedAt: string,
-    SocketChecks?:  {
-      __typename: "ModelSocketCheckConnection",
-      items?:  Array< {
-        __typename: "SocketCheck",
-        id: string,
-        healthcheckID?: string | null,
-        socketComfortScore: string,
-        blistered?: boolean | null,
-        bleeding?: boolean | null,
-        bruised?: boolean | null,
-        hot?: boolean | null,
-        painful?: boolean | null,
-        red?: boolean | null,
-        sore?: boolean | null,
-        sweaty?: boolean | null,
-        loose?: boolean | null,
-        tight?: boolean | null,
-        amputationID?: string | null,
-        _version: number,
-        _deleted?: boolean | null,
-        _lastChangedAt: number,
-        createdAt: string,
-        updatedAt: string,
-        owner?: string | null,
-      } | null > | null,
-      nextToken?: string | null,
-      startedAt?: number | null,
-    } | null,
-    owner?: string | null,
-  } | null,
-};
-
-export type OnUpdateHealthCheckSubscriptionVariables = {
-  owner?: string | null,
-};
-
-export type OnUpdateHealthCheckSubscription = {
-  onUpdateHealthCheck?:  {
-    __typename: "HealthCheck",
-    id: string,
-    bodyScore: string,
-    aching?: boolean | null,
-    painful?: boolean | null,
-    sore?: boolean | null,
-    tight?: boolean | null,
-    tired?: boolean | null,
-    other?: boolean | null,
-    details?: string | null,
-    otherComments?: string | null,
-    date: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
-    createdAt: string,
-    updatedAt: string,
-    SocketChecks?:  {
-      __typename: "ModelSocketCheckConnection",
-      items?:  Array< {
-        __typename: "SocketCheck",
-        id: string,
-        healthcheckID?: string | null,
-        socketComfortScore: string,
-        blistered?: boolean | null,
-        bleeding?: boolean | null,
-        bruised?: boolean | null,
-        hot?: boolean | null,
-        painful?: boolean | null,
-        red?: boolean | null,
-        sore?: boolean | null,
-        sweaty?: boolean | null,
-        loose?: boolean | null,
-        tight?: boolean | null,
-        amputationID?: string | null,
-        _version: number,
-        _deleted?: boolean | null,
-        _lastChangedAt: number,
-        createdAt: string,
-        updatedAt: string,
-        owner?: string | null,
-      } | null > | null,
-      nextToken?: string | null,
-      startedAt?: number | null,
-    } | null,
-    owner?: string | null,
-  } | null,
-};
-
-export type OnDeleteHealthCheckSubscriptionVariables = {
-  owner?: string | null,
-};
-
-export type OnDeleteHealthCheckSubscription = {
-  onDeleteHealthCheck?:  {
-    __typename: "HealthCheck",
-    id: string,
-    bodyScore: string,
-    aching?: boolean | null,
-    painful?: boolean | null,
-    sore?: boolean | null,
-    tight?: boolean | null,
-    tired?: boolean | null,
-    other?: boolean | null,
-    details?: string | null,
-    otherComments?: string | null,
-    date: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
-    createdAt: string,
-    updatedAt: string,
-    SocketChecks?:  {
-      __typename: "ModelSocketCheckConnection",
-      items?:  Array< {
-        __typename: "SocketCheck",
-        id: string,
-        healthcheckID?: string | null,
-        socketComfortScore: string,
-        blistered?: boolean | null,
-        bleeding?: boolean | null,
-        bruised?: boolean | null,
-        hot?: boolean | null,
-        painful?: boolean | null,
-        red?: boolean | null,
-        sore?: boolean | null,
-        sweaty?: boolean | null,
-        loose?: boolean | null,
-        tight?: boolean | null,
-        amputationID?: string | null,
-        _version: number,
-        _deleted?: boolean | null,
-        _lastChangedAt: number,
-        createdAt: string,
-        updatedAt: string,
-        owner?: string | null,
-      } | null > | null,
-      nextToken?: string | null,
-      startedAt?: number | null,
-    } | null,
-    owner?: string | null,
-  } | null,
-};
-
-export type OnCreateAmputationSubscriptionVariables = {
-  owner?: string | null,
-};
-
-export type OnCreateAmputationSubscription = {
-  onCreateAmputation?:  {
-    __typename: "Amputation",
-    id: string,
-    limb?: AmputationEnum | null,
-    level?: AmputationLevelEnum | null,
-    prosthesisWorn?: boolean | null,
-    scarring?: boolean | null,
-    grafting?: boolean | null,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
-    createdAt: string,
-    updatedAt: string,
-    SocketChecks?:  {
-      __typename: "ModelSocketCheckConnection",
-      items?:  Array< {
-        __typename: "SocketCheck",
-        id: string,
-        healthcheckID?: string | null,
-        socketComfortScore: string,
-        blistered?: boolean | null,
-        bleeding?: boolean | null,
-        bruised?: boolean | null,
-        hot?: boolean | null,
-        painful?: boolean | null,
-        red?: boolean | null,
-        sore?: boolean | null,
-        sweaty?: boolean | null,
-        loose?: boolean | null,
-        tight?: boolean | null,
-        amputationID?: string | null,
-        _version: number,
-        _deleted?: boolean | null,
-        _lastChangedAt: number,
-        createdAt: string,
-        updatedAt: string,
-        owner?: string | null,
-      } | null > | null,
-      nextToken?: string | null,
-      startedAt?: number | null,
-    } | null,
-    owner?: string | null,
-  } | null,
-};
-
-export type OnUpdateAmputationSubscriptionVariables = {
-  owner?: string | null,
-};
-
-export type OnUpdateAmputationSubscription = {
-  onUpdateAmputation?:  {
-    __typename: "Amputation",
-    id: string,
-    limb?: AmputationEnum | null,
-    level?: AmputationLevelEnum | null,
-    prosthesisWorn?: boolean | null,
-    scarring?: boolean | null,
-    grafting?: boolean | null,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
-    createdAt: string,
-    updatedAt: string,
-    SocketChecks?:  {
-      __typename: "ModelSocketCheckConnection",
-      items?:  Array< {
-        __typename: "SocketCheck",
-        id: string,
-        healthcheckID?: string | null,
-        socketComfortScore: string,
-        blistered?: boolean | null,
-        bleeding?: boolean | null,
-        bruised?: boolean | null,
-        hot?: boolean | null,
-        painful?: boolean | null,
-        red?: boolean | null,
-        sore?: boolean | null,
-        sweaty?: boolean | null,
-        loose?: boolean | null,
-        tight?: boolean | null,
-        amputationID?: string | null,
-        _version: number,
-        _deleted?: boolean | null,
-        _lastChangedAt: number,
-        createdAt: string,
-        updatedAt: string,
-        owner?: string | null,
-      } | null > | null,
-      nextToken?: string | null,
-      startedAt?: number | null,
-    } | null,
-    owner?: string | null,
-  } | null,
-};
-
-export type OnDeleteAmputationSubscriptionVariables = {
-  owner?: string | null,
-};
-
-export type OnDeleteAmputationSubscription = {
-  onDeleteAmputation?:  {
-    __typename: "Amputation",
-    id: string,
-    limb?: AmputationEnum | null,
-    level?: AmputationLevelEnum | null,
-    prosthesisWorn?: boolean | null,
-    scarring?: boolean | null,
-    grafting?: boolean | null,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
-    createdAt: string,
-    updatedAt: string,
-    SocketChecks?:  {
-      __typename: "ModelSocketCheckConnection",
-      items?:  Array< {
-        __typename: "SocketCheck",
-        id: string,
-        healthcheckID?: string | null,
-        socketComfortScore: string,
-        blistered?: boolean | null,
-        bleeding?: boolean | null,
-        bruised?: boolean | null,
-        hot?: boolean | null,
-        painful?: boolean | null,
-        red?: boolean | null,
-        sore?: boolean | null,
-        sweaty?: boolean | null,
-        loose?: boolean | null,
-        tight?: boolean | null,
-        amputationID?: string | null,
-        _version: number,
-        _deleted?: boolean | null,
-        _lastChangedAt: number,
-        createdAt: string,
-        updatedAt: string,
-        owner?: string | null,
-      } | null > | null,
-      nextToken?: string | null,
-      startedAt?: number | null,
-    } | null,
-    owner?: string | null,
-  } | null,
-};
-
-export type OnCreateUserSubscriptionVariables = {
-  owner?: string | null,
-};
-
-export type OnCreateUserSubscription = {
-  onCreateUser?:  {
-    __typename: "User",
-    id: string,
-    name?: string | null,
-    display_name?: string | null,
-    dateOfBirth?: string | null,
-    gender?: string | null,
-    weight?: string | null,
-    height?: string | null,
-    sex?: string | null,
-    ethnicGroup?: string | null,
-    ethnicIdentity?: string | null,
-    ethnicIdentityOther?: string | null,
-    hasMilitaryService?: string | null,
-    militaryService?: string | null,
-    militaryServiceOther?: string | null,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
-    createdAt: string,
-    updatedAt: string,
-    owner?: string | null,
-  } | null,
-};
-
-export type OnUpdateUserSubscriptionVariables = {
-  owner?: string | null,
-};
-
-export type OnUpdateUserSubscription = {
-  onUpdateUser?:  {
-    __typename: "User",
-    id: string,
-    name?: string | null,
-    display_name?: string | null,
-    dateOfBirth?: string | null,
-    gender?: string | null,
-    weight?: string | null,
-    height?: string | null,
-    sex?: string | null,
-    ethnicGroup?: string | null,
-    ethnicIdentity?: string | null,
-    ethnicIdentityOther?: string | null,
-    hasMilitaryService?: string | null,
-    militaryService?: string | null,
-    militaryServiceOther?: string | null,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
-    createdAt: string,
-    updatedAt: string,
-    owner?: string | null,
-  } | null,
-};
-
-export type OnDeleteUserSubscriptionVariables = {
-  owner?: string | null,
-};
-
-export type OnDeleteUserSubscription = {
-  onDeleteUser?:  {
-    __typename: "User",
-    id: string,
-    name?: string | null,
-    display_name?: string | null,
-    dateOfBirth?: string | null,
-    gender?: string | null,
-    weight?: string | null,
-    height?: string | null,
-    sex?: string | null,
-    ethnicGroup?: string | null,
-    ethnicIdentity?: string | null,
-    ethnicIdentityOther?: string | null,
-    hasMilitaryService?: string | null,
-    militaryService?: string | null,
-    militaryServiceOther?: string | null,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
-    createdAt: string,
-    updatedAt: string,
-    owner?: string | null,
   } | null,
 };
 
