@@ -1,7 +1,7 @@
 import { MONTHS } from '../utils';
 import { HealthCheck, SocketCheck } from '../../models';
 import { DataStore } from '@aws-amplify/datastore';
-import { compareDesc } from 'date-fns';
+import { compareAsc, compareDesc } from 'date-fns';
 
 type HealthCheckMonth = HealthCheck & { month: string };
 
@@ -89,9 +89,11 @@ export function mapHealthChecksByMonth(healthChecks: HealthCheck[]): ListHealthC
     [],
   );
 
-  months.forEach((month) =>
-    month.healthChecks.sort((a, b) => compareDesc(new Date(a.date), new Date(b.date))),
-  );
+  months
+    .reverse()
+    .forEach((month) =>
+      month.healthChecks.sort((a, b) => compareDesc(new Date(a.date), new Date(b.date))),
+    );
 
   return months;
 }

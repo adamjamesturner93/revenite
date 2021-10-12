@@ -131,7 +131,7 @@ const AddHealthCheck: React.FC = () => {
                   register={register}
                 />
 
-                {+socketScore < +DEFAULT_SCORE && (
+                {+socketScore < 7 && (
                   <div className="flex flex-col">
                     <p className="text-sm">Please explain your score (select all that apply)?</p>
                     <div className="flex">
