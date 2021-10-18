@@ -222,13 +222,13 @@ export const ExertionOptions: Record<number, string> = {
 };
 
 export const FatigueOptions: Record<number, string> = {
-  1: 'I am full of beans: I do not feel any fatigue at all',
-  2: "I feel really good: I don't feel fatigued",
-  3: "I feel good: I don't feel much fatigue",
+  1: 'I am worn out: I feel very, very fatigued',
+  2: 'I feel really fatigued',
+  3: 'I feel quite fatigued',
   4: 'I feel a bit fatigued, but no more than I would normally expect',
-  5: 'I feel quite fatigued',
-  6: 'I feel really fatigued',
-  7: 'I am worn out: I feel very, very fatigued',
+  5: "I feel good: I don't feel much fatigue",
+  6: "I feel really good: I don't feel fatigued",
+  7: 'I am full of beans: I do not feel any fatigue at all',
 };
 
 const LowerLimbAmputationLevels: { label: string; value: string }[] = [

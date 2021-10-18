@@ -22,6 +22,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const { scope, code, user } = req.query;
 
+    console.log({ scope, code, user });
+    console.error({ scope, code, user });
+
     const resp = await fetch(
       `https://www.strava.com/oauth/token?client_id=${process.env.STRAVA__CLIENT_ID}&client_secret=${process.env.STRAVA__CLIENT_SECRET}&code=${code}&grant_type=authorization_code`,
       {
@@ -49,6 +52,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       country,
     };
 
+    console.log({ stravaUser });
+    console.error({ stravaUser });
+
     await API.graphql({
       query: createStravaUser,
       variables: { input: stravaUser },
@@ -62,6 +68,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   if (!process.env.STRAVA__REDIRECT) {
     return res.status(500).end();
   }
+
+  console.log('Success');
+  console.error('Success');
 
   return res.redirect(process.env.STRAVA__REDIRECT);
 };
