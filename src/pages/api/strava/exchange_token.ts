@@ -23,6 +23,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     req,
   });
 
+  let stravaUser: CreateStravaUserInput | undefined = undefined;
+
   try {
     const { scope, code, user } = req.query;
 
@@ -43,7 +45,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       athlete: { id: athleteId, city, state, country },
     } = await resp.json();
 
-    const stravaUser: CreateStravaUserInput = {
+    stravaUser = {
       refresh_token,
       access_token,
       expires_at,
@@ -56,8 +58,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       country,
     };
 
-    return res.status(500).send({ stravaUser });
-
     console.log({ stravaUser });
     console.error({ stravaUser });
 
@@ -67,12 +67,13 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       authMode: GRAPHQL_AUTH_MODE.API_KEY,
     });
   } catch (error) {
+    console.log(error);
     console.error(error);
-    return res.status(500).send({ error });
+    return res.status(500).send({ error, stravaUser, test: 'test' });
   }
 
-  // console.log('Success');
-  // console.error('Success');
+  console.log('Success');
+  console.error('Success');
 
-  // return res.redirect(process.env.STRAVA__REDIRECT);
+  return res.redirect(process.env.STRAVA__REDIRECT);
 };
