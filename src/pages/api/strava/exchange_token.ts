@@ -56,6 +56,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       country,
     };
 
+    return res.status(500).send({ stravaUser });
+
     console.log({ stravaUser });
     console.error({ stravaUser });
 
