@@ -15,6 +15,10 @@ Amplify.configure({
 });
 const scopes = { READ: 'read', ACTIVITY: 'activity:read_all' };
 export default async (req: NextApiRequest, res: NextApiResponse) => {
+  if (!process.env.STRAVA__REDIRECT) {
+    return res.status(500).end();
+  }
+
   const { API }: { API: GraphQLAPIClass; DataStore: DataStoreClass } = withSSRContext({
     req,
   });
@@ -62,11 +66,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     });
   } catch (error) {
     console.error(error);
-    return res.status(500).end();
-  }
-
-  if (!process.env.STRAVA__REDIRECT) {
-    return res.status(500).end();
+    return res.redirect(process.env.STRAVA__REDIRECT);
   }
 
   console.log('Success');
