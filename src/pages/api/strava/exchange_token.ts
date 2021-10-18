@@ -66,7 +66,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     });
   } catch (error) {
     console.error(error);
-    return res.redirect(process.env.STRAVA__REDIRECT);
+    return res.status(500).send({ error });
   }
 
   console.log('Success');
