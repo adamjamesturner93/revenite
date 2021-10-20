@@ -192,7 +192,7 @@ export const ActivitiesOptions: Record<
   treadmill: { label: 'Treadmill', cardio: true, flex: false, strength: false, distance: true },
   walk: { label: 'Walk', cardio: true, flex: false, strength: false, distance: true },
   weightTraining: {
-    label: 'WeightTraining',
+    label: 'Weight Training',
     cardio: false,
     flex: false,
     strength: true,
@@ -221,7 +221,27 @@ export const ExertionOptions: Record<number, string> = {
   10: 'Max Effort (hardest I can possibly work)',
 };
 
+export const SleepOptions: Record<number, string> = {
+  1: "Worst night's sleep in a long time",
+  2: 'I slept really poorly',
+  3: 'I slept poorly',
+  4: 'I slept OK',
+  5: 'I slept well',
+  6: 'I slept really well',
+  7: "Best night's sleep in a long time",
+};
+
 export const FatigueOptions: Record<number, string> = {
+  1: 'I am worn out: I feel very, very fatigued',
+  2: 'I feel really fatigued',
+  3: 'I feel quite fatigued',
+  4: 'I feel a bit fatigued, but no more than I would normally expect',
+  5: "I feel good: I don't feel much fatigue",
+  6: "I feel really good: I don't feel fatigued",
+  7: 'I am full of beans: I do not feel any fatigue at all',
+};
+
+export const PainOptions: Record<number, string> = {
   1: 'I am worn out: I feel very, very fatigued',
   2: 'I feel really fatigued',
   3: 'I feel quite fatigued',

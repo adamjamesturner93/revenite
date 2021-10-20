@@ -33,6 +33,13 @@ type SocketCheck @model @key(name: "byHealthCheck", fields: ["healthcheckID"]) @
   loose: Boolean
   tight: Boolean
   amputationID: ID
+  phantomSensations: Boolean!
+  pinsAndNeedles: Boolean
+  pain: Boolean
+  limbPresences: Boolean
+  itching: Boolean
+  other: Boolean
+  otherComments: String
 }
 
 type HealthCheck @model @auth(rules: [{allow: owner}]) {
@@ -48,6 +55,7 @@ type HealthCheck @model @auth(rules: [{allow: owner}]) {
   otherComments: String
   SocketChecks: [SocketCheck] @connection(keyName: "byHealthCheck", fields: ["id"])
   date: AWSDateTime!
+  sleepScore: String!
 }
 
 enum AmputationLevelEnum {

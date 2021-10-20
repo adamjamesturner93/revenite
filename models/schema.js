@@ -273,6 +273,55 @@ export const schema = {
                     "type": "ID",
                     "isRequired": false,
                     "attributes": []
+                },
+                "phantomSensations": {
+                    "name": "phantomSensations",
+                    "isArray": false,
+                    "type": "Boolean",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "pinsAndNeedles": {
+                    "name": "pinsAndNeedles",
+                    "isArray": false,
+                    "type": "Boolean",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "pain": {
+                    "name": "pain",
+                    "isArray": false,
+                    "type": "Boolean",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "limbPresences": {
+                    "name": "limbPresences",
+                    "isArray": false,
+                    "type": "Boolean",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "itching": {
+                    "name": "itching",
+                    "isArray": false,
+                    "type": "Boolean",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "other": {
+                    "name": "other",
+                    "isArray": false,
+                    "type": "Boolean",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "otherComments": {
+                    "name": "otherComments",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
                 }
             },
             "syncable": true,
@@ -412,6 +461,13 @@ export const schema = {
                     "name": "date",
                     "isArray": false,
                     "type": "AWSDateTime",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "sleepScore": {
+                    "name": "sleepScore",
+                    "isArray": false,
+                    "type": "String",
                     "isRequired": true,
                     "attributes": []
                 }
@@ -833,5 +889,5 @@ export const schema = {
         }
     },
     "nonModels": {},
-    "version": "cbc63b7ff60d3e345739b23924d9918b"
+    "version": "641b8c8a05c967e64f7274530001a779"
 };

@@ -59,6 +59,13 @@ export declare class SocketCheck {
   readonly loose?: boolean;
   readonly tight?: boolean;
   readonly amputationID?: string;
+  readonly phantomSensations: boolean;
+  readonly pinsAndNeedles?: boolean;
+  readonly pain?: boolean;
+  readonly limbPresences?: boolean;
+  readonly itching?: boolean;
+  readonly other?: boolean;
+  readonly otherComments?: string;
   constructor(init: ModelInit<SocketCheck>);
   static copyOf(source: SocketCheck, mutator: (draft: MutableModel<SocketCheck>) => MutableModel<SocketCheck> | void): SocketCheck;
 }
@@ -76,6 +83,7 @@ export declare class HealthCheck {
   readonly otherComments?: string;
   readonly SocketChecks?: (SocketCheck | null)[];
   readonly date: string;
+  readonly sleepScore: string;
   constructor(init: ModelInit<HealthCheck>);
   static copyOf(source: HealthCheck, mutator: (draft: MutableModel<HealthCheck>) => MutableModel<HealthCheck> | void): HealthCheck;
 }

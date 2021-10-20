@@ -63,6 +63,13 @@ export const HealthCheckTab: React.FC<{
         borderColor: 'rgb(75, 192, 192)',
         tension: 0.1,
       },
+      {
+        label: 'Sleep',
+        data: sortedChecks.map((c) => +c.sleepScore),
+        fill: false,
+        borderColor: 'rgb(75, 12, 192)',
+        tension: 0.1,
+      },
       ...amputationData,
     ],
   };
@@ -124,6 +131,40 @@ export const HealthCheckTab: React.FC<{
     labels: limbLabels,
     datasets: limbData,
   };
+  const phantomData = amputations.map((amputation) => ({
+    label: checkMap[amputation.limb!].label,
+    data: Object.values(
+      sortedChecks
+        .map((c) => c.SocketChecks?.filter((s) => s?.amputationID === amputation.id))
+        .flat()
+        .reduce(
+          (acc, cur) => {
+            return {
+              itching: cur?.itching ? acc.itching + 1 : acc.itching,
+              limbPresences: cur?.limbPresences ? acc.limbPresences + 1 : acc.limbPresences,
+              pinsAndNeedles: cur?.pinsAndNeedles ? acc.pinsAndNeedles + 1 : acc.pinsAndNeedles,
+              pain: cur?.pain ? acc.pain + 1 : acc.pain,
+            };
+          },
+          {
+            itching: 0,
+            limbPresences: 0,
+            pinsAndNeedles: 0,
+            pain: 0,
+          },
+        ),
+    ),
+    backgroundColor: checkMap[amputation.limb!].color,
+    borderColor: checkMap[amputation.limb!].color,
+    tension: 0.1,
+  }));
+
+  const phantomLabels = ['Itching', 'Limb Presences', 'Pins and Needles', 'Pain'];
+
+  const phantomGraphData = {
+    labels: phantomLabels,
+    datasets: phantomData,
+  };
 
   const data = Object.values(
     sortedChecks.reduce(
@@ -180,6 +221,17 @@ export const HealthCheckTab: React.FC<{
       },
     },
   };
+  const phantomOptions = {
+    scales: {
+      y: {
+        min: 0,
+        max: 5 * Math.ceil(Math.max(...limbData.map((l) => l.data).flat()) / 5),
+        ticks: {
+          stepSize: 1,
+        },
+      },
+    },
+  };
   const bodyOptions = {
     scales: {
       y: {
@@ -199,8 +251,14 @@ export const HealthCheckTab: React.FC<{
       <Line options={lineOptions} data={scoreData} />
       <h4 className="pt-4">Body Check</h4>
       <Bar options={bodyOptions} data={bodyGraphData} />
-      <h4 className="pt-4">Limb Checks</h4>
-      <Bar options={limbOptions} data={limbGraphData} />
+      {amputations.length > 0 ? (
+        <React.Fragment>
+          <h4 className="pt-4">Limb Checks</h4>
+          <Bar options={limbOptions} data={limbGraphData} />
+          <h4 className="pt-4">Phantom Sensations</h4>
+          <Bar options={phantomOptions} data={phantomGraphData} />
+        </React.Fragment>
+      ) : undefined}
     </React.Fragment>
   );
 };

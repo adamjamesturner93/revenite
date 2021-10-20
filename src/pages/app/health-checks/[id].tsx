@@ -4,7 +4,7 @@ import { Amputation, HealthCheck } from '../../../../models';
 import { Input, PageWrapper } from '../../../components';
 import { getHealthCheck } from '../../../services';
 import { getAmputations } from '../../../services/Amputations';
-import { FatigueOptions } from '../../../utils';
+import { FatigueOptions, SleepOptions } from '../../../utils';
 
 const DEFAULT_SCORE = '7';
 
@@ -49,6 +49,18 @@ const ViewHealthCheck: React.FC<{ id: string }> = ({ id }) => {
         <h2 className="text-xl">Body Check</h2>
         <section className="my-3 pt-0 p-3">
           <Input
+            label="How did you sleep last night?"
+            defaultValue={healthCheck.sleepScore}
+            name="sleepScore"
+            type="range"
+            min="1"
+            max="7"
+            step="1"
+          />
+          <p className="text-xs">
+            {healthCheck.sleepScore} - {SleepOptions[+healthCheck.sleepScore]}
+          </p>
+          <Input
             label={`How is your body feeling today?`}
             defaultValue={healthCheck.bodyScore}
             name="bodyScore"
@@ -61,7 +73,7 @@ const ViewHealthCheck: React.FC<{ id: string }> = ({ id }) => {
             {healthCheck.bodyScore} - {FatigueOptions[+healthCheck.bodyScore]}
           </p>
 
-          {+healthCheck.bodyScore < +DEFAULT_SCORE && (
+          {+healthCheck.bodyScore < +4 && (
             <React.Fragment>
               <p className="text-sm">Please explain your score (select all that apply)?</p>
               <div className="mt-3 flex flex-col sm:flex-row sm:justify-around ">

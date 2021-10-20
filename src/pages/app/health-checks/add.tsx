@@ -8,9 +8,9 @@ import { saveHealthCheck } from '../../../services';
 import { useRouter } from 'next/router';
 import { useAuth } from '../../../hooks';
 import { toast } from 'react-toastify';
-import { FatigueOptions } from '../../../utils';
+import { FatigueOptions, SleepOptions } from '../../../utils';
 
-const DEFAULT_SCORE = '4';
+const DEFAULT_SCORE = '7';
 
 const AddHealthCheck: React.FC = () => {
   const router = useRouter();
@@ -21,7 +21,8 @@ const AddHealthCheck: React.FC = () => {
     HealthCheck & { socketChecks: SocketCheck[] }
   >({
     defaultValues: {
-      bodyScore: DEFAULT_SCORE,
+      sleepScore: '5',
+      bodyScore: '5',
     },
     mode: 'onTouched',
   });
@@ -64,12 +65,25 @@ const AddHealthCheck: React.FC = () => {
   };
 
   const bodyScore = watch('bodyScore');
+  const sleepScore = watch('sleepScore');
 
   return (
     <PageWrapper title="Add Health Check">
       <form onSubmit={handleSubmit(onSubmit)}>
         <h2 className="text-xl">Body Check</h2>
         <section className="my-3 pt-0 p-3">
+          <Input
+            label="How did you sleep last night?"
+            name="sleepScore"
+            type="range"
+            min="1"
+            max="7"
+            step="1"
+            register={register}
+          />
+          <p className="text-xs">
+            {sleepScore} - {SleepOptions[+sleepScore]}
+          </p>
           <Input
             label={`How is your body feeling today?`}
             name="bodyScore"
@@ -83,7 +97,7 @@ const AddHealthCheck: React.FC = () => {
             {bodyScore} - {FatigueOptions[+bodyScore]}
           </p>
 
-          {+bodyScore < +DEFAULT_SCORE && (
+          {+bodyScore < 5 && (
             <React.Fragment>
               <p className="text-sm">Please explain your score (select all that apply)?</p>
               <div className="mt-3 flex flex-col sm:flex-row sm:justify-around ">
@@ -117,7 +131,7 @@ const AddHealthCheck: React.FC = () => {
           fields.map((field, index) => {
             const socketScore = watch(`socketChecks.${index}.socketComfortScore`) || DEFAULT_SCORE;
             return (
-              <section className="my-2 pt-0 p-3" key={field.id}>
+              <section className="my-4 pt-0 p-3" key={field.id}>
                 <Input
                   label={`On a scale of 0-10, how is your ${amputations[index]?.limb
                     ?.replace(/_/g, ' ')
@@ -125,7 +139,7 @@ const AddHealthCheck: React.FC = () => {
                   name={`socketChecks.${index}.socketComfortScore`}
                   type="range"
                   defaultValue={field.socketComfortScore}
-                  min="1"
+                  min="0"
                   max="10"
                   step="1"
                   register={register}
@@ -247,6 +261,55 @@ const AddHealthCheck: React.FC = () => {
                     </div>
                   </div>
                 )}
+
+                <section>
+                  <label className="text-sm">
+                    Have you felt any of the following Phantom Limb Sensations since your last
+                    health check?
+                  </label>
+                  <div className="mt-3 flex flex-col sm:flex-row sm:justify-around ">
+                    <label className="text-sm">
+                      <input
+                        {...register(`socketChecks.${index}.itching`)}
+                        defaultChecked={field.itching}
+                        className="mr-2"
+                        type="checkbox"
+                        name={`socketChecks.${index}.itching`}
+                      />
+                      Itching
+                    </label>
+                    <label className="text-sm">
+                      <input
+                        {...register(`socketChecks.${index}.limbPresences`)}
+                        defaultChecked={field.limbPresences}
+                        className="mr-2"
+                        type="checkbox"
+                        name={`socketChecks.${index}.limbPresences`}
+                      />
+                      Limb Presences
+                    </label>
+                    <label className="text-sm">
+                      <input
+                        {...register(`socketChecks.${index}.pinsAndNeedles`)}
+                        defaultChecked={field.pinsAndNeedles}
+                        className="mr-2"
+                        type="checkbox"
+                        name={`socketChecks.${index}.pinsAndNeedles`}
+                      />
+                      Pins and Needles
+                    </label>
+                    <label className="text-sm">
+                      <input
+                        {...register(`socketChecks.${index}.pain`)}
+                        defaultChecked={field.pain}
+                        className="mr-2"
+                        type="checkbox"
+                        name={`socketChecks.${index}.pain`}
+                      />
+                      Pain
+                    </label>
+                  </div>
+                </section>
               </section>
             );
           })}
