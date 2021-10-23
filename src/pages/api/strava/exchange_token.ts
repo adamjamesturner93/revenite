@@ -37,8 +37,13 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
     const response = await resp.json();
 
-    console.log({ response });
-    console.error({ response });
+    console.log(
+      response,
+      'id',
+      process.env.STRAVA__CLIENT_ID,
+      'sec',
+      process.env.STRAVA__CLIENT_SECRET,
+    );
 
     const {
       refresh_token,
