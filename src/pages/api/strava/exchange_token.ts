@@ -20,7 +20,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     req,
   });
 
-  let stravaUser: CreateStravaUserInput | undefined = undefined;
+  // let stravaUser: CreateStravaUserInput | undefined = undefined;
 
   try {
     const { scope, code, user } = req.query;
@@ -36,42 +36,49 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     );
 
     const response = await resp.json();
-    console.log({ response });
-    console.error({ response });
 
-    const {
-      refresh_token,
-      access_token,
-      expires_at,
-      athlete: { id: athleteId, city, state, country },
-    } = response;
-
-    stravaUser = {
-      refresh_token,
-      access_token,
-      expires_at,
-      scope_activity: scope.includes(scopes.ACTIVITY),
-      scope_read: scope.includes(scopes.READ),
-      athleteId,
-      userId: !Array.isArray(user) ? user : '',
-      city,
-      state,
-      country,
-    };
-
-    console.log('STRAVA USER', stravaUser);
-    console.log({ stravaUser });
-    console.error({ stravaUser });
-
-    await API.graphql({
-      query: createStravaUser,
-      variables: { input: stravaUser },
-      authMode: GRAPHQL_AUTH_MODE.API_KEY,
+    return res.status(500).send({
+      response,
+      id: process.env.STRAVA__CLIENT_ID,
+      secret: process.env.STRAVA__CLIENT_SECRET,
+      code,
     });
+    // console.log({ response });
+    // console.error({ response });
+
+    // const {
+    //   refresh_token,
+    //   access_token,
+    //   expires_at,
+    //   athlete: { id: athleteId, city, state, country },
+    // } = response;
+
+    // stravaUser = {
+    //   refresh_token,
+    //   access_token,
+    //   expires_at,
+    //   scope_activity: scope.includes(scopes.ACTIVITY),
+    //   scope_read: scope.includes(scopes.READ),
+    //   athleteId,
+    //   userId: !Array.isArray(user) ? user : '',
+    //   city,
+    //   state,
+    //   country,
+    // };
+
+    // console.log('STRAVA USER', stravaUser);
+    // console.log({ stravaUser });
+    // console.error({ stravaUser });
+
+    // await API.graphql({
+    //   query: createStravaUser,
+    //   variables: { input: stravaUser },
+    //   authMode: GRAPHQL_AUTH_MODE.API_KEY,
+    // });
   } catch (error) {
     console.log(error);
     console.error(error);
-    return res.status(500).send({ error, stravaUser, test: 'test' });
+    // return res.status(500).send({ error, stravaUser, test: 'test' });
   }
 
   console.log('Success');
