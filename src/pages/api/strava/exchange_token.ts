@@ -4,22 +4,19 @@ import config from '../../../../aws-exports.js';
 import { createStravaUser } from '../../../graphql/mutations';
 import { GraphQLAPIClass, GRAPHQL_AUTH_MODE } from '@aws-amplify/api-graphql';
 import { CreateStravaUserInput } from '../../../API.js';
-import { DataStoreClass } from '@aws-amplify/datastore';
 
 Amplify.configure({
   ...config,
   ssr: true,
-  DataStore: {
-    authModeStrategyType: AuthModeStrategyType.MULTI_AUTH,
-  },
 });
 const scopes = { READ: 'read', ACTIVITY: 'activity:read_all' };
 export default async (req: NextApiRequest, res: NextApiResponse) => {
+  console.log('EXCHANGING TOKEN');
   if (!process.env.STRAVA__REDIRECT) {
     return res.status(500).end();
   }
 
-  const { API }: { API: GraphQLAPIClass; DataStore: DataStoreClass } = withSSRContext({
+  const { API }: { API: GraphQLAPIClass } = withSSRContext({
     req,
   });
 
@@ -58,6 +55,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       country,
     };
 
+    console.log('STRAVA USER', stravaUser);
     console.log({ stravaUser });
     console.error({ stravaUser });
 
