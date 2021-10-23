@@ -35,12 +35,16 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       },
     );
 
+    const response = await resp.json();
+    console.log({ response });
+    console.error({ response });
+
     const {
       refresh_token,
       access_token,
       expires_at,
       athlete: { id: athleteId, city, state, country },
-    } = await resp.json();
+    } = response;
 
     stravaUser = {
       refresh_token,
