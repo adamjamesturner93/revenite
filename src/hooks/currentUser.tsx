@@ -1,12 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { Auth } from 'aws-amplify';
+type AmplifyAttributes = {
+  'custom:email': string;
+  'custom:personalDetails': string;
+  'custom:amputationDetails': string;
+  'custom:firstActivity': string;
+  'custom:firstApp': string;
+  'custom:lastHealthCheck': string;
+};
 type User = {
   username: string;
   attributes: {
     email: string;
-    name: string;
-    preferred_username: string;
-  };
+  } & AmplifyAttributes;
 };
 type SetUser = (user: any) => void;
 type GetCurrentSession = () => Promise<void>;
@@ -20,8 +26,13 @@ type ForgottenPasswordConfirm = (email: string, code: string, password: string) 
 
 const AuthContext = React.createContext<
   | {
-      user: User | undefined;
+      user: { user: User | undefined; loading: boolean };
       setUser: SetUser;
+      getPersonalDetails: () => boolean;
+      getAmputationDetails: () => boolean;
+      getFirstActivity: () => boolean;
+      getFirstApp: () => boolean;
+      getLastHealthCheck: () => Date | undefined;
       storeCurrentSession: GetCurrentSession;
       signOut: SignOut;
       signIn: SignIn;
@@ -30,19 +41,45 @@ const AuthContext = React.createContext<
       signUpConfirm: SignUpConfirm;
       forgottenPassword: ForgottenPassword;
       forgottenPasswordConfirm: ForgottenPasswordConfirm;
+      updateUserAttributes: (
+        payload:
+          | {
+              attribute: 'personalDetails' | 'amputationDetails' | 'firstActivity' | 'firstApp';
+              value: boolean;
+            }
+          | {
+              attribute: 'lastHealthCheck';
+              value: Date;
+            },
+      ) => Promise<void>;
     }
   | undefined
 >(undefined);
 
 const AuthProvider: React.FC = ({ children }) => {
-  const [user, setUser] = useState<User | undefined>(undefined);
+  const [user, setUser] = useState<{ user: User | undefined; loading: boolean }>({
+    user: undefined,
+    loading: true,
+  });
 
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        setUser(await Auth.currentAuthenticatedUser());
+        setUser((state) => ({
+          ...state,
+          loading: true,
+        }));
+        const u = await Auth.currentAuthenticatedUser();
+        setUser((state) => ({
+          ...state,
+          user: u,
+          loading: false,
+        }));
       } catch (error) {
-        setUser(undefined);
+        setUser({
+          loading: false,
+          user: undefined,
+        });
       }
     };
     fetchUser();
@@ -51,16 +88,22 @@ const AuthProvider: React.FC = ({ children }) => {
   const signOut = async () => {
     try {
       await Auth.signOut();
-      setUser(undefined);
-    } catch (error) {
+      setUser({ user: undefined, loading: false });
+    } catch (err) {
+      const error = err as Error;
       console.error(error);
     }
   };
 
   const signIn = async (email: string, password: string) => {
     try {
-      setUser(await Auth.signIn({ username: email, password }));
-    } catch (error) {
+      const u = await Auth.signIn({ username: email, password });
+      setUser((state) => ({
+        ...state,
+        user: u,
+      }));
+    } catch (err) {
+      const error = err as Error;
       console.error(error);
       throw new Error(error.message);
     }
@@ -71,9 +114,18 @@ const AuthProvider: React.FC = ({ children }) => {
       await Auth.signUp({
         username: email,
         password,
-        attributes: { email },
+        attributes: {
+          email,
+          'custom:personalDetails': JSON.stringify(false),
+          'custom:amputationDetails': JSON.stringify(false),
+          'custom:firstActivity': JSON.stringify(false),
+          'custom:firstHealthCheck': JSON.stringify(false),
+          'custom:firstApp': JSON.stringify(false),
+          'custom:lastHealthCheck': JSON.stringify(undefined),
+        },
       });
-    } catch (error) {
+    } catch (err) {
+      const error = err as Error;
       console.error(error);
       throw new Error(error.message);
     }
@@ -82,7 +134,8 @@ const AuthProvider: React.FC = ({ children }) => {
   const signUpResend = async (email: string) => {
     try {
       Auth.resendSignUp(email);
-    } catch (error) {
+    } catch (err) {
+      const error = err as Error;
       console.error(error);
       throw new Error(error.message);
     }
@@ -91,8 +144,9 @@ const AuthProvider: React.FC = ({ children }) => {
   const signUpConfirm = async (email: string, password: string, code: string) => {
     try {
       await Auth.confirmSignUp(email, code);
-      return await Auth.signIn(email, password);
-    } catch (error) {
+      return await signIn(email, password);
+    } catch (err) {
+      const error = err as Error;
       console.error(error);
       throw new Error(error.message);
     }
@@ -101,8 +155,12 @@ const AuthProvider: React.FC = ({ children }) => {
   const forgottenPassword = async (email: string) => {
     try {
       await Auth.forgotPassword(email);
-      setUser(undefined);
-    } catch (error) {
+      setUser({
+        user: undefined,
+        loading: true,
+      });
+    } catch (err) {
+      const error = err as Error;
       console.error(error);
     }
   };
@@ -110,21 +168,71 @@ const AuthProvider: React.FC = ({ children }) => {
   const forgottenPasswordConfirm = async (email: string, code: string, password: string) => {
     try {
       await Auth.forgotPasswordSubmit(email, code, password);
-      setUser(undefined);
-    } catch (error) {
+      setUser({
+        user: undefined,
+        loading: true,
+      });
+    } catch (err) {
+      const error = err as Error;
       console.error(error);
     }
   };
 
   const storeCurrentSession = async () => {
     try {
-      setUser(await Auth.currentAuthenticatedUser());
+      const user = await Auth.currentAuthenticatedUser();
+      setUser({
+        loading: false,
+        user,
+      });
     } catch (error) {}
+  };
+
+  const getPersonalDetails = () =>
+    user.user ? (JSON.parse(user.user.attributes['custom:personalDetails']) as boolean) : false;
+  const getAmputationDetails = () =>
+    user.user ? (JSON.parse(user.user.attributes['custom:amputationDetails']) as boolean) : false;
+  const getFirstActivity = () =>
+    user.user ? (JSON.parse(user.user.attributes['custom:firstActivity']) as boolean) : false;
+  const getFirstApp = () =>
+    user.user ? (JSON.parse(user.user.attributes['custom:firstApp']) as boolean) : false;
+  const getLastHealthCheck = () => {
+    if (user.user && user.user.attributes['custom:lastHealthCheck'])
+      return JSON.parse(user.user.attributes['custom:lastHealthCheck']);
+
+    return undefined;
+  };
+
+  const updateUserAttributes = async (
+    payload:
+      | {
+          attribute: 'personalDetails' | 'amputationDetails' | 'firstActivity' | 'firstApp';
+          value: boolean;
+        }
+      | { attribute: 'lastHealthCheck'; value: Date },
+  ) => {
+    const attribute = `custom:${payload.attribute}`;
+    await Auth.updateUserAttributes(user.user, {
+      ...user.user?.attributes,
+      [attribute]: JSON.stringify(payload.value),
+    });
+
+    const u = await Auth.currentAuthenticatedUser();
+    setUser((state) => ({
+      ...state,
+      user: u,
+      loading: false,
+    }));
   };
 
   const value = {
     setUser,
     user,
+    getPersonalDetails,
+    getAmputationDetails,
+    getFirstActivity,
+    getFirstApp,
+    getLastHealthCheck,
     storeCurrentSession,
     signOut,
     signIn,
@@ -133,6 +241,7 @@ const AuthProvider: React.FC = ({ children }) => {
     signUpConfirm,
     forgottenPassword,
     forgottenPasswordConfirm,
+    updateUserAttributes,
   };
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };

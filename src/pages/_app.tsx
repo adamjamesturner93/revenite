@@ -1,13 +1,21 @@
 import '../../styles/globals.css';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useBreakpoint, AuthProvider } from '../hooks';
 import { Layout } from '../layout';
+import { useRouter } from 'next/router';
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
 
 const App: React.FC<AppProps> = ({ Component, pageProps, router }) => {
   const [isSidebarClosed, setSidebarClosed] = useState(true);
   const isStatic = useBreakpoint('sm');
+  const { pathname } = useRouter();
+
+  useEffect(() => {
+    setSidebarClosed(true);
+  }, [pathname]);
 
   return (
     <React.Fragment>
@@ -40,7 +48,7 @@ const App: React.FC<AppProps> = ({ Component, pageProps, router }) => {
 
         <meta name="theme-color" content="#5B21B6" />
         <meta name="description" content="Revenite" />
-        <link rel="icon" type="image/png" sizes="196x196" href="favicon-196.png" />
+        {/* <link rel="icon" type="image/png" sizes="196x196" href="favicon196.png" /> */}
 
         <link rel="apple-touch-icon" href="apple-icon-180.png" />
 
@@ -188,6 +196,7 @@ const App: React.FC<AppProps> = ({ Component, pageProps, router }) => {
           <Component {...pageProps} />
         </Layout>
       </AuthProvider>
+      <ToastContainer />
     </React.Fragment>
   );
 };

@@ -1,4 +1,91 @@
-type User @model @auth(rules: [{ allow: owner }]) {
+type StravaActivity @model @auth(rules: [{allow: private}, {allow: public}]) {
+  id: ID!
+  userId: ID!
+  stravaActivity: AWSJSON!
+}
+
+type StravaUser @model @auth(rules: [{allow: public, operations: [create, read, update]}, {allow: private}]) {
+  id: ID!
+  access_token: String!
+  refresh_token: String!
+  expires_at: Int!
+  athleteId: Int!
+  scope_activity: Boolean!
+  scope_read: Boolean!
+  state: String
+  country: String
+  city: String
+  userId: ID!
+}
+
+type SocketCheck @model @key(name: "byHealthCheck", fields: ["healthcheckID"]) @key(name: "byAmputation", fields: ["amputationID"]) @auth(rules: [{allow: owner}]) {
+  id: ID!
+  healthcheckID: ID
+  socketComfortScore: String!
+  blistered: Boolean
+  bleeding: Boolean
+  bruised: Boolean
+  hot: Boolean
+  painful: Boolean
+  red: Boolean
+  sore: Boolean
+  sweaty: Boolean
+  loose: Boolean
+  tight: Boolean
+  amputationID: ID
+  pinsAndNeedles: Boolean
+  pain: Boolean
+  limbPresences: Boolean
+  itching: Boolean
+  other: Boolean
+  otherComments: String
+}
+
+type HealthCheck @model @auth(rules: [{allow: owner}]) {
+  id: ID!
+  bodyScore: String!
+  aching: Boolean
+  painful: Boolean
+  sore: Boolean
+  tight: Boolean
+  tired: Boolean
+  other: Boolean
+  details: String
+  otherComments: String
+  SocketChecks: [SocketCheck] @connection(keyName: "byHealthCheck", fields: ["id"])
+  date: AWSDateTime!
+  sleepScore: String!
+}
+
+enum AmputationLevelEnum {
+  THROUGH_FOOT
+  TRANSTIBIAL
+  THROUGH_KNEE
+  TRANSFEMORAL
+  THROUGH_HAND
+  TRANSRADIAL
+  THROUGH_ELBOW
+  TRANSHUMERAL
+}
+
+enum AmputationEnum {
+  LEFT_LEG
+  RIGHT_LEG
+  LEFT_ARM
+  RIGHT_ARM
+}
+
+type Amputation @model @auth(rules: [{allow: owner}]) {
+  id: ID!
+  limb: AmputationEnum
+  level: AmputationLevelEnum
+  prosthesisWorn: Boolean
+  SocketChecks: [SocketCheck] @connection(keyName: "byAmputation", fields: ["id"])
+  scarring: Boolean
+  grafting: Boolean
+}
+
+type User @model @auth(rules: [{allow: owner}]) {
   id: ID!
   name: String
   display_name: String
@@ -15,48 +102,19 @@ type User @model @auth(rules: [{ allow: owner }]) {
   militaryServiceOther: String
 }
 
-type Activity @model @auth(rules: [{ allow: owner }]) {
+type Activity @model @auth(rules: [{allow: owner}, {allow: public}, {allow: private}]) {
   id: ID!
   name: String
-  date: String!
+  date: AWSDate!
   duration: String!
   distance: String!
   cardio: Boolean
   flexibility: Boolean
   strength: Boolean
   perceivedExertion: String!
-  feeling: String!
+  feeling: String
+  activity: String
+  stravaId: String
+  userId: ID!
 }
-
-# type Amputation
-#   @model
-#   @auth(rules: [{ allow: owner }])
-#   @key(name: "byUserID", fields: ["userId"], queryField: "amputationByUserId") {
-#   id: ID!
-#   userId: ID!
-#   user: User @connection(fields: ["userId"])
-#   limb: String!
-#   level: String!
-#   prosthesisWorn: Boolean!
-# }
-
-# type Injury
-#   @model
-#   @auth(rules: [{ allow: owner }])
-#   @key(name: "byUserID", fields: ["userId"], queryField: "injuryByUserId") {
-#   id: ID!
-#   userId: ID!
-#   user: User @connection(fields: ["userId"])
-#   location: String!
-#   severity: String!
-#   chronic: Boolean!
-# }
-
-# type HealthCheck
-#   @model
-#   @auth(rules: [{ allow: owner }])
-#   @key(name: "byUserID", fields: ["userId"], queryField: "healthCheckByUserId") {
-#   id: ID!
-#   userId: ID!
-#   user: User @connection(fields: ["userId"])
-# }
+ 

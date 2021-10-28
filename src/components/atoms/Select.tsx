@@ -18,7 +18,7 @@ export const Select: React.FC<
     <div className="mt-3">
       <label className="text-sm">
         {label}
-        <select {...register(name)} {...rest} className={classes} defaultValue="">
+        <select {...register(name)} {...rest} className={classes} defaultValue={rest.defaultValue}>
           <option value="" disabled>
             Select your option
           </option>

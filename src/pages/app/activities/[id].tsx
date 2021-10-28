@@ -1,33 +1,76 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { GetServerSideProps } from 'next';
 import { Input, PageWrapper } from '../../../components';
 import { format } from 'date-fns';
-import { withSSRContext } from 'aws-amplify';
-import { getActivity, getGraphQL } from '../../../graphql';
-import { GetActivityQuery } from '../../../API';
-import { mapGetActivityQuery } from '../../../models/Activity';
+import { Activity } from '../../../../models';
+import { getActivity, deleteActivity } from '../../../services';
+import { ActivitiesOptions, ExertionOptions, FatigueOptions } from '../../../utils';
+import { formatTime } from '../../../utils/prettifyMins';
+import { FaTimes } from 'react-icons/fa';
+import { useRouter } from 'next/router';
+import { toast } from 'react-toastify';
 
-type ActivityFormData = {
-  id: string;
-  name: string;
-  date: Date;
-  duration: number;
-  distance: number;
-  cardio: boolean;
-  flexibility: boolean;
-  strength: boolean;
-  perceivedExertion: number;
-  feeling: number;
-};
+const ViewActivity: React.FC<{ id: string }> = ({ id }) => {
+  const [activity, setActivity] = useState<Activity>();
+  const [loading, setLoading] = useState(false);
+  const { push } = useRouter();
 
-const ViewActivity: React.FC<{ activity: ActivityFormData }> = ({ activity }) => {
-  if (!activity) return <p>Error - not found</p>;
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await getActivity(id);
+      setActivity(data);
+      setLoading(false);
+    };
+    setLoading(true);
+    fetchData();
+  }, [id]);
+
+  if (loading) {
+    return (
+      <PageWrapper title="Activity">
+        <h2>Loading...</h2>
+      </PageWrapper>
+    );
+  }
+
+  if (!activity) {
+    return (
+      <PageWrapper title="Activity">
+        <p>Error - not found</p>{' '}
+      </PageWrapper>
+    );
+  }
+
+  const activityOption = ActivitiesOptions[activity.activity?.toLowerCase() || ''];
+  debugger;
+  const onDelete = async () => {
+    const resp = window.confirm('Are you sure you want to delete this activity?');
+    if (resp) {
+      try {
+        await deleteActivity(id);
+        toast.success('Activity deleted successfully');
+        push('/app/activities/list');
+      } catch (error) {
+        toast.error('Activity failed to delete');
+      }
+    }
+  };
+  const deleteButton = (
+    <button
+      className="m-4 flex border border-gray-700 hover:border-purple-600 hover:text-purple-600 p-4 rounded-full items-center justify-center"
+      title="Delete"
+      onClick={onDelete}
+    >
+      <FaTimes />
+    </button>
+  );
   return (
-    <PageWrapper title={activity.name}>
+    <PageWrapper title={activity.name} back="/app/activities/list" right={deleteButton}>
       <form>
         <Input label="Date" value={format(new Date(activity.date), 'PPP')} />
-        <Input title="Duration" type="number" value={activity.duration} />
-        <Input title="Distance" type="number" value={activity.distance} />
+        <Input label="Activity" value={activityOption.label} />
+        <Input label="Duration" value={formatTime(+activity.duration)} />
+        {activityOption.distance && <Input label="Distance" value={`${activity.distance} km`} />}
 
         <section className="mt-3">
           <label className="text-sm">Workout type</label>
@@ -72,32 +115,31 @@ const ViewActivity: React.FC<{ activity: ActivityFormData }> = ({ activity }) =>
             max={10}
             type="range"
           />
-          <p className="text-xs">{activity.perceivedExertion} - Really hard!</p>
+          <p className="text-xs">
+            {activity.perceivedExertion} - {ExertionOptions[+activity.perceivedExertion]}
+          </p>
         </section>
-        <section className="mt-3">
-          <Input
-            label="How is your body feeling?"
-            value={activity.feeling}
-            min={1}
-            max={10}
-            type="range"
-          />
-          <p className="text-xs">{activity.feeling} - Really hard!</p>
-        </section>
+        {activity.feeling ? (
+          <section className="mt-3">
+            <Input
+              label="How is your body feeling?"
+              value={activity.feeling}
+              min={1}
+              max={10}
+              type="range"
+            />
+            <p className="text-xs">
+              {activity.feeling} - {FatigueOptions[+activity.feeling]}
+            </p>
+          </section>
+        ) : null}
       </form>
     </PageWrapper>
   );
 };
-
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { API } = withSSRContext(context);
   const id = context.params?.id;
-
-  const resp = await getGraphQL<GetActivityQuery>(getActivity, API, {
-    id,
-  });
-  const activity = mapGetActivityQuery(resp);
-  return { props: { activity } };
+  return { props: { id } };
 };
 
 export default ViewActivity;
