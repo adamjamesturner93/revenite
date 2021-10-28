@@ -33,7 +33,6 @@ type SocketCheck @model @key(name: "byHealthCheck", fields: ["healthcheckID"]) @
   loose: Boolean
   tight: Boolean
   amputationID: ID
-  phantomSensations: Boolean!
   pinsAndNeedles: Boolean
   pain: Boolean
   limbPresences: Boolean

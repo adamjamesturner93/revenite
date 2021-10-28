@@ -78,23 +78,48 @@ const ViewHealthCheck: React.FC<{ id: string }> = ({ id }) => {
               <p className="text-sm">Please explain your score (select all that apply)?</p>
               <div className="mt-3 flex flex-col sm:flex-row sm:justify-around ">
                 <label className="text-sm px-6">
-                  <input className="mr-2" type="checkbox" defaultChecked={healthCheck.aching} />
+                  <input
+                    className="mr-2"
+                    type="checkbox"
+                    disabled
+                    defaultChecked={healthCheck.aching}
+                  />
                   Aching
                 </label>
                 <label className="text-sm px-6">
-                  <input className="mr-2" type="checkbox" defaultChecked={healthCheck.painful} />
+                  <input
+                    className="mr-2"
+                    type="checkbox"
+                    disabled
+                    defaultChecked={healthCheck.painful}
+                  />
                   Painful
                 </label>
                 <label className="text-sm px-6">
-                  <input className="mr-2" type="checkbox" defaultChecked={healthCheck.sore} />
+                  <input
+                    className="mr-2"
+                    type="checkbox"
+                    disabled
+                    defaultChecked={healthCheck.sore}
+                  />
                   Sore
                 </label>
                 <label className="text-sm px-6">
-                  <input className="mr-2" type="checkbox" defaultChecked={healthCheck.tight} />
+                  <input
+                    className="mr-2"
+                    type="checkbox"
+                    disabled
+                    defaultChecked={healthCheck.tight}
+                  />
                   Tight
                 </label>
                 <label className="text-sm px-6">
-                  <input className="mr-2" type="checkbox" defaultChecked={healthCheck.tired} />
+                  <input
+                    className="mr-2"
+                    type="checkbox"
+                    disabled
+                    defaultChecked={healthCheck.tired}
+                  />
                   Tired
                 </label>
               </div>
@@ -128,6 +153,7 @@ const ViewHealthCheck: React.FC<{ id: string }> = ({ id }) => {
                           <p>My limb is:</p>
                           <label className="text-sm px-6">
                             <input
+                              disabled
                               defaultChecked={check.bleeding}
                               className="mr-2"
                               type="checkbox"
@@ -136,6 +162,7 @@ const ViewHealthCheck: React.FC<{ id: string }> = ({ id }) => {
                           </label>
                           <label className="text-sm px-6">
                             <input
+                              disabled
                               defaultChecked={check.blistered}
                               className="mr-2"
                               type="checkbox"
@@ -144,6 +171,7 @@ const ViewHealthCheck: React.FC<{ id: string }> = ({ id }) => {
                           </label>
                           <label className="text-sm px-6">
                             <input
+                              disabled
                               defaultChecked={check.bruised}
                               className="mr-2"
                               type="checkbox"
@@ -151,11 +179,17 @@ const ViewHealthCheck: React.FC<{ id: string }> = ({ id }) => {
                             Bruised
                           </label>
                           <label className="text-sm px-6">
-                            <input defaultChecked={check.hot} className="mr-2" type="checkbox" />
+                            <input
+                              disabled
+                              defaultChecked={check.hot}
+                              className="mr-2"
+                              type="checkbox"
+                            />
                             Hot
                           </label>
                           <label className="text-sm px-6">
                             <input
+                              disabled
                               defaultChecked={check.painful}
                               className="mr-2"
                               type="checkbox"
@@ -163,15 +197,30 @@ const ViewHealthCheck: React.FC<{ id: string }> = ({ id }) => {
                             Painful
                           </label>
                           <label className="text-sm px-6">
-                            <input defaultChecked={check.red} className="mr-2" type="checkbox" />
+                            <input
+                              disabled
+                              defaultChecked={check.red}
+                              className="mr-2"
+                              type="checkbox"
+                            />
                             Red
                           </label>
                           <label className="text-sm px-6">
-                            <input defaultChecked={check.sore} className="mr-2" type="checkbox" />
+                            <input
+                              disabled
+                              defaultChecked={check.sore}
+                              className="mr-2"
+                              type="checkbox"
+                            />
                             Sore
                           </label>
                           <label className="text-sm px-6">
-                            <input defaultChecked={check.sweaty} className="mr-2" type="checkbox" />
+                            <input
+                              disabled
+                              defaultChecked={check.sweaty}
+                              className="mr-2"
+                              type="checkbox"
+                            />
                             Sweaty
                           </label>
                         </div>

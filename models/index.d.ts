@@ -59,7 +59,6 @@ export declare class SocketCheck {
   readonly loose?: boolean;
   readonly tight?: boolean;
   readonly amputationID?: string;
-  readonly phantomSensations: boolean;
   readonly pinsAndNeedles?: boolean;
   readonly pain?: boolean;
   readonly limbPresences?: boolean;

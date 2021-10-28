@@ -42,6 +42,7 @@ const ViewActivity: React.FC<{ id: string }> = ({ id }) => {
   }
 
   const activityOption = ActivitiesOptions[activity.activity?.toLowerCase() || ''];
+  debugger;
   const onDelete = async () => {
     const resp = window.confirm('Are you sure you want to delete this activity?');
     if (resp) {

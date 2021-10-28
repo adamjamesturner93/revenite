@@ -138,14 +138,14 @@ export const ActivitiesOptions: Record<
   bandwork: { label: 'Bandwork', cardio: false, flex: true, strength: true, distance: false },
   canoeing: { label: 'Canoeing', cardio: true, flex: false, strength: false, distance: true },
   crossfit: { label: 'Crossfit', cardio: true, flex: false, strength: true, distance: false },
-  cyclingIndoor: {
+  cyclingindoor: {
     label: 'Cycling (Indoor)',
     cardio: true,
     flex: false,
     strength: false,
     distance: true,
   },
-  cyclingOutdoor: {
+  cyclingoutdoor: {
     label: 'Cycling (Outdoor)',
     cardio: true,
     flex: false,
@@ -157,21 +157,21 @@ export const ActivitiesOptions: Record<
   hike: { label: 'Hike', cardio: true, flex: false, strength: false, distance: true },
   kayaking: { label: 'Kayaking', cardio: true, flex: false, strength: false, distance: true },
   pilates: { label: 'Pilates', cardio: false, flex: true, strength: true, distance: false },
-  rockClimbing: {
+  rockclimbing: {
     label: 'Rock Climbing',
     cardio: true,
     flex: false,
     strength: true,
     distance: false,
   },
-  rowingIndoor: {
+  rowingindoor: {
     label: 'Rowing (Indoor)',
     cardio: true,
     flex: false,
     strength: false,
     distance: true,
   },
-  rowingOutdoor: {
+  rowingoutdoor: {
     label: 'Rowing (Outdoor)',
     cardio: true,
     flex: false,
@@ -191,7 +191,7 @@ export const ActivitiesOptions: Record<
   swim: { label: 'Swim', cardio: true, flex: false, strength: false, distance: true },
   treadmill: { label: 'Treadmill', cardio: true, flex: false, strength: false, distance: true },
   walk: { label: 'Walk', cardio: true, flex: false, strength: false, distance: true },
-  weightTraining: {
+  weighttraining: {
     label: 'Weight Training',
     cardio: false,
     flex: false,

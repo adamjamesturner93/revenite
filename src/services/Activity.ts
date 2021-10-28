@@ -47,9 +47,11 @@ export function mapActivitiesByMonth(activities: Activity[]): ListActivitiesByMo
     [],
   );
 
-  months.forEach((month) =>
-    month.activities.sort((a, b) => compareDesc(new Date(a.date), new Date(b.date))),
-  );
+  months
+    .reverse()
+    .forEach((month) =>
+      month.activities.sort((a, b) => compareDesc(new Date(a.date), new Date(b.date))),
+    );
 
   return months;
 }

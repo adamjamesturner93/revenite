@@ -274,13 +274,6 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
-                "phantomSensations": {
-                    "name": "phantomSensations",
-                    "isArray": false,
-                    "type": "Boolean",
-                    "isRequired": true,
-                    "attributes": []
-                },
                 "pinsAndNeedles": {
                     "name": "pinsAndNeedles",
                     "isArray": false,
@@ -889,5 +882,5 @@ export const schema = {
         }
     },
     "nonModels": {},
-    "version": "641b8c8a05c967e64f7274530001a779"
+    "version": "0755430c844f8bb20e69241327cce662"
 };
