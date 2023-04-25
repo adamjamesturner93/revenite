@@ -27,7 +27,7 @@
     "react-responsive": "^8.2.0",
     "react-scroll": "^1.8.2",
     "react-transition-group": "^4.4.2",
-    "tailwindcss": "npm:@tailwindcss/postcss7-compat",
+    "tailwindcss": "3.1.5",
     "uuid": "^8.3.2"
   },
   "devDependencies": {
