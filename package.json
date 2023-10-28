@@ -9,9 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@aws-amplify/api": "^4.0.4",
+    "@aws-amplify/api": "^6.0.0",
     "autoprefixer": "^9",
-    "aws-amplify": "^4.1.1",
+    "aws-amplify": "^6.0.0",
     "chartist": "^0.11.4",
     "classnames": "^2.3.1",
     "date-fns": "^2.22.1",
